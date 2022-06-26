@@ -7,11 +7,15 @@ end
 local banana = function()
 end
 
+local function anotherFunction()
+end
+
 local c = {
     {
     },{},{},
 };
 
+anotherFunction(apple, cat);
 
 if (
     apple == banana and
