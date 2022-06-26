@@ -22,22 +22,23 @@ function matchWholeWord(word, isEmbeddedCode)
 end
 
 -- operator pending purpose
-function _G.getConditionStatementScript()
+function getConditionStatementSelectorScript()
     local fileExt = vim.fn.expand('%:e');
+    -- embedded match whole word
+    local emww = function(w) return matchWholeWord(w, true); end
+
     if fileExt == "lua" then
-        -- embedded match whole word
-        local emww = function(w) return matchWholeWord(w, true); end
-        return 'execute "normal! ?' .. emww'if' .. '\\rwv/' .. emww'then' .. '\\rge" ';
+        -- 在使用ctrl-r= 的表達式時，\<Esc>似乎是不會跳出該表達示，所以關閉高亮得以被呼叫
+        return 'execute "normal! ?' .. emww'if' .. '\\rwv/' .. emww'then' .. '\\rge\\<Esc>:noh\\rgv"';
+        --return 'execute "normal! ?' .. emww'if' .. '\\rwv/' .. emww'then' .. '\\rge"';
+        --return 'execute "normal! ?' .. emww'if' .. '\\rwv/' .. emww'then' .. '\\rge^[:noh\\rgv"';
     else
-        return 'normal! vi(';
+        return 'execute "normal! ?' .. emww'if' .. '\\r:noh\\rwvi("';
     end
 end
 
 -- Normal Mode
 nmap('zp', 'viw\"0p');
-nmap('zhe', function()
-    print("Hello, keymapping!");
-end);
 nmap('<Space>', '<Nop>');
 nmap('<Space>j', '<C-F>');
 nmap('<Space>k', '<C-B>');
@@ -50,7 +51,7 @@ local function toggleRelativeLineNumber()
 end
 nmap('<Space>l', toggleRelativeLineNumber);
 nmap('<Space>r', ':source $MYVIMRC<CR>');
-nmap('zhh', ':noh<CR>');
+nmap('zh', ':noh<CR>');
 
 -- Insert Mode
 imap('<C-o>', '<Esc>o');
@@ -68,14 +69,22 @@ vmap('/', "<Esc>/" .. scriptGetSelectionLineRage);
 vmap('?', "<Esc>?" .. scriptGetSelectionLineRage);
 vmap('f', 'y/<C-R>"<CR>');
 vmap('jf', '<Esc>'); 
-vmap('cs', [[:<C-U><C-R>=v:lua.getConditionStatementScript()<CR><CR>]]);
+vmap('cs', [[:<C-U><C-R>=v:lua.getConditionStatementSelectorScript()<CR><CR>]]);
+vmap('lll', function() return 'hhh'; end, {expr = true});
 
 -- Command Mode
 cmap('mww', matchWholeWord'' .. '<Left><Left>');
 cmap('hh', 'noh<CR>');
 
 -- Operation Mode
-omap('cs', [[:<C-U><C-R>=v:lua.getConditionStatementScript()<CR><CR>]]);  -- condition statement
+omap('cs', [[:<C-U><C-R>=v:lua.getConditionStatementSelectorScript()<CR><CR>]]);  -- condition statement
+local function getOp()
+    local emww = function(w) return matchWholeWord(w, true); end
+    return ':<C-U>execute "normal! ?' .. emww'if' .. '\\rvw/' .. emww'then' .. '\\rge" <CR>';
+    --return ':<C-U>execute "normal! ?' .. emww'if' .. '\\rvw/' .. emww'then' .. '\\rge^[:noh\\rgv" <CR> ';
+    --return ':<C-U>' .. getConditionStatementSelectorScript() .. '<CR>';
+end
+omap('cx', getOp, {expr = true});
 --[[
     補充
     ctrl-u 的用途：https://vi.stackexchange.com/questions/9751/understanding-ctrl-u-combination
