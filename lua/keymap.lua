@@ -30,8 +30,6 @@ function getConditionStatementSelectorScript()
     if fileExt == "lua" then
         -- 在使用ctrl-r= 的表達式時，\<Esc>似乎是不會跳出該表達示，所以關閉高亮得以被呼叫
         return 'execute "normal! ?' .. emww'if' .. '\\rwv/' .. emww'then' .. '\\rge\\<Esc>:noh\\rgv"';
-        --return 'execute "normal! ?' .. emww'if' .. '\\rwv/' .. emww'then' .. '\\rge"';
-        --return 'execute "normal! ?' .. emww'if' .. '\\rwv/' .. emww'then' .. '\\rge^[:noh\\rgv"';
     else
         return 'execute "normal! ?' .. emww'if' .. '\\r:noh\\rwvi("';
     end
@@ -57,6 +55,11 @@ nmap('zh', ':noh<CR>');
 imap('<C-o>', '<Esc>o');
 imap('<C-i>', '<Esc>O');
 imap('jf', '<Esc>'); 
+imap('(', '()<Esc>i');
+imap('[', '[]<Esc>i');
+imap('{', '{}<Esc>i');
+imap([[']], [[''<Esc>i]]);
+imap([["]], [[""<Esc>i]]);
 
 -- Visual Mode
 --[[
@@ -70,7 +73,6 @@ vmap('?', "<Esc>?" .. scriptGetSelectionLineRage);
 vmap('f', 'y/<C-R>"<CR>');
 vmap('jf', '<Esc>'); 
 vmap('cs', [[:<C-U><C-R>=v:lua.getConditionStatementSelectorScript()<CR><CR>]]);
-vmap('lll', function() return 'hhh'; end, {expr = true});
 
 -- Command Mode
 cmap('mww', matchWholeWord'' .. '<Left><Left>');

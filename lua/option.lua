@@ -6,10 +6,11 @@ opt.showcmd = true;
 
 -- 顯示設定
 opt.number = true;
-opt.cmdheight = 5;
+-- opt.cmdheight = 5;
 opt.mouse = "a";
 opt.cursorline = true;
 opt.hlsearch = true;
+opt.ruler = true;
 -- opt.relativenumber = true;
 
 -- tab轉空格
