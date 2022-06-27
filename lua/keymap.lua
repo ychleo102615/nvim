@@ -7,6 +7,7 @@ local function modeMap(mode, ...)
     return vim.keymap.set(mode, unpack(params));
     -- return vim.keymap.set(mode, ...);
 end
+local function map(...)  return modeMap('', ...);  end
 local function nmap(...) return modeMap('n', ...); end
 local function imap(...) return modeMap('i', ...); end
 local function vmap(...) return modeMap('v', ...); end
@@ -35,9 +36,11 @@ function getConditionStatementSelectorScript()
     end
 end
 
+-- All
+map('<Space>', '<Nop>');
+
 -- Normal Mode
 nmap('zp', 'viw\"0p');
-nmap('<Space>', '<Nop>');
 nmap('<Space>j', '<C-F>');
 nmap('<Space>k', '<C-B>');
 nmap('<Space>w', '<C-W>');
@@ -52,9 +55,7 @@ nmap('<Space>r', ':source $MYVIMRC<CR>');
 nmap('zh', ':noh<CR>');
 
 -- Insert Mode
-imap('<C-o>', '<Esc>o');
-imap('<C-i>', '<Esc>O');
-imap('jf', '<Esc>'); 
+imap(';a', '<Esc>'); 
 imap('(', '()<Esc>i');
 imap('[', '[]<Esc>i');
 imap('{', '{}<Esc>i');
@@ -71,12 +72,12 @@ local scriptGetSelectionLineRage = [[\%><C-R>=line("'<")-1<CR>l\%<<C-R>=line("'>
 vmap('/', "<Esc>/" .. scriptGetSelectionLineRage);
 vmap('?', "<Esc>?" .. scriptGetSelectionLineRage);
 vmap('f', 'y/<C-R>"<CR>');
-vmap('jf', '<Esc>'); 
+vmap(';a', '<Esc>'); 
+vmap('<Space>e', '<Esc>');
 vmap('cs', [[:<C-U><C-R>=v:lua.getConditionStatementSelectorScript()<CR><CR>]]);
 
 -- Command Mode
 cmap('mww', matchWholeWord'' .. '<Left><Left>');
-cmap('hh', 'noh<CR>');
 
 -- Operation Mode
 omap('cs', [[:<C-U><C-R>=v:lua.getConditionStatementSelectorScript()<CR><CR>]]);  -- condition statement
