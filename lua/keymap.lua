@@ -41,9 +41,11 @@ map('<Space>', '<Nop>');
 
 -- Normal Mode
 nmap('zp', 'viw\"0p');
-nmap('<Space>j', '<C-F>');
-nmap('<Space>k', '<C-B>');
+nmap('<Space>j', '<C-F>M');
+nmap('<Space>k', '<C-B>M');
 nmap('<Space>w', '<C-W>');
+nmap(';j', '10j');
+nmap(';k', '10k');
 -- vim.opt.relativenumber is always a table
 local defaultShowRelativeNumber = false;
 local function toggleRelativeLineNumber()
@@ -71,23 +73,25 @@ imap([["]], [[""<Esc>i]]);
 local scriptGetSelectionLineRage = [[\%><C-R>=line("'<")-1<CR>l\%<<C-R>=line("'>")+1<CR>l]];
 vmap('/', "<Esc>/" .. scriptGetSelectionLineRage);
 vmap('?', "<Esc>?" .. scriptGetSelectionLineRage);
+-- c_ctrl-r 會貼上指定的暫存器裡的東西
 vmap('f', 'y/<C-R>"<CR>');
 vmap(';a', '<Esc>'); 
 vmap('<Space>e', '<Esc>');
-vmap('cs', [[:<C-U><C-R>=v:lua.getConditionStatementSelectorScript()<CR><CR>]]);
+vmap('is', [[:<C-U><C-R>=v:lua.getConditionStatementSelectorScript()<CR><CR>]]);
+vmap(';;', 'iwy/<C-R>"<CR>');
 
 -- Command Mode
-cmap('mww', matchWholeWord'' .. '<Left><Left>');
+cmap(';m', matchWholeWord'' .. '<Left><Left>');
 
 -- Operation Mode
-omap('cs', [[:<C-U><C-R>=v:lua.getConditionStatementSelectorScript()<CR><CR>]]);  -- condition statement
+omap('is', [[:<C-U><C-R>=v:lua.getConditionStatementSelectorScript()<CR><CR>]]);  -- condition statement
 local function getOp()
     local emww = function(w) return matchWholeWord(w, true); end
     return ':<C-U>execute "normal! ?' .. emww'if' .. '\\rvw/' .. emww'then' .. '\\rge" <CR>';
     --return ':<C-U>execute "normal! ?' .. emww'if' .. '\\rvw/' .. emww'then' .. '\\rge^[:noh\\rgv" <CR> ';
     --return ':<C-U>' .. getConditionStatementSelectorScript() .. '<CR>';
 end
-omap('cx', getOp, {expr = true});
+omap('ics', getOp, {expr = true});
 --[[
     補充
     ctrl-u 的用途：https://vi.stackexchange.com/questions/9751/understanding-ctrl-u-combination
