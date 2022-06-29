@@ -54,7 +54,8 @@ local function toggleRelativeLineNumber()
 end
 nmap('<Space>l', toggleRelativeLineNumber);
 nmap('<Space>r', ':source $MYVIMRC<CR>');
-nmap('zh', ':noh<CR>');
+-- nmap('zh', ':noh<CR>');
+nmap('zh', ':let @/ = ""<CR>');
 
 -- Insert Mode
 imap(';a', '<Esc>'); 
