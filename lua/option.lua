@@ -19,3 +19,4 @@ opt.ts = 4;
 opt.shiftwidth = 4;
 
 opt.smartindent = true;
+opt.timeoutlen = 300;

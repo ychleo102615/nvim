@@ -10,8 +10,8 @@ end
 local function map(...)  return modeMap('', ...);  end
 local function nmap(...) return modeMap('n', ...); end
 local function imap(...) return modeMap('i', ...); end
-local function vmap(...) return modeMap('v', ...); end
 local function cmap(...) return modeMap('c', ...); end
+local function vmap(...) return modeMap('v', ...); end
 local function omap(...) return modeMap('o', ...); end
 
 function matchWholeWord(word, isEmbeddedCode)
@@ -41,29 +41,34 @@ map('<Space>', '<Nop>');
 
 -- Normal Mode
 nmap('zp', 'viw\"0p');
+nmap('zh', ':let @/ = ""<CR>'); -- clear search history
+-- nmap('zh', ':noh<CR>');
+
 nmap('<Space>j', '<C-F>M');
 nmap('<Space>k', '<C-B>M');
 nmap('<Space>w', '<C-W>');
+-- vim.opt.relativenumber is always a table
+nmap('<Space>l', (function()
+    local defaultShowRelativeNumber = false;
+    return function()
+        defaultShowRelativeNumber = not defaultShowRelativeNumber;
+        vim.opt.relativenumber = defaultShowRelativeNumber;
+    end
+end)());
+-- nmap('<Space>r', ':source $MYVIMRC<CR>'); -- Not Working
+nmap('<Space>d', ':NvimTreeToggle<CR>');
+nmap('<C-J>', 'ddp');
+nmap('<C-K>', 'ddkP');
 nmap(';j', '10j');
 nmap(';k', '10k');
--- vim.opt.relativenumber is always a table
-local defaultShowRelativeNumber = false;
-local function toggleRelativeLineNumber()
-    defaultShowRelativeNumber = not defaultShowRelativeNumber;
-    vim.opt.relativenumber = defaultShowRelativeNumber;
-end
-nmap('<Space>l', toggleRelativeLineNumber);
-nmap('<Space>r', ':source $MYVIMRC<CR>');
--- nmap('zh', ':noh<CR>');
-nmap('zh', ':let @/ = ""<CR>');
 
 -- Insert Mode
 imap(';a', '<Esc>'); 
-imap('(', '()<Esc>i');
-imap('[', '[]<Esc>i');
-imap('{', '{}<Esc>i');
-imap([[']], [[''<Esc>i]]);
-imap([["]], [[""<Esc>i]]);
+-- imap('(', '()<Esc>i');
+-- imap('[', '[]<Esc>i');
+-- imap('{', '{}<Esc>i');
+-- imap([[']], [[''<Esc>i]]);
+-- imap([["]], [[""<Esc>i]]);
 
 -- Visual Mode
 --[[
@@ -103,4 +108,3 @@ omap('in(', ':<C-U>normal! f(vi(<CR>');   -- range between () in same line
 omap('F', ':<C-U>normal! 0f(hviw<CR>');   -- range word precede first () in same line
 
 
-print("keymap設定完成");
