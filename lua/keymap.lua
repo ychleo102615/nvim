@@ -40,15 +40,21 @@ end
 map('<Space>', '<Nop>');
 
 -- Normal Mode
-nmap('zp', 'viw\"0p');
+nmap('zp', '"0p'); -- paste from yanked
 nmap('zh', ':let @/ = ""<CR>'); -- clear search history
 -- nmap('zh', ':noh<CR>');
 
 nmap('<Space>j', '<C-F>M');
 nmap('<Space>k', '<C-B>M');
 nmap('<Space>w', '<C-W>');
+-- plugin key map
+nmap('<Space>h', ':BufferLineCyclePrev<CR>');
+nmap('<Space>l', ':BufferLineCycleNext<CR>');
+nmap('<Space>o', ':BufferLinePick<CR>');
+nmap('<Space>c', ':BufferLinePickClose<CR>');
+nmap('<Space>d', ':NvimTreeToggle<CR>');
 -- vim.opt.relativenumber is always a table
-nmap('<Space>l', (function()
+nmap('<Space>n', (function()
     local defaultShowRelativeNumber = false;
     return function()
         defaultShowRelativeNumber = not defaultShowRelativeNumber;
@@ -56,11 +62,11 @@ nmap('<Space>l', (function()
     end
 end)());
 -- nmap('<Space>r', ':source $MYVIMRC<CR>'); -- Not Working
-nmap('<Space>d', ':NvimTreeToggle<CR>');
 nmap('<C-J>', 'ddp');
 nmap('<C-K>', 'ddkP');
-nmap(';j', '10j');
-nmap(';k', '10k');
+nmap(';j', '15j');
+nmap(';k', '15k');
+nmap(';p', 'viw\"0p');
 
 -- Insert Mode
 imap(';a', '<Esc>'); 

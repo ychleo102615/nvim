@@ -23,4 +23,7 @@ return require('packer').startup(function()
         },
         tag = 'nightly' -- optional, updated every week. (see issue #1193)
     };
+
+    -- buffer line
+    use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'};
 end);

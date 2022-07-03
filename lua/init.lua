@@ -5,6 +5,7 @@ require "plugins";
 require "plugin-config/nvim-treesitter";
 require "plugin-config/nvim-tree";
 require "plugin-config/gruvbox-material";
+require "plugin-config/bufferline";
 
 local schemeChoices = {
     "kanagawa",
