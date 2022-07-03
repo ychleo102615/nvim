@@ -24,7 +24,7 @@
         @statement.outer
 ]]
 require 'nvim-treesitter.configs'.setup{
-    ensure_installed = {"html", "css", "javascript", "typescript", "lua", "c"},
+    ensure_installed = {"html", "css", "javascript", "typescript", "lua", "c", "cpp"},
     highlight = {
         enable = true,
     },
