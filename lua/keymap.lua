@@ -69,7 +69,7 @@ nmap(';k', '15k');
 nmap(';p', 'viw\"0p');
 
 -- Insert Mode
-imap(';a', '<Esc>'); 
+imap(';a', '<Esc>');
 -- imap('(', '()<Esc>i');
 -- imap('[', '[]<Esc>i');
 -- imap('{', '{}<Esc>i');
@@ -87,7 +87,7 @@ vmap('/', "<Esc>/" .. scriptGetSelectionLineRage);
 vmap('?', "<Esc>?" .. scriptGetSelectionLineRage);
 -- c_ctrl-r 會貼上指定的暫存器裡的東西
 vmap('f', 'y/<C-R>"<CR>');
-vmap(';a', '<Esc>'); 
+vmap(';a', '<Esc>');
 vmap('<Space>e', '<Esc>');
 vmap('is', [[:<C-U><C-R>=v:lua.getConditionStatementSelectorScript()<CR><CR>]]);
 vmap(';;', 'iwy/<C-R>"<CR>');

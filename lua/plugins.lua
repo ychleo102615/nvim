@@ -1,4 +1,4 @@
-return require('packer').startup(function()
+return require('packer').startup(function(use)
     -- Packer can manage itself as an optional plugin
     use 'wbthomason/packer.nvim';
 
@@ -26,4 +26,7 @@ return require('packer').startup(function()
 
     -- buffer line
     use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'};
+
+    -- lsp config
+    use {'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer'};
 end);

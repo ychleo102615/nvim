@@ -7,6 +7,8 @@ require "plugin-config/nvim-tree";
 require "plugin-config/gruvbox-material";
 require "plugin-config/bufferline";
 
+require "lsp/setup";
+
 local schemeChoices = {
     "kanagawa",
     "gruvbox-material",
