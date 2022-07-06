@@ -1,5 +1,5 @@
 local function modeMap(mode, ...)
-    local params = {...};
+    local params = { ... };
     params[3] = params[3] or {
         -- remap = false,
         silent = true,
@@ -7,14 +7,20 @@ local function modeMap(mode, ...)
     return vim.keymap.set(mode, unpack(params));
     -- return vim.keymap.set(mode, ...);
 end
-local function map(...)  return modeMap('', ...);  end
+
+local function map(...) return modeMap('', ...); end
+
 local function nmap(...) return modeMap('n', ...); end
+
 local function imap(...) return modeMap('i', ...); end
+
 local function cmap(...) return modeMap('c', ...); end
+
 local function vmap(...) return modeMap('v', ...); end
+
 local function omap(...) return modeMap('o', ...); end
 
-function matchWholeWord(word, isEmbeddedCode)
+function MatchWholeWord(word, isEmbeddedCode)
     -- 使用omap時，可能需要以字串形式描述指令，反斜線會被視為特殊符號
     if isEmbeddedCode then
         return [[\\<]] .. word .. [[\\>]];
@@ -23,16 +29,16 @@ function matchWholeWord(word, isEmbeddedCode)
 end
 
 -- operator pending purpose
-function getConditionStatementSelectorScript()
+function GetConditionStatementSelectorScript()
     local fileExt = vim.fn.expand('%:e');
     -- embedded match whole word
-    local emww = function(w) return matchWholeWord(w, true); end
+    local emww = function(w) return MatchWholeWord(w, true); end
 
     if fileExt == "lua" then
         -- 在使用ctrl-r= 的表達式時，\<Esc>似乎是不會跳出該表達示，所以關閉高亮得以被呼叫
-        return 'execute "normal! ?' .. emww'if' .. '\\rwv/' .. emww'then' .. '\\rge\\<Esc>:noh\\rgv"';
+        return 'execute "normal! ?' .. emww 'if' .. '\\rwv/' .. emww 'then' .. '\\rge\\<Esc>:noh\\rgv"';
     else
-        return 'execute "normal! ?' .. emww'if' .. '\\r:noh\\rwvi("';
+        return 'execute "normal! ?' .. emww 'if' .. '\\r:noh\\rwvi("';
     end
 end
 
@@ -43,16 +49,15 @@ map('<Space>', '<Nop>');
 nmap('zp', '"0p'); -- paste from yanked
 nmap('zh', ':let @/ = ""<CR>'); -- clear search history
 -- nmap('zh', ':noh<CR>');
-
 nmap('<Space>j', '<C-F>M');
 nmap('<Space>k', '<C-B>M');
-nmap('<Space>w', '<C-W>');
--- plugin key map
-nmap('<Space>h', ':BufferLineCyclePrev<CR>');
-nmap('<Space>l', ':BufferLineCycleNext<CR>');
-nmap('<Space>o', ':BufferLinePick<CR>');
-nmap('<Space>c', ':BufferLinePickClose<CR>');
-nmap('<Space>d', ':NvimTreeToggle<CR>');
+-- nmap('<Space>w', '<C-W>');
+nmap('<Space>f', ':w<CR>:source %<CR>'); -- flush file
+nmap('<C-J>', 'ddp');
+nmap('<C-K>', 'ddkP');
+nmap(';j', '15j');
+nmap(';k', '15k');
+nmap(';p', 'viw\"0p');
 -- vim.opt.relativenumber is always a table
 nmap('<Space>n', (function()
     local defaultShowRelativeNumber = false;
@@ -61,12 +66,18 @@ nmap('<Space>n', (function()
         vim.opt.relativenumber = defaultShowRelativeNumber;
     end
 end)());
--- nmap('<Space>r', ':source $MYVIMRC<CR>'); -- Not Working
-nmap('<C-J>', 'ddp');
-nmap('<C-K>', 'ddkP');
-nmap(';j', '15j');
-nmap(';k', '15k');
-nmap(';p', 'viw\"0p');
+--[[
+    plugin key map
+]]
+nmap('<Space>h', ':BufferLineCyclePrev<CR>');
+nmap('<Space>l', ':BufferLineCycleNext<CR>');
+nmap('<Space>o', ':BufferLinePick<CR>');
+nmap('<Space>c', ':BufferLinePickClose<CR>');
+nmap('<Space>d', ':NvimTreeToggle<CR>');
+nmap('<Space>e', vim.diagnostic.open_float)
+nmap('[d', vim.diagnostic.goto_prev);
+nmap(']d', vim.diagnostic.goto_next);
+nmap('<Space>q', vim.diagnostic.setloclist);
 
 -- Insert Mode
 imap(';a', '<Esc>');
@@ -89,28 +100,27 @@ vmap('?', "<Esc>?" .. scriptGetSelectionLineRage);
 vmap('f', 'y/<C-R>"<CR>');
 vmap(';a', '<Esc>');
 vmap('<Space>e', '<Esc>');
-vmap('is', [[:<C-U><C-R>=v:lua.getConditionStatementSelectorScript()<CR><CR>]]);
+vmap('is', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]);
 vmap(';;', 'iwy/<C-R>"<CR>');
 
 -- Command Mode
-cmap(';m', matchWholeWord'' .. '<Left><Left>');
+cmap(';m', MatchWholeWord '' .. '<Left><Left>');
 
 -- Operation Mode
-omap('is', [[:<C-U><C-R>=v:lua.getConditionStatementSelectorScript()<CR><CR>]]);  -- condition statement
+omap('is', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]); -- condition statement
 local function getOp()
-    local emww = function(w) return matchWholeWord(w, true); end
-    return ':<C-U>execute "normal! ?' .. emww'if' .. '\\rvw/' .. emww'then' .. '\\rge" <CR>';
+    local emww = function(w) return MatchWholeWord(w, true); end
+    return ':<C-U>execute "normal! ?' .. emww 'if' .. '\\rvw/' .. emww 'then' .. '\\rge" <CR>';
     --return ':<C-U>execute "normal! ?' .. emww'if' .. '\\rvw/' .. emww'then' .. '\\rge^[:noh\\rgv" <CR> ';
-    --return ':<C-U>' .. getConditionStatementSelectorScript() .. '<CR>';
+    --return ':<C-U>' .. GetConditionStatementSelectorScript() .. '<CR>';
 end
-omap('ics', getOp, {expr = true});
+
+omap('ics', getOp, { expr = true });
 --[[
     補充
     ctrl-u 的用途：https://vi.stackexchange.com/questions/9751/understanding-ctrl-u-combination
     omap很難用：https://learnvimscriptthehardway.stevelosh.com/chapters/15.html
 ]]
 -- examples
-omap('in(', ':<C-U>normal! f(vi(<CR>');   -- range between () in same line
-omap('F', ':<C-U>normal! 0f(hviw<CR>');   -- range word precede first () in same line
-
-
+omap('in(', ':<C-U>normal! f(vi(<CR>'); -- range between () in same line
+omap('F', ':<C-U>normal! 0f(hviw<CR>'); -- range word precede first () in same line

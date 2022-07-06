@@ -47,8 +47,8 @@ require 'nvim-treesitter.configs'.setup{
                 ["il"] = "@loop.inner",
 
                 -- 實用度感覺較低           suffix "a" means argument
-                -- ["aa"] = "@parameter.outer",
-                -- ["ia"] = "@parameter.inner",
+                ["aa"] = "@parameter.outer",
+                ["ia"] = "@parameter.inner",
             },
         },
         swap = {
@@ -66,18 +66,18 @@ require 'nvim-treesitter.configs'.setup{
             enable = true,
             set_jumps = true,
             goto_next_start = {
-                ["]m"] = "@function.outer",
-                ["]c"] = "@conditional.inner",
+                ["]f"] = "@function.outer",
+                ["]c"] = "@conditional.outer",
             },
             goto_next_end = {
-                ["]M"] = "@function.outer",
+                ["]F"] = "@function.outer",
             },
             goto_previous_start = {
-                ["[m"] = "@function.outer",
-                ["[c"] = "@conditional.inner",
+                ["[f"] = "@function.outer",
+                ["[c"] = "@conditional.outer",
             },
             goto_previous_end = {
-                ["[M"] = "@function.outer",
+                ["[F"] = "@function.outer",
             },
 
         },
