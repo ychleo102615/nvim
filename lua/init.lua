@@ -3,6 +3,9 @@ require "keymap";
 require "plugins";
 
 require "plugin-config/nvim-treesitter";
+
+if vim.fn.exists 'g:vscode' ~= 0 then return; end
+
 require "plugin-config/nvim-tree";
 require "plugin-config/gruvbox-material";
 require "plugin-config/bufferline";
