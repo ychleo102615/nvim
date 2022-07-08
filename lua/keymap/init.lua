@@ -58,6 +58,11 @@ nmap('<C-K>', 'ddkP');
 nmap(';j', '15j');
 nmap(';k', '15k');
 nmap(';p', 'viw\"0p');
+nmap(';w', function()
+    local prefix = "yiw:%s/\\<<C-R>0\\>/";
+    if vim.fn.exists 'g:vscode' ~= 0 then return prefix; end
+    return prefix .. "/g<Left><Left>";
+end, { expr = true });
 -- vim.opt.relativenumber is always a table
 nmap('<Space>n', (function()
     local defaultShowRelativeNumber = false;
