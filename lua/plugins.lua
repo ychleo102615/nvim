@@ -14,13 +14,13 @@ return require('packer').startup {
             'nvim-treesitter/nvim-treesitter',
             run = ':TSUpdate'
         };
-        use {'nvim-treesitter/nvim-treesitter-textobjects'};
+        use { 'nvim-treesitter/nvim-treesitter-textobjects' };
 
         -- Tree
         use {
             'kyazdani42/nvim-tree.lua',
             requires = {
-              'kyazdani42/nvim-web-devicons', -- optional, for file icons
+                'kyazdani42/nvim-web-devicons', -- optional, for file icons
             },
             tag = 'nightly', -- optional, updated every week. (see issue #1193)
         };
@@ -50,8 +50,12 @@ return require('packer').startup {
                 "saadparwaiz1/cmp_luasnip"
             }
         };
+
+        -- motion
+        use 'ggandor/lightspeed.nvim';
     end,
     config = {
+        -- 漂浮視窗功能
         display = {
             open_fn = require('packer.util').float,
         }
