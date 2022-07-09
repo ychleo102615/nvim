@@ -34,17 +34,24 @@ return require('packer').startup(function(use)
     -- lsp config
     use {
         'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer',
+        "onsails/lspkind-nvim"
     };
 
     -- cmp, config from: https://gist.github.com/mengwangk/e5b64dbbeadc81b0129f274908a7b692
     use {
         "hrsh7th/nvim-cmp",
         requires = {
-            "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp",
-            'quangnguyen30192/cmp-nvim-ultisnips', 'hrsh7th/cmp-nvim-lua',
-            'octaltree/cmp-look', 'hrsh7th/cmp-path', 'hrsh7th/cmp-calc',
-            'f3fora/cmp-spell', 'hrsh7th/cmp-emoji',
-            'SirVer/ultisnips'
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-nvim-lsp",
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-calc',
+            'hrsh7th/cmp-nvim-lua',
+            'hrsh7th/cmp-emoji',
+            --'quangnguyen30192/cmp-nvim-ultisnips',
+            --'octaltree/cmp-look',
+            'f3fora/cmp-spell',
+            --'SirVer/ultisnips',
+            "saadparwaiz1/cmp_luasnip"
         }
     };
 end);
