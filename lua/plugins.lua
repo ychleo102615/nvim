@@ -22,7 +22,7 @@ return require('packer').startup {
             requires = {
                 'kyazdani42/nvim-web-devicons', -- optional, for file icons
             },
-            tag = 'nightly', -- optional, updated every week. (see issue #1193)
+            -- tag = 'nightly', -- optional, updated every week. (see issue #1193)
         };
 
         -- buffer line
@@ -60,7 +60,7 @@ return require('packer').startup {
         -- https://github.com/tpope/vim-surround
         use {
             'kylechui/nvim-surround',
-            --config = function() require('nvim-surround').setup {}; end
+            -- config = function() require('nvim-surround').setup {}; end
         };
 
         -- telescope
@@ -68,7 +68,10 @@ return require('packer').startup {
             'nvim-telescope/telescope.nvim',
             requires = { 'nvim-lua/plenary.nvim' }
         };
-        use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' };
+        use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' };
+
+        -- git
+        use { 'lewis6991/gitsigns.nvim', };
     end,
     config = {
         -- 漂浮視窗功能
