@@ -39,7 +39,7 @@ return require('packer').startup {
         -- cmp, config from: https://gist.github.com/mengwangk/e5b64dbbeadc81b0129f274908a7b692
         use { 'L3MON4D3/LuaSnip' };
         use {
-            "hrsh7th/nvim-cmp",
+            'hrsh7th/nvim-cmp',
             requires = {
                 'hrsh7th/cmp-buffer',
                 'hrsh7th/cmp-nvim-lsp',
@@ -62,6 +62,13 @@ return require('packer').startup {
             'kylechui/nvim-surround',
             --config = function() require('nvim-surround').setup {}; end
         };
+
+        -- telescope
+        use {
+            'nvim-telescope/telescope.nvim',
+            requires = { 'nvim-lua/plenary.nvim' }
+        };
+        use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' };
     end,
     config = {
         -- 漂浮視窗功能

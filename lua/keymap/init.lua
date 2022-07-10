@@ -7,17 +7,11 @@ local function modeMap(mode, ...)
     return vim.keymap.set(mode, unpack(params));
     -- return vim.keymap.set(mode, ...);
 end
-
 local function map(...) return modeMap('', ...); end
-
 local function nmap(...) return modeMap('n', ...); end
-
 local function imap(...) return modeMap('i', ...); end
-
 local function cmap(...) return modeMap('c', ...); end
-
 local function vmap(...) return modeMap('v', ...); end
-
 local function omap(...) return modeMap('o', ...); end
 
 function MatchWholeWord(word, isEmbeddedCode)
@@ -52,25 +46,27 @@ nmap('zh', ':let @/ = ""<CR>'); -- clear search history
 nmap('<Space>j', '<C-F>M');
 nmap('<Space>k', '<C-B>M');
 -- nmap('<Space>w', '<C-W>');
-nmap('<Space>f', ':w<CR>:source %<CR>'); -- flush file
 nmap('<C-J>', 'ddp');
 nmap('<C-K>', 'ddkP');
 nmap(';j', '15j');
 nmap(';k', '15k');
 nmap(';p', 'viw\"0p');
-nmap(';w', function()
+
+local ReplaceFileWords = function()
     local prefix = "yiw:%s/\\<<C-R>0\\>/";
     if vim.fn.exists 'g:vscode' ~= 0 then return prefix; end
     return prefix .. "/g<Left><Left>";
-end, { expr = true });
--- vim.opt.relativenumber is always a table
-nmap('<Space>n', (function()
+end
+nmap(';w', ReplaceFileWords, { expr = true });
+local ToggleRelativeLineNum = function()
     local defaultShowRelativeNumber = false;
     return function()
         defaultShowRelativeNumber = not defaultShowRelativeNumber;
+        -- vim.opt.relativenumber is always a table
         vim.opt.relativenumber = defaultShowRelativeNumber;
     end
-end)());
+end
+nmap('<Space>n', ToggleRelativeLineNum());
 --[[
     plugin key map
 ]]
@@ -83,14 +79,11 @@ nmap('<Space>e', vim.diagnostic.open_float)
 nmap('[d', vim.diagnostic.goto_prev);
 nmap(']d', vim.diagnostic.goto_next);
 nmap('<Space>q', vim.diagnostic.setloclist);
+nmap('<Space>f', '<Cmd>Telescope find_files<CR>');
+nmap('<Space>s', '<Cmd>Telescope live_grep<CR>');
 
 -- Insert Mode
 imap(';a', '<Esc>');
--- imap('(', '()<Esc>i');
--- imap('[', '[]<Esc>i');
--- imap('{', '{}<Esc>i');
--- imap([[']], [[''<Esc>i]]);
--- imap([["]], [[""<Esc>i]]);
 
 -- Visual Mode
 --[[
@@ -106,7 +99,7 @@ vmap('f', 'y/<C-R>"<CR>');
 vmap(';a', '<Esc>');
 vmap('<Space>e', '<Esc>');
 vmap('is', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]);
-vmap(';;', 'iwy/<C-R>"<CR>');
+vmap(';;', 'iwy/' .. MatchWholeWord [[<C-R>"]] .. '<CR>');
 
 -- Command Mode
 cmap(';m', MatchWholeWord '' .. '<Left><Left>');

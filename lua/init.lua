@@ -10,7 +10,8 @@ if vim.fn.exists 'g:vscode' ~= 0 then return; end
 require "plugin-config/nvim-tree";
 require "plugin-config/gruvbox-material";
 require "plugin-config/bufferline";
-require "plugin-config/nvim-cmp"
+require "plugin-config/nvim-cmp";
+require "plugin-config.telescope";
 
 require "lsp/setup";
 
