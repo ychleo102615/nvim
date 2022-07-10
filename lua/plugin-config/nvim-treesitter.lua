@@ -1,28 +1,4 @@
---[[
-    https://github.com/nvim-treesitter/nvim-treesitter-textobjects#built-in-textobjects
-    Built-in Textobjects
-        @attribute.inner
-        @attribute.outer
-        @block.inner
-        @block.outer
-        @call.inner
-        @call.outer
-        @class.inner
-        @class.outer
-        @comment.outer
-        @conditional.inner
-        @conditional.outer
-        @frame.inner
-        @frame.outer
-        @function.inner
-        @function.outer
-        @loop.inner
-        @loop.outer
-        @parameter.inner
-        @parameter.outer
-        @scopename.inner
-        @statement.outer
-]]
+-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#built-in-textobjects
 require 'nvim-treesitter.configs'.setup{
     ensure_installed = {"html", "css", "javascript", "typescript", "lua", "c", "cpp"},
     highlight = {

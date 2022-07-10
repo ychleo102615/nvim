@@ -33,26 +33,35 @@ return require('packer').startup {
         -- lsp config
         use {
             'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer',
-            "onsails/lspkind-nvim"
+            'onsails/lspkind-nvim'
         };
 
         -- cmp, config from: https://gist.github.com/mengwangk/e5b64dbbeadc81b0129f274908a7b692
+        use { 'L3MON4D3/LuaSnip' };
         use {
             "hrsh7th/nvim-cmp",
             requires = {
-                "hrsh7th/cmp-buffer",
-                "hrsh7th/cmp-nvim-lsp",
+                'hrsh7th/cmp-buffer',
+                'hrsh7th/cmp-nvim-lsp',
                 'hrsh7th/cmp-path',
-                'hrsh7th/cmp-calc',
                 'hrsh7th/cmp-nvim-lua',
+                'hrsh7th/cmp-calc',
                 'hrsh7th/cmp-emoji',
+                'saadparwaiz1/cmp_luasnip',
                 'f3fora/cmp-spell',
-                "saadparwaiz1/cmp_luasnip"
             }
         };
 
         -- motion
         use 'ggandor/lightspeed.nvim';
+
+        -- surround
+        -- https://github.com/kylechui/nvim-surround
+        -- https://github.com/tpope/vim-surround
+        use {
+            'kylechui/nvim-surround',
+            --config = function() require('nvim-surround').setup {}; end
+        };
     end,
     config = {
         -- 漂浮視窗功能

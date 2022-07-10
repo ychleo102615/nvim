@@ -3,6 +3,7 @@ require "keymap";
 require "plugins";
 
 require "plugin-config/nvim-treesitter";
+require "plugin-config.nvim-surround";
 
 if vim.fn.exists 'g:vscode' ~= 0 then return; end
 

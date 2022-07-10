@@ -13,10 +13,15 @@ opt.hlsearch = true;
 opt.ruler = true;
 -- opt.relativenumber = true;
 
--- tab轉空格
+-- 縮排
 opt.expandtab = true;
 opt.ts = 4;
 opt.shiftwidth = 4;
-
 opt.smartindent = true;
+
+-- keymap
 opt.timeoutlen = 300;
+
+-- spell
+opt.spell = true;
+opt.spelllang = { 'en_us' };
