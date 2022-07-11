@@ -81,6 +81,7 @@ nmap(']d', vim.diagnostic.goto_next);
 nmap('<Space>q', vim.diagnostic.setloclist);
 nmap('<Space>f', '<Cmd>Telescope find_files<CR>');
 nmap('<Space>s', '<Cmd>Telescope live_grep<CR>');
+nmap('<Space>t', '<Cmd>Telescope <Tab>');
 
 -- Insert Mode
 imap(';a', '<Esc>');

@@ -6,4 +6,8 @@ require('gitsigns').setup {
         topdelete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
         changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
     },
+    on_attach = function(bufnr)
+        require('keymap.gitsigns')(bufnr);
+        print("gitsigns keymap setted");
+    end,
 };

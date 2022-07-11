@@ -2,7 +2,8 @@
 require 'nvim-treesitter.configs'.setup{
     ensure_installed = {"html", "css", "javascript", "typescript", "lua", "c", "cpp"},
     highlight = {
-        enable = true,
+        -- enable = true,
+        enable = not IS_USING_VSCODE,
     },
 
     -- text objects
@@ -11,11 +12,14 @@ require 'nvim-treesitter.configs'.setup{
             enable = true,
             lookhead = true,
             keymaps = {
+                ["ab"] = "@block.outer",
+                ["ib"] = "@block.inner",
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
                 ["ac"] = "@conditional.outer",
                 ["ic"] = "@conditional.inner",
-                ["cm"] = "@comment.outer",
+                -- suffix "q" means quote
+                ["q"] = "@comment.outer",
                 -- suffix "e" means execute
                 ["ae"] = "@call.outer",
                 ["ie"] = "@call.inner",
@@ -31,11 +35,11 @@ require 'nvim-treesitter.configs'.setup{
             enable = true,
             swap_next = {
                 ["<Space>pl"] = "@parameter.inner",
-                ["<Space>fj"] = "@function.outer",
+                -- ["<Space>fj"] = "@function.outer",
             },
             swap_previous = {
                 ["<Space>ph"] = "@parameter.inner",
-                ["<Space>fk"] = "@function.outer",
+                -- ["<Space>fk"] = "@function.outer",
             },
         },
         move = {
@@ -43,14 +47,18 @@ require 'nvim-treesitter.configs'.setup{
             set_jumps = true,
             goto_next_start = {
                 ["]f"] = "@function.outer",
-                ["]c"] = "@conditional.outer",
+                ["]s"] = "@conditional.outer",
+                ["]q"] = "@comment.outer",
+                ["]a"] = "@parameter.outer",
             },
             goto_next_end = {
                 ["]F"] = "@function.outer",
             },
             goto_previous_start = {
                 ["[f"] = "@function.outer",
-                ["[c"] = "@conditional.outer",
+                ["[s"] = "@conditional.outer",
+                ["[q"] = "@comment.outer",
+                ["[a"] = "@parameter.outer",
             },
             goto_previous_end = {
                 ["[F"] = "@function.outer",

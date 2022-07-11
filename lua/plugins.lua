@@ -8,6 +8,7 @@ return require('packer').startup {
         use 'sainnhe/sonokai';
         use 'sainnhe/gruvbox-material';
         use 'ellisonleao/gruvbox.nvim';
+        use 'olimorris/onedarkpro.nvim';
 
         -- Tree Sitter
         use {
