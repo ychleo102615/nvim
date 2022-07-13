@@ -16,6 +16,7 @@ local function imap(...) return modeMap('i', ...); end
 local function cmap(...) return modeMap('c', ...); end
 local function vmap(...) return modeMap('v', ...); end
 local function omap(...) return modeMap('o', ...); end
+local function xmap(...) return modeMap('x', ...); end
 
 --[[
     Global Function
@@ -67,6 +68,7 @@ nmap(';k', '15k');
 nmap(';p', 'viw\"0p');
 nmap(GetOptionKey 'j', ':m+<CR>==');
 nmap(GetOptionKey 'k', ':m-2<CR>==');
+nmap('ga', '<Plug>(EasyAlign)');
 
 local function ReplaceFileWords()
     local prefix = "yiw:%s/\\<<C-R>0\\>/";
@@ -86,23 +88,6 @@ nmap('<Space>n', ToggleRelativeLineNum());
 --[[
     plugin key map
 ]]
-nmap('<Space>h', ':BufferLineCyclePrev<CR>');
-nmap('<Space>l', ':BufferLineCycleNext<CR>');
-nmap('<Space>o', ':BufferLinePick<CR>');
-nmap('<Space>cp', ':BufferLinePickClose<CR>');
-nmap('<Space>cl', ':BufferLineCloseLeft<CR>');
-nmap('<Space>cr', ':BufferLineCloseRight<CR>');
-nmap('<Space>cg', ':BufferLineGroupClose ungrouped<CR>');
-nmap('<Space>d', ':NvimTreeToggle<CR>');
-nmap('<Space>r', ':NvimTreeFindFile<CR>');
--- lsp
-nmap('<Space>e', vim.diagnostic.open_float)
-nmap('[d', vim.diagnostic.goto_prev);
-nmap(']d', vim.diagnostic.goto_next);
-nmap('<Space>q', vim.diagnostic.setloclist);
-nmap('<Space>f', '<Cmd>Telescope find_files<CR>');
-nmap('<Space>s', '<Cmd>Telescope live_grep<CR>');
-nmap('<Space>t', '<Cmd>Telescope <Tab>');
 
 -- Insert Mode
 imap(';a', '<Esc>');
@@ -142,3 +127,24 @@ omap('is', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]);
 -- examples
 omap('in(', ':<C-U>normal! f(vi(<CR>'); -- range between () in same line
 omap('F', ':<C-U>normal! 0f(hviw<CR>'); -- range word precede first () in same line
+
+-- Visual Mode With out Select Mode
+xmap('ga', '<Plug>(EasyAlign)');
+
+--[[
+    Plugin
+]]
+require('keymap.lsp').setupKeymap();
+nmap('<Space>h', ':BufferLineCyclePrev<CR>');
+nmap('<Space>l', ':BufferLineCycleNext<CR>');
+nmap('<Space>o', ':BufferLinePick<CR>');
+nmap('<Space>cp', ':BufferLinePickClose<CR>');
+nmap('<Space>cl', ':BufferLineCloseLeft<CR>');
+nmap('<Space>cr', ':BufferLineCloseRight<CR>');
+nmap('<Space>cg', ':BufferLineGroupClose ungrouped<CR>');
+nmap('<Space>d', ':NvimTreeToggle<CR>');
+nmap('<Space>r', ':NvimTreeFindFile<CR>');
+nmap('<Space>f', '<Cmd>Telescope find_files<CR>');
+nmap('<Space>s', '<Cmd>Telescope live_grep<CR>');
+nmap('<Space>t', '<Cmd>Telescope <Tab>');
+

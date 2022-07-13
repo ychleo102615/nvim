@@ -12,7 +12,7 @@ require("nvim-lsp-installer").setup {
 -- TODO: 拆分lua設定的程式碼到另外一個檔案
 require "lspconfig"["sumneko_lua"].setup {
     on_attach = function(_client, bufnr)
-        return require"keymap.lsp"(bufnr);
+        return require('keymap.lsp').on_attach(bufnr);
     end,
     settings = {
         Lua = {

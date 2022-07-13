@@ -73,6 +73,9 @@ return require('packer').startup {
 
         -- git
         use { 'lewis6991/gitsigns.nvim', };
+
+        -- align
+        use 'junegunn/vim-easy-align';
     end,
     config = {
         -- 漂浮視窗功能
