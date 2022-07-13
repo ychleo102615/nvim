@@ -8,6 +8,5 @@ require('gitsigns').setup {
     },
     on_attach = function(bufnr)
         require('keymap.gitsigns')(bufnr);
-        print("gitsigns keymap setted");
     end,
 };

@@ -25,3 +25,4 @@ opt.timeoutlen = 300;
 -- spell
 opt.spell = true;
 opt.spelllang = { 'en_us' };
+opt.ignorecase = true;

@@ -48,6 +48,8 @@ nmap('<Space>k', '<C-B>M');
 -- nmap('<Space>w', '<C-W>');
 nmap('<C-J>', 'ddp');
 nmap('<C-K>', 'ddkP');
+nmap('<C-S>', ':w<CR>');
+nmap('<C-Q>', ':qa<CR>');
 nmap(';j', '15j');
 nmap(';k', '15k');
 nmap(';p', 'viw\"0p');
@@ -73,8 +75,13 @@ nmap('<Space>n', ToggleRelativeLineNum());
 nmap('<Space>h', ':BufferLineCyclePrev<CR>');
 nmap('<Space>l', ':BufferLineCycleNext<CR>');
 nmap('<Space>o', ':BufferLinePick<CR>');
-nmap('<Space>c', ':BufferLinePickClose<CR>');
+nmap('<Space>cp', ':BufferLinePickClose<CR>');
+nmap('<Space>cl', ':BufferLineCloseLeft<CR>');
+nmap('<Space>cr', ':BufferLineCloseRight<CR>');
+nmap('<Space>cg', ':BufferLineGroupClose ungrouped<CR>');
 nmap('<Space>d', ':NvimTreeToggle<CR>');
+nmap('<Space>r', ':NvimTreeFindFile<CR>');
+-- lsp
 nmap('<Space>e', vim.diagnostic.open_float)
 nmap('[d', vim.diagnostic.goto_prev);
 nmap(']d', vim.diagnostic.goto_next);
