@@ -36,6 +36,21 @@ function GetConditionStatementSelectorScript()
     end
 end
 
+local GetOptionKey = (function()
+    local OPT_KEY = {
+        -- direction
+        h = "˙",
+        j = "∆",
+        k = "˚",
+        l = "¬",
+    };
+    return function(originalKey)
+        local mappedKey = OPT_KEY[originalKey]
+        assert(mappedKey ~= nil, ("Option Key Mapping Error:'%s'"):format(originalKey));
+        return mappedKey;
+    end
+end)();
+
 -- All
 map('<Space>', '<Nop>');
 
@@ -46,13 +61,13 @@ nmap('zh', ':let @/ = ""<CR>'); -- clear search history
 nmap('<Space>j', '<C-F>M');
 nmap('<Space>k', '<C-B>M');
 -- nmap('<Space>w', '<C-W>');
-nmap('<C-J>', 'ddp');
-nmap('<C-K>', 'ddkP');
 nmap('<C-S>', ':w<CR>');
 nmap('<C-Q>', ':qa<CR>');
 nmap(';j', '15j');
 nmap(';k', '15k');
 nmap(';p', 'viw\"0p');
+nmap(GetOptionKey 'j', ':m+<CR>==');
+nmap(GetOptionKey 'k', ':m-2<CR>==');
 
 local ReplaceFileWords = function()
     local prefix = "yiw:%s/\\<<C-R>0\\>/";
@@ -92,6 +107,10 @@ nmap('<Space>t', '<Cmd>Telescope <Tab>');
 
 -- Insert Mode
 imap(';a', '<Esc>');
+imap(GetOptionKey 'h', '<Left>');    -- option h
+imap(GetOptionKey 'j', '<Down>');    -- option j
+imap(GetOptionKey 'k', '<Up>');      -- option k
+imap(GetOptionKey 'l', '<Right>');   -- option l
 
 -- Visual Mode
 --[[
@@ -108,6 +127,8 @@ vmap(';a', '<Esc>');
 vmap('<Space>e', '<Esc>');
 vmap('is', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]);
 vmap(';;', 'iwy/' .. MatchWholeWord [[<C-R>"]] .. '<CR>');
+vmap(GetOptionKey 'j', ":m '>+1<CR>gv=gv");    -- option j
+vmap(GetOptionKey 'k', ":m '<-2<CR>gv=gv");    -- option k
 
 -- Command Mode
 cmap(';m', MatchWholeWord '' .. '<Left><Left>');
