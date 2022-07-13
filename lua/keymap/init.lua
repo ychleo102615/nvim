@@ -1,3 +1,6 @@
+--[[
+    Mapping Function Abbreviation
+]]
 local function modeMap(mode, ...)
     local params = { ... };
     params[3] = params[3] or {
@@ -14,6 +17,9 @@ local function cmap(...) return modeMap('c', ...); end
 local function vmap(...) return modeMap('v', ...); end
 local function omap(...) return modeMap('o', ...); end
 
+--[[
+    Global Function
+]]
 function MatchWholeWord(word, isEmbeddedCode)
     -- 使用omap時，可能需要以字串形式描述指令，反斜線會被視為特殊符號
     if isEmbeddedCode then
@@ -36,20 +42,14 @@ function GetConditionStatementSelectorScript()
     end
 end
 
-local GetOptionKey = (function()
-    local OPT_KEY = {
-        -- direction
-        h = "˙",
-        j = "∆",
-        k = "˚",
-        l = "¬",
-    };
-    return function(originalKey)
-        local mappedKey = OPT_KEY[originalKey]
-        assert(mappedKey ~= nil, ("Option Key Mapping Error:'%s'"):format(originalKey));
-        return mappedKey;
-    end
-end)();
+--[[
+    Local Function
+]]
+local function GetOptionKey(originalKey)
+    local mappedKey = require('keymap.optionKeyMapping')[originalKey];
+    assert(mappedKey ~= nil, ("Option Key Mapping Error:'%s'"):format(originalKey));
+    return mappedKey;
+end;
 
 -- All
 map('<Space>', '<Nop>');
@@ -60,7 +60,6 @@ nmap('zh', ':let @/ = ""<CR>'); -- clear search history
 -- nmap('zh', ':noh<CR>');
 nmap('<Space>j', '<C-F>M');
 nmap('<Space>k', '<C-B>M');
--- nmap('<Space>w', '<C-W>');
 nmap('<C-S>', ':w<CR>');
 nmap('<C-Q>', ':qa<CR>');
 nmap(';j', '15j');
@@ -69,17 +68,17 @@ nmap(';p', 'viw\"0p');
 nmap(GetOptionKey 'j', ':m+<CR>==');
 nmap(GetOptionKey 'k', ':m-2<CR>==');
 
-local ReplaceFileWords = function()
+local function ReplaceFileWords()
     local prefix = "yiw:%s/\\<<C-R>0\\>/";
-    if vim.fn.exists 'g:vscode' ~= 0 then return prefix; end
-    return prefix .. "/g<Left><Left>";
+    return IS_USING_VSCODE and prefix or prefix .. "/g<Left><Left>";
 end
 nmap(';w', ReplaceFileWords, { expr = true });
-local ToggleRelativeLineNum = function()
+
+-- vim.opt.relativenumber is always a table
+local function ToggleRelativeLineNum()
     local defaultShowRelativeNumber = false;
     return function()
         defaultShowRelativeNumber = not defaultShowRelativeNumber;
-        -- vim.opt.relativenumber is always a table
         vim.opt.relativenumber = defaultShowRelativeNumber;
     end
 end
@@ -135,14 +134,6 @@ cmap(';m', MatchWholeWord '' .. '<Left><Left>');
 
 -- Operation Mode
 omap('is', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]); -- condition statement
-local function getOp()
-    local emww = function(w) return MatchWholeWord(w, true); end
-    return ':<C-U>execute "normal! ?' .. emww 'if' .. '\\rvw/' .. emww 'then' .. '\\rge" <CR>';
-    --return ':<C-U>execute "normal! ?' .. emww'if' .. '\\rvw/' .. emww'then' .. '\\rge^[:noh\\rgv" <CR> ';
-    --return ':<C-U>' .. GetConditionStatementSelectorScript() .. '<CR>';
-end
-
-omap('ics', getOp, { expr = true });
 --[[
     補充
     ctrl-u 的用途：https://vi.stackexchange.com/questions/9751/understanding-ctrl-u-combination
