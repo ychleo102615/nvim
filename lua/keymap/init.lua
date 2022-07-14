@@ -135,16 +135,33 @@ xmap('ga', '<Plug>(EasyAlign)');
     Plugin
 ]]
 require('keymap.lsp').setupKeymap();
-nmap('<Space>h', ':BufferLineCyclePrev<CR>');
-nmap('<Space>l', ':BufferLineCycleNext<CR>');
-nmap('<Space>o', ':BufferLinePick<CR>');
+nmap('<Space>h',  ':BufferLineCyclePrev<CR>');
+nmap('<Space>l',  ':BufferLineCycleNext<CR>');
+nmap('<Space>o',  ':BufferLinePick<CR>');
 nmap('<Space>cp', ':BufferLinePickClose<CR>');
 nmap('<Space>cl', ':BufferLineCloseLeft<CR>');
 nmap('<Space>cr', ':BufferLineCloseRight<CR>');
 nmap('<Space>cg', ':BufferLineGroupClose ungrouped<CR>');
-nmap('<Space>d', ':NvimTreeToggle<CR>');
-nmap('<Space>r', ':NvimTreeFindFile<CR>');
-nmap('<Space>f', '<Cmd>Telescope find_files<CR>');
-nmap('<Space>s', '<Cmd>Telescope live_grep<CR>');
-nmap('<Space>t', '<Cmd>Telescope <Tab>');
+nmap('<Space>d',  ':NvimTreeToggle<CR>');
+nmap('<Space>r',  ':NvimTreeFindFile<CR>');
+
+--[[ Telescope ]]
+local builtin = require('telescope.builtin');
+local themes  = require('telescope.themes');
+nmap('<Space>ff', '<Cmd>Telescope find_files<CR>');
+nmap('<Space>fs', '<Cmd>Telescope live_grep<CR>');
+-- nmap('<Space>fb', '<Cmd>Telescope current_buffer_fuzzy_find<CR>');
+nmap('<Space>fb', function()
+    builtin.current_buffer_fuzzy_find(themes.get_ivy {
+        --sorting_strategy = "descending";
+    });
+end);
+nmap('<Space>gs', '<Cmd>Telescope git_status<CR>');
+nmap('<Space>gc', '<Cmd>Telescope git_commits sorting_strategy=descending<CR>');
+nmap('<Space>gc', function()
+    builtin.git_commits(themes.get_dropdown {});
+end);
+nmap('<Space>gb', function()
+    builtin.git_branches(themes.get_dropdown {});
+end);
 

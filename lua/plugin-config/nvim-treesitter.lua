@@ -1,5 +1,5 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#built-in-textobjects
-require 'nvim-treesitter.configs'.setup{
+require('nvim-treesitter.configs').setup{
     ensure_installed = {"html", "css", "javascript", "typescript", "lua", "c", "cpp"},
     highlight = {
         -- enable = true,

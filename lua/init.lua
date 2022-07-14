@@ -8,6 +8,7 @@ require "plugins";
 require "plugin-config/nvim-treesitter";
 require "plugin-config.nvim-surround";
 require "plugin-config.gitsigns";
+require "plugin-config.lualine";
 
 if IS_USING_VSCODE then
     -- print("detect vscode, stop plugin setup");
@@ -20,14 +21,7 @@ require "plugin-config.bufferline";
 require "plugin-config.nvim-cmp";
 require "plugin-config.telescope";
 
-require "lsp/setup";
-
-local schemeChoices = {
-    "kanagawa",
-    "gruvbox-material",
-    "gruvbox",
-    "onedarkpro",
-};
-vim.cmd("colorscheme " .. schemeChoices[3]);
+require "lsp.setup";
+require "colorscheme";
 
 -- print("init.lua載入完成");

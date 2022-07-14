@@ -9,6 +9,22 @@ return require('packer').startup {
         use 'sainnhe/gruvbox-material';
         use 'ellisonleao/gruvbox.nvim';
         use 'olimorris/onedarkpro.nvim';
+        use 'jdsimcoe/abstract.vim';
+        use 'AlessandroYorba/Alduin';
+        use 'tlhr/anderson.vim';
+        use 'ayu-theme/ayu-vim';
+        use 'romainl/Apprentice';
+        use 'haystackandroid/carbonized';
+        use 'ajmwagar/vim-deus';
+        use 'wadackel/vim-dogrun';
+        use 'romainl/flattened';
+        use 'rakr/vim-one';
+        use 'sonph/onehalf';
+        use 'sts10/vim-pink-moon';
+        use 'junegunn/seoul256.vim';
+        use 'AlessandroYorba/Sierra';
+        use 'rakr/vim-two-firewatch';
+        use 'sainnhe/everforest';
 
         -- Tree Sitter
         use {
@@ -76,6 +92,12 @@ return require('packer').startup {
 
         -- align
         use 'junegunn/vim-easy-align';
+
+        -- status line
+        use {
+            'nvim-lualine/lualine.nvim',
+            requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+        };
     end,
     config = {
         -- 漂浮視窗功能
