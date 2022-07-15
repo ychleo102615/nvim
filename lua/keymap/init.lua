@@ -142,6 +142,8 @@ nmap('<Space>cp', ':BufferLinePickClose<CR>');
 nmap('<Space>cl', ':BufferLineCloseLeft<CR>');
 nmap('<Space>cr', ':BufferLineCloseRight<CR>');
 nmap('<Space>cg', ':BufferLineGroupClose ungrouped<CR>');
+nmap('<Space>cb', ':bdelete<CR>');
+
 nmap('<Space>d',  ':NvimTreeToggle<CR>');
 nmap('<Space>r',  ':NvimTreeFindFile<CR>');
 
