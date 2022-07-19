@@ -63,11 +63,20 @@ nmap('<Space>j', '<C-F>M');
 nmap('<Space>k', '<C-B>M');
 nmap('<C-S>', ':w<CR>');
 nmap('<C-Q>', ':qa<CR>');
+nmap('<C-H>', ':w | source %<CR>');
+-- nmap('<C-M>', ':w | source %<CR>');   -- It seems that  ctrl-m is equivalent to Return key
 nmap(';j', '15j');
 nmap(';k', '15k');
 nmap(';p', 'viw\"0p');
 nmap(GetOptionKey 'j', ':m+<CR>==');
 nmap(GetOptionKey 'k', ':m-2<CR>==');
+nmap(GetOptionKey 's', ':w | source %<CR>');
+--[[
+    m' will push current cursor position to jump list
+    nmap(GetOptionKey 'o', "m':normal o<CR>0D<C-O>");
+]]
+nmap(GetOptionKey 'o', ":call append(line('.'), '')<CR>");
+nmap(GetOptionKey 'O', ":call append(line('.')-1, '')<CR>");
 nmap('ga', '<Plug>(EasyAlign)');
 
 local function ReplaceFileWords()
@@ -95,6 +104,9 @@ imap(GetOptionKey 'h', '<Left>');    -- option h
 imap(GetOptionKey 'j', '<Down>');    -- option j
 imap(GetOptionKey 'k', '<Up>');      -- option k
 imap(GetOptionKey 'l', '<Right>');   -- option l
+imap(GetOptionKey 'o', "<C-O>:call append(line('.'), '')<CR>");
+imap(GetOptionKey 'O', "<C-O>:call append(line('.')-1, '')<CR>");
+
 
 -- Visual Mode
 --[[
@@ -110,7 +122,8 @@ vmap('f', 'y/<C-R>"<CR>');
 vmap(';a', '<Esc>');
 vmap('<Space>e', '<Esc>');
 vmap('is', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]);
-vmap(';;', 'iwy/' .. MatchWholeWord [[<C-R>"]] .. '<CR>');
+--vmap(';;', 'iwy/' .. MatchWholeWord [[<C-R>"]] .. '<CR>');
+vmap(';;', '/' .. MatchWholeWord [[<C-R><C-W>]] .. '<CR>');
 vmap(GetOptionKey 'j', ":m '>+1<CR>gv=gv");    -- option j
 vmap(GetOptionKey 'k', ":m '<-2<CR>gv=gv");    -- option k
 
