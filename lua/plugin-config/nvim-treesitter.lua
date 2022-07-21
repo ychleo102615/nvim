@@ -16,8 +16,9 @@ require('nvim-treesitter.configs').setup{
                 ["ib"] = "@block.inner",
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
-                ["ac"] = "@conditional.outer",
-                ["ic"] = "@conditional.inner",
+                -- c 已被change佔用，改用 s
+                ["as"] = "@conditional.outer",
+                ["is"] = "@conditional.inner",
                 -- suffix "q" means quote
                 ["q"] = "@comment.outer",
                 -- suffix "e" means execute
@@ -47,7 +48,8 @@ require('nvim-treesitter.configs').setup{
             set_jumps = true,
             goto_next_start = {
                 ["]f"] = "@function.outer",
-                ["]s"] = "@conditional.outer",
+                ["]s"] = "@conditional.inner",
+                ["]S"] = "@conditional.outer",
                 ["]q"] = "@comment.outer",
                 ["]a"] = "@parameter.outer",
             },
@@ -56,7 +58,8 @@ require('nvim-treesitter.configs').setup{
             },
             goto_previous_start = {
                 ["[f"] = "@function.outer",
-                ["[s"] = "@conditional.outer",
+                ["[s"] = "@conditional.inner",
+                ["[S"] = "@conditional.outer",
                 ["[q"] = "@comment.outer",
                 ["[a"] = "@parameter.outer",
             },

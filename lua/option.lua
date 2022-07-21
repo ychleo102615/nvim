@@ -19,10 +19,12 @@ opt.ts          = 4;
 opt.shiftwidth  = 4;
 opt.smartindent = true;
 
+-- fold
+opt.foldmethod     = "indent";
+opt.foldlevelstart = 99;
+
 -- keymap
 opt.timeoutlen = 300;
 
 -- spell
-opt.spell      = true;
-opt.spelllang  = { 'en_us' };
 opt.ignorecase = true;

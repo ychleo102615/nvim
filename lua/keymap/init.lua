@@ -61,6 +61,10 @@ nmap('zh', ':let @/ = ""<CR>'); -- clear search history
 -- nmap('zh', ':noh<CR>');
 nmap('<Space>j', '<C-F>M');
 nmap('<Space>k', '<C-B>M');
+nmap('<Space>w', function()
+    vim.api.nvim_command 'NvimTreeClose';
+    vim.api.nvim_command 'bdelete';
+end);
 nmap('<C-S>', ':w<CR>');
 nmap('<C-Q>', ':qa<CR>');
 nmap('<C-H>', ':w | source %<CR>');
@@ -154,8 +158,12 @@ nmap('<Space>o',  ':BufferLinePick<CR>');
 nmap('<Space>cp', ':BufferLinePickClose<CR>');
 nmap('<Space>cl', ':BufferLineCloseLeft<CR>');
 nmap('<Space>cr', ':BufferLineCloseRight<CR>');
+nmap('<Space>co', function()
+    local bufferline = require('bufferline');
+    bufferline.close_in_direction "right";
+    bufferline.close_in_direction "left";
+end);
 nmap('<Space>cg', ':BufferLineGroupClose ungrouped<CR>');
-nmap('<Space>cb', ':bdelete<CR>');
 
 nmap('<Space>d',  ':NvimTreeToggle<CR>');
 nmap('<Space>r',  ':NvimTreeFindFile<CR>');
