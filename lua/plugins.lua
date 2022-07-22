@@ -91,8 +91,9 @@ return require('packer').startup {
         -- git
         use { 'lewis6991/gitsigns.nvim', };
 
-        -- align
+        -- editing
         use 'junegunn/vim-easy-align';
+        use 'rmagatti/alternate-toggler';
 
         -- status line
         use {

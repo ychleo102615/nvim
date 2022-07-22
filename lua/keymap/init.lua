@@ -151,7 +151,9 @@ xmap('ga', '<Plug>(EasyAlign)');
 --[[
     Plugin
 ]]
+--[[ lsp ]]
 require('keymap.lsp').setupKeymap();
+--[[ BufferLine ]]
 nmap('<Space>h',  ':BufferLineCyclePrev<CR>');
 nmap('<Space>l',  ':BufferLineCycleNext<CR>');
 nmap('<Space>o',  ':BufferLinePick<CR>');
@@ -164,10 +166,15 @@ nmap('<Space>co', function()
     bufferline.close_in_direction "left";
 end);
 nmap('<Space>cg', ':BufferLineGroupClose ungrouped<CR>');
-
+--[[ Tree ]]
 nmap('<Space>d',  ':NvimTreeToggle<CR>');
 nmap('<Space>r',  ':NvimTreeFindFile<CR>');
-
+--[[ EasyAlign ]]
+nmap('<Space>a', ':EasyAlign -1/--/<CR>');
+vmap('<Space>a', ':EasyAlign -1/--/<CR>');
+--[[ Toggler ]]
+nmap('<Space>ta', '<Cmd>ToggleAlternate<CR>');
+nmap('<Space>i', '<Cmd>ToggleAlternate<CR>');
 --[[ Telescope ]]
 local builtin = require('telescope.builtin');
 local themes  = require('telescope.themes');
@@ -181,9 +188,23 @@ nmap('<Space>fb', function()
 end);
 nmap('<Space>gs', '<Cmd>Telescope git_status<CR>');
 nmap('<Space>gc', '<Cmd>Telescope git_commits sorting_strategy=descending<CR>');
+local TELESCOPE_DEBUG = false;
+local mode = TELESCOPE_DEBUG and { expr = TELESCOPE_DEBUG };
 nmap('<Space>gc', function()
-    builtin.git_commits(themes.get_dropdown {});
-end);
+    local config = themes.get_dropdown {
+        previewer = false,
+        layout_config = {
+            height = 0.9,
+        },
+    };
+    if not TELESCOPE_DEBUG then
+        builtin.git_commits(config);
+        return;
+    end
+    vim.api.nvim_command "messages clear";
+    print(vim.inspect(config));
+    return ":messages<CR>";
+end, mode);
 nmap('<Space>gb', function()
     builtin.git_branches(themes.get_dropdown {});
 end);

@@ -22,6 +22,7 @@ require "plugin-config.nvim-cmp";
 require "plugin-config.telescope";
 
 require "lsp.setup";
+require "luasnip.setup";
 require "colorscheme";
 
 -- print("init.lua載入完成");
