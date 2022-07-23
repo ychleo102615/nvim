@@ -191,11 +191,14 @@ nmap('<Space>gc', '<Cmd>Telescope git_commits sorting_strategy=descending<CR>');
 local TELESCOPE_DEBUG = false;
 local mode = TELESCOPE_DEBUG and { expr = TELESCOPE_DEBUG };
 nmap('<Space>gc', function()
-    local config = themes.get_dropdown {
-        previewer = false,
+    --local config = themes.get_dropdown {
+    local config = {
+        -- previewer = false,
         layout_config = {
-            height = 0.9,
+            height          = 0.9,
+            prompt_position = "top",
         },
+        sorting_strategy = "ascending",
     };
     if not TELESCOPE_DEBUG then
         builtin.git_commits(config);
