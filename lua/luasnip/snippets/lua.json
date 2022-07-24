@@ -1,17 +1,4 @@
 {
-	// Place your snippets for lua here. Each snippet is defined under a snippet name and has a prefix, body and 
-	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
-	// same ids are connected.
-	// Example:
-	// "Print to console": {
-	// 	"prefix": "log",
-	// 	"body": [
-	// 		"console.log('$1');",
-	// 		"$2"
-	// 	],
-	// 	"description": "Log output to console"
-	// }
 	"Actions": {
 		"prefix":"CCSequence",
 		"body":[
@@ -33,7 +20,7 @@
 		"body":[
 			"CCCallFunc:create(function()",
 				"$0",
-			"end),",
+			"end),"
 		],
 		"description": "建立 Callback func"
 	},
@@ -87,14 +74,14 @@
 			"",
 			"--------------------------------------------------    create    --------------------------------------------------",
 			"",
-			"return ${TM_FILENAME/(.*)\\..+$/$1/};",
+			"return ${TM_FILENAME/(.*)\\..+$/$1/};"
 		],
 		"description": "建立類別"
 	},
 	"PrintVisualAnchor": {
 		"prefix":"print_visual_anchor",
 		"body":[
-			"print(\"\\n===> ${CLIPBOARD}$0\\n\");",
+			"print(\"\\n===> ${CLIPBOARD}$0\\n\");"
 		],
 		"description": "空的成員函數"
 	},
@@ -126,48 +113,46 @@
 	"Function": {
 		"prefix":"function",
 		"body":[
-			"function()$0end",
+			"function()$0end"
 		],
 		"description": "普通函式"
 	},
 	"Button": {
 		"prefix":"button_make",
 		"body":[
-			// "local $0 = display.newButton({",
 			"local $1 = CONFIG.Tools.UI.createSoundBtn({",
 			"    normal = CONFIG.BTN_PATH .. \"$2.png\",",
-			// "    normal = $2\"$3.png\",",
 			"    callback = function()",
 			"    end,",
 			"    priority = -128,",
 			"});",
 			"$1:setPosition(0, 0);",
-			"self:addChild($1);",
+			"self:addChild($1);"
 		],
-		"description": "按鈕",
+		"description": "按鈕"
 	},
 	"Center": {
 		"prefix": "center_abbreviation",
 		"body":[
-			"display.cx, display.cy",
+			"display.cx, display.cy"
 		],
-		"description": "中心點簡寫",
+		"description": "中心點簡寫"
 	},
 	"DisplaySize": {
 		"prefix": "display_size_abbreviation",
 		"body":[
-			"display.width$0, display.height",
+			"display.width$0, display.height"
 		],
-		"description": "螢幕尺寸簡寫",
+		"description": "螢幕尺寸簡寫"
 	},
 	"ForeverActionSequence":{
 		"prefix": "forever_sequence",
 		"body":[
 			"CCRepeatForever:create(transition.sequence{",
 			"    $0",
-			"})",
+			"})"
 		],
-		"description": "永久循環動作列",
+		"description": "永久循環動作列"
 	},
 	"DemoClass":{
 		"prefix": "demo_class_make",
@@ -263,8 +248,8 @@
 			"    return listView;",
 			"end",
 			"",
-			"return ${TM_FILENAME/(.*)\\..+$/$1/};",
+			"return ${TM_FILENAME/(.*)\\..+$/$1/};"
 		],
 		"description": "創建預設utilityDemoLayer"
-	},
+	}
 }

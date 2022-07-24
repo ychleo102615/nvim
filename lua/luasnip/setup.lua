@@ -1,6 +1,6 @@
 -- require("luasnip.loaders.from_vscode").load({paths = "./luasnip/snippets"});
---require("luasnip.loaders.from_vscode").lazy_load({paths = "~/.config/nvim/lua/luasnip/snippets"})
-require("luasnip.loaders.from_vscode").lazy_load();
+require("luasnip.loaders.from_vscode").lazy_load({paths = "~/.config/nvim/lua/luasnip/snippets"})
+--require("luasnip.loaders.from_vscode").lazy_load();
 
 local ls      = require("luasnip");
 local s       = ls.snippet;
