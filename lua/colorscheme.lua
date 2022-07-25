@@ -29,6 +29,7 @@ require "gruvbox".setup {
     contrast = "hard",
     overrides = {
         GitSignsCurrentLineBlame = { link = "GruvboxBg4" },
+        GitSignsChange           = { link = "GruvboxBlueSign" },
     },
 };
 vim.g.ayucolor = "dark"
