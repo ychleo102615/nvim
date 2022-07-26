@@ -24,5 +24,6 @@ require "plugin-config.telescope";
 require "lsp.setup";
 require "luasnip.setup";
 require "colorscheme";
+require "autocmd";
 
 -- print("init.lua載入完成");

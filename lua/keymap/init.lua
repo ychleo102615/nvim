@@ -1,16 +1,18 @@
 --[[
     Mapping Function Abbreviation
+    https://neovim.io/doc/user/api.html#nvim_set_keymap()
 ]]
-local function modeMap(mode, ...)
-    local params = { ... };
-    params[3] = params[3] or {
-        -- remap = false,
-        silent = true,
-    };
-    return vim.keymap.set(mode, unpack(params));
-    -- return vim.keymap.set(mode, ...);
-end
-local function map(...) return modeMap('', ...); end
+-- IIFE
+local modeMap = (function()
+    local OPT_INDEX   = 3;
+    local DEFAULT_OPT = { silent = true, remap = false };
+    return function(mode, ...)
+        local params = {...};
+        params[OPT_INDEX] = vim.tbl_extend('keep', params[OPT_INDEX] or {}, DEFAULT_OPT);
+        return vim.keymap.set(mode, unpack(params));
+    end;
+end)();
+local function map(...)  return modeMap('',  ...); end
 local function nmap(...) return modeMap('n', ...); end
 local function imap(...) return modeMap('i', ...); end
 local function cmap(...) return modeMap('c', ...); end
@@ -64,7 +66,16 @@ nmap('<Space>k', '<C-B>M');
 nmap('<Space>w', function()
     vim.api.nvim_command 'NvimTreeClose';
     vim.api.nvim_command 'bdelete';
-end);
+end); --
+nmap('<Space>s', function()
+    local lineNumber = vim.fn.line('.');
+    local rangeStr   = '\\%>' .. lineNumber - 1 .. 'l' .. '\\%<' .. lineNumber + 1 .. 'l';
+    local patternStr = '\\s\\+';
+    local operateStr = 'Ngnc <Esc>';
+    local cleanupStr = ':let @/ = ""<CR>';
+    local cmdStr     = '/' .. rangeStr .. patternStr .. "<CR>" .. operateStr .. cleanupStr;
+    return cmdStr;
+end, { expr = true, silent = true });   -- shrink spaces
 nmap('<C-S>', ':w<CR>');
 nmap('<C-Q>', ':qa<CR>');
 nmap('<C-H>', ':w | source %<CR>');
@@ -81,6 +92,10 @@ nmap(GetOptionKey 's', ':w | source %<CR>');
 ]]
 nmap(GetOptionKey 'o', ":call append(line('.'), '')<CR>");
 nmap(GetOptionKey 'O', ":call append(line('.')-1, '')<CR>");
+nmap(GetOptionKey ',', "<C-W><");
+nmap(GetOptionKey '.', "<C-W>>");
+nmap(GetOptionKey '<', "5<C-W><");
+nmap(GetOptionKey '>', "5<C-W>>");
 nmap('ga', '<Plug>(EasyAlign)');
 
 local function ReplaceFileWords()
@@ -90,17 +105,15 @@ end
 nmap(';w', ReplaceFileWords, { expr = true });
 
 -- vim.opt.relativenumber is always a table
-local function ToggleRelativeLineNum()
+-- IIFE
+local ToggleRelativeLineNum = (function()
     local defaultShowRelativeNumber = false;
     return function()
         defaultShowRelativeNumber = not defaultShowRelativeNumber;
         vim.opt.relativenumber = defaultShowRelativeNumber;
     end
-end
-nmap('<Space>n', ToggleRelativeLineNum());
---[[
-    plugin key map
-]]
+end)();
+nmap('<Space>n', ToggleRelativeLineNum);
 
 -- Insert Mode
 imap(';a', '<Esc>');
