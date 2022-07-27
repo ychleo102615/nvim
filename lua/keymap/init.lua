@@ -186,42 +186,63 @@ nmap('<Space>r',  ':NvimTreeFindFile<CR>');
 nmap('<Space>a', ':EasyAlign -1/--/<CR>');
 vmap('<Space>a', ':EasyAlign -1/--/<CR>');
 --[[ Toggler ]]
-nmap('<Space>ta', '<Cmd>ToggleAlternate<CR>');
 nmap('<Space>i', '<Cmd>ToggleAlternate<CR>');
 --[[ Telescope ]]
 local builtin = require('telescope.builtin');
 local themes  = require('telescope.themes');
 nmap('<Space>ff', '<Cmd>Telescope find_files<CR>');
 nmap('<Space>fs', '<Cmd>Telescope live_grep<CR>');
--- nmap('<Space>fb', '<Cmd>Telescope current_buffer_fuzzy_find<CR>');
 nmap('<Space>fb', function()
-    builtin.current_buffer_fuzzy_find(themes.get_ivy {
+    -- builtin.current_buffer_fuzzy_find(themes.get_ivy {
+    builtin.buffers(themes.get_ivy {
         --sorting_strategy = "descending";
+        layout_config = {
+            --height          = 0.9,
+            prompt_position = 'bottom',
+        },
+        initial_mode = 'normal',
     });
 end);
-nmap('<Space>gs', '<Cmd>Telescope git_status<CR>');
-nmap('<Space>gc', '<Cmd>Telescope git_commits sorting_strategy=descending<CR>');
-local TELESCOPE_DEBUG = false;
-local mode = TELESCOPE_DEBUG and { expr = TELESCOPE_DEBUG };
+nmap('<leader>fh', '<Cmd>Telescope help_tags<Cr>');
+nmap('<leader>fn', '<Cmd>Telescope current_buffer_fuzzy_find<Cr>');
+nmap('<Space>gs', '<Cmd>Telescope git_status initial_mode=normal<CR>');
 nmap('<Space>gc', function()
-    --local config = themes.get_dropdown {
-    local config = {
-        -- previewer = false,
+    local config = themes.get_ivy {
+    -- local config = themes.get_dropdown {
         layout_config = {
-            height          = 0.9,
-            prompt_position = "top",
+            height          = 0.6,
+            prompt_position = 'bottom',
         },
-        sorting_strategy = "ascending",
+        sorting_strategy = 'ascending',
+        initial_mode = 'normal',
     };
-    if not TELESCOPE_DEBUG then
-        builtin.git_commits(config);
-        return;
-    end
-    vim.api.nvim_command "messages clear";
-    print(vim.inspect(config));
-    return ":messages<CR>";
-end, mode);
+    builtin.git_commits(config);
+end);
 nmap('<Space>gb', function()
-    builtin.git_branches(themes.get_dropdown {});
+    builtin.git_branches(themes.get_ivy {
+        layout_config = {
+            mirror = false,
+            prompt_position = 'bottom',
+        },
+        initial_mode = 'normal',
+    });
 end);
 
+local TELESCOPE_DEBUG = false;
+if TELESCOPE_DEBUG then
+    local config = themes.get_dropdown {
+    -- local config = {
+        -- previewer = false,
+        layout_config = {
+        --    height          = 0.9,
+            prompt_position = 'top',
+        },
+        sorting_strategy = 'ascending',
+    };
+    vim.api.nvim_command 'messages clear';
+    --print(vim.inspect(config));
+    nmap('<Space>gc', function()
+        builtin.git_commits(config);
+        print(vim.inspect(config));
+    end);
+end
