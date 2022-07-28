@@ -141,6 +141,8 @@ vmap('<Space>e', '<Esc>');
 vmap('is', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]);
 -- vmap(';;', 'iwy/' .. MatchWholeWord [[<C-R>"]] .. '<CR>');
 vmap(';;', '<Esc>/' .. MatchWholeWord [[<C-R><C-W>]] .. '<CR>');
+vmap(';w', '<Esc>/' .. MatchWholeWord [[<C-R><C-W>]] .. '<CR>');
+vmap(';v', 'y/' .. MatchWholeWord [[<C-R>"]] .. '<CR>');
 vmap(GetOptionKey 'j', ":m '>+1<CR>gv=gv");    -- option j
 vmap(GetOptionKey 'k', ":m '<-2<CR>gv=gv");    -- option k
 
