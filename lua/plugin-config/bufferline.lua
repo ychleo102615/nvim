@@ -1,6 +1,6 @@
 require('bufferline').setup {
     options = {
-        -- mode = "tabs",
+        mode = "tabs",
         numbers = "oridinal",
         offsets = {{
             filetype   = "NvimTree",

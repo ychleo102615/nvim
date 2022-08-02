@@ -14,7 +14,6 @@ return require('packer').startup {
         use 'tlhr/anderson.vim';
         use 'ayu-theme/ayu-vim';
         use 'romainl/Apprentice';
-        use 'haystackandroid/carbonized';
         use 'ajmwagar/vim-deus';
         use 'wadackel/vim-dogrun';
         use 'romainl/flattened';
@@ -32,6 +31,7 @@ return require('packer').startup {
             run = ':TSUpdate'
         };
         use { 'nvim-treesitter/nvim-treesitter-textobjects' };
+        use 'nvim-treesitter/playground';
 
         -- Tree
         use {

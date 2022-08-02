@@ -5,7 +5,6 @@ require('nvim-treesitter.configs').setup{
         -- enable = true,
         enable = not IS_USING_VSCODE,
     },
-
     -- text objects
     textobjects = {
         select = {
@@ -67,6 +66,24 @@ require('nvim-treesitter.configs').setup{
                 ["[F"] = "@function.outer",
             },
 
+        },
+    },
+    playground = {
+        enable          = true,
+        disable         = {},
+        updatetime      = 25,    -- Debounced time for highlighting nodes in the playground from source code
+        persist_queries = false, -- Whether the query persists across vim sessions
+        keybindings = {
+            toggle_query_editor       = 'o',
+            toggle_hl_groups          = 'i',
+            toggle_injected_languages = 't',
+            toggle_anonymous_nodes    = 'a',
+            toggle_language_display   = 'I',
+            focus_language            = 'f',
+            unfocus_language          = 'F',
+            update                    = 'R',
+            goto_node                 = '<cr>',
+            show_help                 = '?',
         },
     },
 };

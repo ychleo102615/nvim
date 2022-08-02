@@ -12,13 +12,14 @@ local modeMap = (function()
         return vim.keymap.set(mode, unpack(params));
     end;
 end)();
-local function map(...)  return modeMap('',  ...); end
-local function nmap(...) return modeMap('n', ...); end
-local function imap(...) return modeMap('i', ...); end
-local function cmap(...) return modeMap('c', ...); end
-local function vmap(...) return modeMap('v', ...); end
-local function omap(...) return modeMap('o', ...); end
-local function xmap(...) return modeMap('x', ...); end
+local function map(...)   return modeMap('',   ...); end
+local function nmap(...)  return modeMap('n',  ...); end
+local function imap(...)  return modeMap('i',  ...); end
+local function cmap(...)  return modeMap('c',  ...); end
+local function vmap(...)  return modeMap('v',  ...); end
+local function omap(...)  return modeMap('o',  ...); end
+local function vomap(...) return modeMap({'v', 'o'}, ...); end
+local function xmap(...)  return modeMap('x',  ...); end
 
 --[[
     Global Function
@@ -138,7 +139,6 @@ vmap('?', "<Esc>?" .. scriptGetSelectionLineRage);
 vmap('f', 'y/<C-R>"<CR>');
 vmap(';a', '<Esc>');
 vmap('<Space>e', '<Esc>');
-vmap('is', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]);
 -- vmap(';;', 'iwy/' .. MatchWholeWord [[<C-R>"]] .. '<CR>');
 vmap(';;', '<Esc>/' .. MatchWholeWord [[<C-R><C-W>]] .. '<CR>');
 vmap(';w', '<Esc>/' .. MatchWholeWord [[<C-R><C-W>]] .. '<CR>');
@@ -149,8 +149,10 @@ vmap(GetOptionKey 'k', ":m '<-2<CR>gv=gv");    -- option k
 -- Command Mode
 cmap(';m', MatchWholeWord '' .. '<Left><Left>');
 
--- Operation Mode
-omap('is', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]); -- condition statement
+-- Visual Operation common
+vomap('cs', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]);
+vomap('om', [[:<C-U>execute "normal! ?self\r:noh\rv3e"<CR>]]); -- object momber / method
+
 --[[
     補充
     ctrl-u 的用途：https://vi.stackexchange.com/questions/9751/understanding-ctrl-u-combination
@@ -184,6 +186,8 @@ nmap('<Space>cg', ':BufferLineGroupClose ungrouped<CR>');
 --[[ Tree ]]
 nmap('<Space>d',  ':NvimTreeToggle<CR>');
 nmap('<Space>r',  ':NvimTreeFindFile<CR>');
+--[[ TreeSitter Playground ]]
+nmap('<Space>p', ':TSPlaygroundToggle<CR>');
 --[[ EasyAlign ]]
 nmap('<Space>a', ':EasyAlign -1/--/<CR>');
 vmap('<Space>a', ':EasyAlign -1/--/<CR>');
