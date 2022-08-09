@@ -9,6 +9,7 @@ require "plugin-config/nvim-treesitter";
 require "plugin-config.nvim-surround";
 require "plugin-config.gitsigns";
 require "plugin-config.lualine";
+require "plugin-config.neogen";
 
 if IS_USING_VSCODE then
     -- print("detect vscode, stop plugin setup");

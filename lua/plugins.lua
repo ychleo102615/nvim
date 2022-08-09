@@ -100,6 +100,15 @@ return require('packer').startup {
             'nvim-lualine/lualine.nvim',
             requires = { 'kyazdani42/nvim-web-devicons', opt = true }
         };
+
+        -- comment
+        use {
+            "danymat/neogen",
+            requires = "nvim-treesitter/nvim-treesitter",
+            -- Uncomment next line if you want to follow only stable versions
+            tag = "*"
+        };
+
     end,
     config = {
         -- 漂浮視窗功能

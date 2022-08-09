@@ -27,6 +27,7 @@ local function xmap(...)  return modeMap('x',  ...); end
 function MatchWholeWord(word, isEmbeddedCode)
     -- 使用omap時，可能需要以字串形式描述指令，反斜線會被視為特殊符號
     if isEmbeddedCode then
+        -- :help expr-quote
         return [[\\<]] .. word .. [[\\>]];
     end
     return '\\<' .. word .. '\\>';
@@ -193,6 +194,9 @@ nmap('<Space>a', ':EasyAlign -1/--/<CR>');
 vmap('<Space>a', ':EasyAlign -1/--/<CR>');
 --[[ Toggler ]]
 nmap('<Space>i', '<Cmd>ToggleAlternate<CR>');
+--[[ Neogen ]]
+nmap('<leader>nf', ':lua require("neogen").generate()<CR>', {noremap = true, silent = true});
+nmap('<leader>nc', ':lua require("neogen").generate{type = "class"}<CR>', {noremap = true, silent = true});
 --[[ Telescope ]]
 local builtin = require('telescope.builtin');
 local themes  = require('telescope.themes');

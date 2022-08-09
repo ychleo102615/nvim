@@ -2,6 +2,7 @@ require('nvim-lsp-installer').setup {
     ensure_installed = {
         "sumneko_lua",
         "clangd",
+        "tsserver",
     },
     ui = {
         icons = {
@@ -19,7 +20,7 @@ require('lspconfig').sumneko_lua.setup {
     end,
     settings = {
         Lua = {
-            runtime = {version = "LuaJIT"},
+            runtime = { version = "LuaJIT" },
             diagnostics = {
                 globals = {"vim"},
             },
@@ -34,3 +35,4 @@ require('lspconfig').sumneko_lua.setup {
 };
 
 require('lspconfig').clangd.setup {};
+require('lspconfig').tsserver.setup {};
