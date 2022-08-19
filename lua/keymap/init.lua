@@ -165,6 +165,7 @@ omap('F', ':<C-U>normal! 0f(hviw<CR>'); -- range word precede first () in same l
 
 -- Visual Mode With out Select Mode
 xmap('ga', '<Plug>(EasyAlign)');
+xmap(';a', '<Esc>');
 
 --[[
     Plugin
