@@ -87,6 +87,8 @@ nmap(';k', '15k');
 nmap(';p', 'viw\"0p');
 nmap(GetOptionKey 'j', ':m+<CR>==');
 nmap(GetOptionKey 'k', ':m-2<CR>==');
+nmap(GetOptionKey 'J', ':t.<CR>');
+nmap(GetOptionKey 'K', ':t.-1<CR>');
 nmap(GetOptionKey 's', ':w | source %<CR>');
 --[[
     m' will push current cursor position to jump list
@@ -146,6 +148,8 @@ vmap(';w', '<Esc>/' .. MatchWholeWord [[<C-R><C-W>]] .. '<CR>');
 vmap(';v', 'y/' .. MatchWholeWord [[<C-R>"]] .. '<CR>');
 vmap(GetOptionKey 'j', ":m '>+1<CR>gv=gv");    -- option j
 vmap(GetOptionKey 'k', ":m '<-2<CR>gv=gv");    -- option k
+vmap(GetOptionKey 'J', ":t'><CR>gv");          -- option J or option shift j
+vmap(GetOptionKey 'K', ":t'<-1<CR>gv");        -- option K or option shift k
 
 -- Command Mode
 cmap(';m', MatchWholeWord '' .. '<Left><Left>');
