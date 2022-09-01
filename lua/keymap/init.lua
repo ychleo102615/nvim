@@ -117,7 +117,7 @@ local ToggleRelativeLineNum = (function()
         vim.opt.relativenumber = defaultShowRelativeNumber;
     end
 end)();
-nmap('<Space>n', ToggleRelativeLineNum);
+nmap('<Space>nn', ToggleRelativeLineNum);
 
 -- Insert Mode
 imap(';a', '<Esc>');

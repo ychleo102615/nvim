@@ -24,6 +24,7 @@ return require('packer').startup {
         use 'AlessandroYorba/Sierra';
         use 'rakr/vim-two-firewatch';
         use 'sainnhe/everforest';
+        use "cpea2506/one_monokai.nvim";
 
         -- Tree Sitter
         use {
@@ -108,6 +109,7 @@ return require('packer').startup {
             -- Uncomment next line if you want to follow only stable versions
             tag = "*"
         };
+        use 'numToStr/Comment.nvim';
 
     end,
     config = {

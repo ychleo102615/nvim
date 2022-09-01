@@ -21,6 +21,7 @@ local schemeChoices = {
     "orange-moon",
     "two-filewatch",
     "everforest",
+    "one_monokai",
 };
 
 -- https://github.com/ellisonleao/gruvbox.nvim/blob/aee207e1ae55c44bd6a23c1a85e5e17939e3835b/lua/gruvbox/groups.lua
@@ -42,4 +43,5 @@ vim.g.sonokai_enable_italic = true;
 vim.g.everforest_background = "hard";
 vim.g.everforest_ui_contrast = "high";
 
-vim.cmd("colorscheme " .. schemeChoices[3]);
+-- vim.cmd("colorscheme " .. schemeChoices[3]);
+vim.cmd("colorscheme " .. schemeChoices[20]);
