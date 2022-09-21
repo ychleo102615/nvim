@@ -22,6 +22,8 @@ require "plugin-config.gruvbox-material";
 require "plugin-config.bufferline";
 require "plugin-config.nvim-cmp";
 require "plugin-config.telescope";
+require "plugin-config.symbols-outline";
+require "plugin-config.vim-go";
 
 require "lsp.setup";
 require "luasnip.setup";

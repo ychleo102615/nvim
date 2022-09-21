@@ -31,7 +31,7 @@ return require('packer').startup {
             'nvim-treesitter/nvim-treesitter',
             run = ':TSUpdate'
         };
-        use { 'nvim-treesitter/nvim-treesitter-textobjects' };
+        use 'nvim-treesitter/nvim-treesitter-textobjects';
         use 'nvim-treesitter/playground';
 
         -- Tree
@@ -45,17 +45,24 @@ return require('packer').startup {
 
         -- buffer line
         use {
-            'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons',
+            'akinsho/bufferline.nvim',
+            requires = 'kyazdani42/nvim-web-devicons',
         };
 
         -- lsp config
         use {
-            'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer',
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
+            'neovim/nvim-lspconfig',
+            'williamboman/nvim-lsp-installer',
             'onsails/lspkind-nvim'
         };
 
+        -- outline
+        use 'simrat39/symbols-outline.nvim';
+
         -- cmp, config from: https://gist.github.com/mengwangk/e5b64dbbeadc81b0129f274908a7b692
-        use { 'L3MON4D3/LuaSnip' };
+        use 'L3MON4D3/LuaSnip';
         use {
             'hrsh7th/nvim-cmp',
             requires = {
@@ -74,12 +81,7 @@ return require('packer').startup {
         use 'ggandor/lightspeed.nvim';
 
         -- surround
-        -- https://github.com/kylechui/nvim-surround
-        -- https://github.com/tpope/vim-surround
-        use {
-            'kylechui/nvim-surround',
-            -- config = function() require('nvim-surround').setup {}; end
-        };
+        use 'kylechui/nvim-surround';
 
         -- telescope
         use {
@@ -87,10 +89,10 @@ return require('packer').startup {
             requires = { 'nvim-lua/plenary.nvim' }
         };
         use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' };
-        use {'nvim-telescope/telescope-ui-select.nvim' };
+        use 'nvim-telescope/telescope-ui-select.nvim';
 
         -- git
-        use { 'lewis6991/gitsigns.nvim', };
+        use 'lewis6991/gitsigns.nvim';
 
         -- editing
         use 'junegunn/vim-easy-align';
@@ -111,6 +113,19 @@ return require('packer').startup {
         };
         use 'numToStr/Comment.nvim';
 
+        -- go
+        use {
+            'fatih/vim-go',
+            -- run = ':GoUpdateBinaries',
+            run = function()
+                vim.cmd [[GoUpdateBinaries]];
+                -- vim.g.go_fmt_autosave = 0;
+                vim.g.go_fmt_autosave = false;
+                vim.api.nvim_exec [[let g:go_fmt_autosave = 0]];
+                print("apple");
+            end,
+            ft  = 'go',
+        };
     end,
     config = {
         -- 漂浮視窗功能

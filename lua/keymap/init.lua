@@ -12,14 +12,14 @@ local modeMap = (function()
         return vim.keymap.set(mode, unpack(params));
     end;
 end)();
-local function map(...)   return modeMap('',   ...); end
-local function nmap(...)  return modeMap('n',  ...); end
-local function imap(...)  return modeMap('i',  ...); end
-local function cmap(...)  return modeMap('c',  ...); end
-local function vmap(...)  return modeMap('v',  ...); end
-local function omap(...)  return modeMap('o',  ...); end
+local function map(...)   return modeMap('',         ...); end
+local function nmap(...)  return modeMap('n',        ...); end
+local function imap(...)  return modeMap('i',        ...); end
+local function cmap(...)  return modeMap('c',        ...); end
+local function vmap(...)  return modeMap('v',        ...); end
+local function omap(...)  return modeMap('o',        ...); end
 local function vomap(...) return modeMap({'v', 'o'}, ...); end
-local function xmap(...)  return modeMap('x',  ...); end
+local function xmap(...)  return modeMap('x',        ...); end
 
 --[[
     Global Function
@@ -136,6 +136,7 @@ imap(GetOptionKey 'O', "<C-O>:call append(line('.')-1, '')<CR>");
     參考 https://vim.fandom.com/wiki/Search_only_over_a_visual_range
 ]]
 local scriptGetSelectionLineRage = [[\%><C-R>=line("'<")-1<CR>l\%<<C-R>=line("'>")+1<CR>l]];
+vmap('zp', '"0p'); -- paste from yanked
 vmap('/', "<Esc>/" .. scriptGetSelectionLineRage);
 vmap('?', "<Esc>?" .. scriptGetSelectionLineRage);
 -- c_ctrl-r 會貼上指定的暫存器裡的東西
@@ -179,7 +180,7 @@ require('keymap.lsp').setupKeymap();
 --[[ BufferLine ]]
 nmap('<Space>h',  ':BufferLineCyclePrev<CR>');
 nmap('<Space>l',  ':BufferLineCycleNext<CR>');
-nmap('<Space>o',  ':BufferLinePick<CR>');
+--[[ nmap('<Space>o',  ':BufferLinePick<CR>');
 nmap('<Space>cp', ':BufferLinePickClose<CR>');
 nmap('<Space>cl', ':BufferLineCloseLeft<CR>');
 nmap('<Space>cr', ':BufferLineCloseRight<CR>');
@@ -187,13 +188,15 @@ nmap('<Space>co', function()
     local bufferline = require('bufferline');
     bufferline.close_in_direction "right";
     bufferline.close_in_direction "left";
-end);
+end); ]]
 nmap('<Space>cg', ':BufferLineGroupClose ungrouped<CR>');
 --[[ Tree ]]
 nmap('<Space>d',  ':NvimTreeToggle<CR>');
 nmap('<Space>r',  ':NvimTreeFindFile<CR>');
 --[[ TreeSitter Playground ]]
 nmap('<Space>p', ':TSPlaygroundToggle<CR>');
+--[[ Symbols Outline ]]
+nmap('<Space>o', ':SymbolsOutline<CR>');
 --[[ EasyAlign ]]
 nmap('<Space>a', ':EasyAlign -1/--/<CR>');
 vmap('<Space>a', ':EasyAlign -1/--/<CR>');
@@ -222,10 +225,10 @@ nmap('<leader>fh', '<Cmd>Telescope help_tags<Cr>');
 nmap('<leader>fn', '<Cmd>Telescope current_buffer_fuzzy_find<Cr>');
 nmap('<Space>gs', '<Cmd>Telescope git_status initial_mode=normal<CR>');
 nmap('<Space>gc', function()
-    local config = themes.get_ivy {
-    -- local config = themes.get_dropdown {
+    -- local config = themes.get_ivy {
+    local config = themes.get_dropdown {
         layout_config = {
-            height          = 0.6,
+            height          = 0.5,
             prompt_position = 'bottom',
         },
         sorting_strategy = 'ascending',
