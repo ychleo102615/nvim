@@ -117,14 +117,12 @@ return require('packer').startup {
         use {
             'fatih/vim-go',
             -- run = ':GoUpdateBinaries',
-            run = function()
-                vim.cmd [[GoUpdateBinaries]];
-                -- vim.g.go_fmt_autosave = 0;
-                vim.g.go_fmt_autosave = false;
-                vim.api.nvim_exec [[let g:go_fmt_autosave = 0]];
-                print("apple");
-            end,
-            ft  = 'go',
+            -- run = function()
+            --     vim.cmd [[GoUpdateBinaries]];
+            --     vim.g.go_fmt_autosave = false;
+            --     vim.api.nvim_exec [[let g:go_fmt_autosave = 0]];
+            -- end,
+            -- ft  = 'go',
         };
     end,
     config = {

@@ -62,9 +62,11 @@ map('<Space>', '<Nop>');
 -- Normal Mode
 nmap('zp', '"0p'); -- paste from yanked
 nmap('zh', ':let @/ = ""<CR>'); -- clear search history
+nmap('zd', ':%bd | e#<CR>');
 -- nmap('zh', ':noh<CR>');
 nmap('<Space>j', '<C-F>M');
 nmap('<Space>k', '<C-B>M');
+nmap('<Space>vt', ':vs<CR><C-W>l:ter<CR>i');
 nmap('<Space>w', function()
     vim.api.nvim_command 'NvimTreeClose';
     vim.api.nvim_command 'bdelete';
@@ -205,6 +207,11 @@ nmap('<Space>i', '<Cmd>ToggleAlternate<CR>');
 --[[ Neogen ]]
 nmap('<leader>nf', ':lua require("neogen").generate()<CR>', {noremap = true, silent = true});
 nmap('<leader>nc', ':lua require("neogen").generate{type = "class"}<CR>', {noremap = true, silent = true});
+--[[ Comment ]]
+local comment = require('Comment.api')
+nmap('<Space>/', function()
+    comment.toggle.linewise.current();
+end);
 --[[ Telescope ]]
 local builtin = require('telescope.builtin');
 local themes  = require('telescope.themes');
