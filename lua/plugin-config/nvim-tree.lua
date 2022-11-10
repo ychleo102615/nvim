@@ -4,4 +4,7 @@ require('nvim-tree').setup {
         highlight_git = true,
         group_empty = true,
     },
+    filters = {
+        exclude = { "node_modules" },
+    },
 };

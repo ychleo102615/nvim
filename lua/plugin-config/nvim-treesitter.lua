@@ -35,11 +35,11 @@ require('nvim-treesitter.configs').setup{
             enable = true,
             swap_next = {
                 ["<Space>pl"] = "@parameter.inner",
-                -- ["<Space>fj"] = "@function.outer",
+                ["<Space>fj"] = "@function.outer",
             },
             swap_previous = {
                 ["<Space>ph"] = "@parameter.inner",
-                -- ["<Space>fk"] = "@function.outer",
+                ["<Space>fk"] = "@function.outer",
             },
         },
         move = {

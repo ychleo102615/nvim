@@ -47,7 +47,11 @@ lspconfig.sumneko_lua.setup {
 };
 
 lspconfig.clangd.setup {};
-lspconfig.tsserver.setup {};
+lspconfig.tsserver.setup {
+    on_attach = function(_client, bufnr)
+        return require('keymap.lsp').on_attach(bufnr);
+    end,
+};
 -- lspconfig.golangci_lint_ls.setup {};
 lspconfig.gopls.setup {
     on_attach = function(_client, bufnr)
