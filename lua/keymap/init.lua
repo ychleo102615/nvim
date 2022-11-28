@@ -200,8 +200,18 @@ nmap('<Space>p', ':TSPlaygroundToggle<CR>');
 --[[ Symbols Outline ]]
 nmap('<Space>o', ':SymbolsOutline<CR>');
 --[[ EasyAlign ]]
-nmap('<Space>a', ':EasyAlign -1/--/<CR>');
-vmap('<Space>a', ':EasyAlign -1/--/<CR>');
+local alignComment = function()
+    local ft = require('Comment.ft');
+    local U  = require('Comment.utils');
+    local commentFormat = ft.get(vim.bo.filetype, U.ctype.linewise); -- `//%s`
+    if not commentFormat then
+        return;
+    end
+    local alignRegex = "\\s" .. commentFormat:gsub("%%s", "");
+    local alignCmdFormat = ":EasyAlign -1/%s/<CR>gv";
+    return alignCmdFormat:format(alignRegex);
+end;
+vmap('<Space>a', alignComment, {expr = true, silent = true});
 --[[ Toggler ]]
 nmap('<Space>i', '<Cmd>ToggleAlternate<CR>');
 --[[ Neogen ]]
