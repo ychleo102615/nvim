@@ -63,6 +63,7 @@ map('<Space>', '<Nop>');
 nmap('zp', '"0p'); -- paste from yanked
 nmap('zh', ':let @/ = ""<CR>'); -- clear search history
 nmap('zd', ':%bd | e#<CR>');
+nmap('ga', '<Plug>(EasyAlign)');
 -- nmap('zh', ':noh<CR>');
 nmap('<Space>j', '<C-F>M');
 nmap('<Space>k', '<C-B>M');
@@ -92,6 +93,7 @@ nmap(GetOptionKey 'k', ':m-2<CR>==');
 nmap(GetOptionKey 'J', ':t.<CR>');
 nmap(GetOptionKey 'K', ':t.-1<CR>');
 nmap(GetOptionKey 's', ':w | source %<CR>');
+nmap(GetOptionKey 'd', ':silent !open dict://<C-R><C-W><CR>');
 --[[
     m' will push current cursor position to jump list
     nmap(GetOptionKey 'o', "m':normal o<CR>0D<C-O>");
@@ -102,7 +104,6 @@ nmap(GetOptionKey ',', "<C-W><");
 nmap(GetOptionKey '.', "<C-W>>");
 nmap(GetOptionKey '<', "5<C-W><");
 nmap(GetOptionKey '>', "5<C-W>>");
-nmap('ga', '<Plug>(EasyAlign)');
 
 local function ReplaceFileWords()
     local prefix = "yiw:%s/\\<<C-R>0\\>/";
