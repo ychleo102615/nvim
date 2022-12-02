@@ -21,15 +21,18 @@ require("mason-lspconfig").setup{
         "gopls",
         "clangd",
         "tsserver",
+        "volar",
     }
 };
+
+local attachKeyMap = function(_client, bufnr)
+    return require('keymap.lsp').on_attach(bufnr);
+end
 
 -- TODO: 拆分lua設定的程式碼到另外一個檔案
 local lspconfig = require('lspconfig');
 lspconfig.sumneko_lua.setup {
-    on_attach = function(_client, bufnr)
-        return require('keymap.lsp').on_attach(bufnr);
-    end,
+    on_attach = attachKeyMap,
     settings = {
         Lua = {
             runtime = { version = "LuaJIT" },
@@ -48,13 +51,11 @@ lspconfig.sumneko_lua.setup {
 
 lspconfig.clangd.setup {};
 lspconfig.tsserver.setup {
-    on_attach = function(_client, bufnr)
-        return require('keymap.lsp').on_attach(bufnr);
-    end,
+    on_attach = attachKeyMap,
 };
--- lspconfig.golangci_lint_ls.setup {};
 lspconfig.gopls.setup {
-    on_attach = function(_client, bufnr)
-        return require('keymap.lsp').on_attach(bufnr);
-    end,
+    on_attach = attachKeyMap,
+};
+lspconfig.volar.setup {
+    on_attach = attachKeyMap,
 };

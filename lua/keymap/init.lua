@@ -224,8 +224,9 @@ nmap('<Space>/', function()
     comment.toggle.linewise.current();
 end);
 --[[ Telescope ]]
-local builtin = require('telescope.builtin');
-local themes  = require('telescope.themes');
+                                               -- apple
+local builtin = require('telescope.builtin');  -- banana
+local themes  = require('telescope.themes');   -- cat
 nmap('<Space>ff', '<Cmd>Telescope find_files<CR>');
 nmap('<Space>fs', '<Cmd>Telescope live_grep<CR>');
 nmap('<Space>fb', function()
