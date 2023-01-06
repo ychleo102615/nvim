@@ -57,6 +57,14 @@ return require('packer').startup {
             'williamboman/nvim-lsp-installer',
             'onsails/lspkind-nvim'
         };
+        -- linters and formatters
+        use({
+            "jose-elias-alvarez/null-ls.nvim",
+            -- config = function()
+            --     require("null-ls").setup()
+            -- end,
+            requires = { "nvim-lua/plenary.nvim" },
+        });
 
         -- outline
         use 'simrat39/symbols-outline.nvim';

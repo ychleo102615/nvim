@@ -71,7 +71,8 @@ nmap('<Space>vt', ':vs<CR><C-W>l:ter<CR>i');
 nmap('<Space>w', function()
     vim.api.nvim_command 'NvimTreeClose';
     vim.api.nvim_command 'bdelete';
-end); --
+end);
+nmap('<Space>m',  'ciw<C-R>=<C-R>"');
 nmap('<Space>s', function()
     local lineNumber = vim.fn.line('.');
     local rangeStr   = '\\%>' .. lineNumber - 1 .. 'l' .. '\\%<' .. lineNumber + 1 .. 'l';
@@ -93,7 +94,7 @@ nmap(GetOptionKey 'k', ':m-2<CR>==');
 nmap(GetOptionKey 'J', ':t.<CR>');
 nmap(GetOptionKey 'K', ':t.-1<CR>');
 nmap(GetOptionKey 's', ':w | source %<CR>');
-nmap(GetOptionKey 'd', ':silent !open dict://<C-R><C-W><CR>');
+nmap(GetOptionKey 'd', ':silent ! dict://<C-R><C-W><CR>');
 --[[
     m' will push current cursor position to jump list
     nmap(GetOptionKey 'o', "m':normal o<CR>0D<C-O>");
@@ -154,6 +155,7 @@ vmap(GetOptionKey 'j', ":m '>+1<CR>gv=gv");    -- option j
 vmap(GetOptionKey 'k', ":m '<-2<CR>gv=gv");    -- option k
 vmap(GetOptionKey 'J', ":t'><CR>gv");          -- option J or option shift j
 vmap(GetOptionKey 'K', ":t'<-1<CR>gv");        -- option K or option shift k
+nmap(GetOptionKey 'm', 'c<C-R>=<C-R>"');
 
 -- Command Mode
 cmap(';m', MatchWholeWord '' .. '<Left><Left>');
@@ -239,6 +241,10 @@ nmap('<Space>fb', function()
         },
         initial_mode = 'normal',
     });
+end);
+nmap('<Space>fm', function()
+    print("Run Formatting");
+    vim.lsp.buf.format();
 end);
 nmap('<leader>fh', '<Cmd>Telescope help_tags<Cr>');
 nmap('<leader>fn', '<Cmd>Telescope current_buffer_fuzzy_find<Cr>');

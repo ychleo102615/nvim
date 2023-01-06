@@ -1,6 +1,6 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#built-in-textobjects
 require('nvim-treesitter.configs').setup{
-    ensure_installed = {"html", "css", "javascript", "typescript", "lua", "c", "cpp", "go" },
+    ensure_installed = {"html", "css", "javascript", "typescript", "lua", "c", "cpp", "go", "vue" },
     highlight = {
         -- enable = true,
         enable = not IS_USING_VSCODE,
