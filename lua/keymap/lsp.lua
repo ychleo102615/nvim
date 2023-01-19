@@ -9,7 +9,7 @@ return {
         vim.keymap.set('n', ']d',       vim.diagnostic.goto_next,  opts)
         vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
     end,
-    on_attach = function(bufnr)
+    on_attach = function(_, bufnr)
         -- Use an on_attach function to only map the following keys
         -- after the language server attaches to the current buffer
         -- Enable completion triggered by <c-x><c-o>

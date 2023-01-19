@@ -65,10 +65,16 @@ nmap('zh', ':let @/ = ""<CR>'); -- clear search history
 nmap('zd', ':%bd | e#<CR>');
 nmap('ga', '<Plug>(EasyAlign)');
 -- nmap('zh', ':noh<CR>');
-nmap('<Space>j', '<C-F>M');
-nmap('<Space>k', '<C-B>M');
 nmap('<Space>vt', ':vs<CR><C-W>l:ter<CR>i');
-nmap('<Space>w', function()
+-- 'gd' refer to my lsp keymap
+-- nmap('<Space>vd', ':vs<CR><C-W>lgd', { remap = true });
+nmap('<Space>vd', function()
+    local lastWin = vim.api.nvim_get_current_win();
+    vim.cmd('vs');
+    vim.api.nvim_set_current_win(lastWin);
+    vim.lsp.buf.definition();
+end);
+nmap('<Space>ww', function()
     vim.api.nvim_command 'NvimTreeClose';
     vim.api.nvim_command 'bdelete';
 end);
@@ -105,6 +111,17 @@ nmap(GetOptionKey ',', "<C-W><");
 nmap(GetOptionKey '.', "<C-W>>");
 nmap(GetOptionKey '<', "5<C-W><");
 nmap(GetOptionKey '>', "5<C-W>>");
+
+
+nmap(GetOptionKey 'a', function()
+    -- https://neovim.io/doc/user/treesitter.html
+    local r,c = unpack(vim.api.nvim_win_get_cursor(0))
+    local node = vim.treesitter.get_node_at_pos(0, r-1, c);
+    local next = node:next_sibling();
+    local nodename = vim.treesitter.get_node_at_cursor();
+    print("hello", node:start(), nodename, node:type());
+end);
+
 
 local function ReplaceFileWords()
     local prefix = "yiw:%s/\\<<C-R>0\\>/";
@@ -155,7 +172,7 @@ vmap(GetOptionKey 'j', ":m '>+1<CR>gv=gv");    -- option j
 vmap(GetOptionKey 'k', ":m '<-2<CR>gv=gv");    -- option k
 vmap(GetOptionKey 'J', ":t'><CR>gv");          -- option J or option shift j
 vmap(GetOptionKey 'K', ":t'<-1<CR>gv");        -- option K or option shift k
-nmap(GetOptionKey 'm', 'c<C-R>=<C-R>"');
+-- nmap(GetOptionKey 'm', 'c<C-R>=<C-R>"');
 
 -- Command Mode
 cmap(';m', MatchWholeWord '' .. '<Left><Left>');
@@ -166,8 +183,10 @@ vomap('om', [[:<C-U>execute "normal! ?self\r:noh\rv3e"<CR>]]); -- object momber 
 
 --[[
     補充
-    ctrl-u 的用途：https://vi.stackexchange.com/questions/9751/understanding-ctrl-u-combination
-    omap很難用：https://learnvimscriptthehardway.stevelosh.com/chapters/15.html
+    1. ctrl-u 的用途：https://vi.stackexchange.com/questions/9751/understanding-ctrl-u-combination
+    其實就像在terminal輸入ctrl-u一樣，清空目前的內容
+    2. 'normal!' https://learnvimscriptthehardway.stevelosh.com/chapters/29.html
+    3. omap很難用：https://learnvimscriptthehardway.stevelosh.com/chapters/15.html
 ]]
 -- examples
 omap('in(', ':<C-U>normal! f(vi(<CR>'); -- range between () in same line
@@ -183,25 +202,22 @@ xmap(';a', '<Esc>');
 --[[ lsp ]]
 require('keymap.lsp').setupKeymap();
 --[[ BufferLine ]]
-nmap('<Space>h',  ':BufferLineCyclePrev<CR>');
-nmap('<Space>l',  ':BufferLineCycleNext<CR>');
---[[ nmap('<Space>o',  ':BufferLinePick<CR>');
-nmap('<Space>cp', ':BufferLinePickClose<CR>');
-nmap('<Space>cl', ':BufferLineCloseLeft<CR>');
-nmap('<Space>cr', ':BufferLineCloseRight<CR>');
-nmap('<Space>co', function()
-    local bufferline = require('bufferline');
-    bufferline.close_in_direction "right";
-    bufferline.close_in_direction "left";
-end); ]]
+nmap('<Space>j', ':BufferLineCycleNext<CR>');
+nmap('<Space>k', ':BufferLineCyclePrev<CR>');
 nmap('<Space>cg', ':BufferLineGroupClose ungrouped<CR>');
 --[[ Tree ]]
-nmap('<Space>d',  ':NvimTreeToggle<CR>');
+-- nmap('<Space>d',  ':NvimTreeToggle<CR>');
+nmap('<Space>d', function()
+    local api = require("nvim-tree.api");
+    local find_file, no_focus = true, false;
+    api.tree.toggle(find_file, no_focus);
+end);
 nmap('<Space>r',  ':NvimTreeFindFile<CR>');
 --[[ TreeSitter Playground ]]
 nmap('<Space>p', ':TSPlaygroundToggle<CR>');
 --[[ Symbols Outline ]]
 nmap('<Space>o', ':SymbolsOutline<CR>');
+nmap('<Space>a', 'ggVG');
 --[[ EasyAlign ]]
 local alignComment = function()
     local ft = require('Comment.ft');
@@ -214,7 +230,7 @@ local alignComment = function()
     local alignCmdFormat = ":EasyAlign -1/%s/<CR>gv";
     return alignCmdFormat:format(alignRegex);
 end;
-vmap('<Space>a', alignComment, {expr = true, silent = true});
+vmap('<Space>ac', alignComment, {expr = true, silent = true});
 --[[ Toggler ]]
 nmap('<Space>i', '<Cmd>ToggleAlternate<CR>');
 --[[ Neogen ]]
@@ -226,9 +242,8 @@ nmap('<Space>/', function()
     comment.toggle.linewise.current();
 end);
 --[[ Telescope ]]
-                                               -- apple
-local builtin = require('telescope.builtin');  -- banana
-local themes  = require('telescope.themes');   -- cat
+local builtin = require('telescope.builtin');
+local themes  = require('telescope.themes');
 nmap('<Space>ff', '<Cmd>Telescope find_files<CR>');
 nmap('<Space>fs', '<Cmd>Telescope live_grep<CR>');
 nmap('<Space>fb', function()
@@ -243,24 +258,19 @@ nmap('<Space>fb', function()
     });
 end);
 nmap('<Space>fm', function()
-    print("Run Formatting");
-    vim.lsp.buf.format();
+    vim.lsp.buf.format({
+        filter = function(client)
+            return client.name == "null-ls";
+        end
+    });
 end);
 nmap('<leader>fh', '<Cmd>Telescope help_tags<Cr>');
 nmap('<leader>fn', '<Cmd>Telescope current_buffer_fuzzy_find<Cr>');
 nmap('<Space>gs', '<Cmd>Telescope git_status initial_mode=normal<CR>');
-nmap('<Space>gc', function()
-    -- local config = themes.get_ivy {
-    local config = themes.get_dropdown {
-        layout_config = {
-            height          = 0.5,
-            prompt_position = 'bottom',
-        },
-        sorting_strategy = 'ascending',
-        initial_mode = 'normal',
-    };
-    builtin.git_commits(config);
-end);
+
+nmap('<Space>gc', '<Cmd>Telescope git_commits initial_mode=normal<CR>');
+-- p means 'page', instead of using b which is occupid by 'buffer'
+nmap('<Space>gp', '<Cmd>Telescope git_bcommits initial_mode=normal<CR>');
 nmap('<Space>gb', function()
     builtin.git_branches(themes.get_ivy {
         layout_config = {

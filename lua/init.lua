@@ -12,7 +12,6 @@ require "plugin-config.gitsigns";
 require "plugin-config.lualine";
 require "plugin-config.neogen";
 require "plugin-config.Comment";
-require "plugin-config.null-ls";
 
 if IS_USING_VSCODE then
     -- print("detect vscode, stop plugin setup");
@@ -23,6 +22,7 @@ require "plugin-config.nvim-tree";
 require "plugin-config.gruvbox-material";
 require "plugin-config.bufferline";
 require "plugin-config.nvim-cmp";
+require "plugin-config.null-ls";
 require "plugin-config.telescope";
 require "plugin-config.symbols-outline";
 require "plugin-config.vim-go";

@@ -1,5 +1,9 @@
 -- https://github.com/hrsh7th/nvim-cmp
-require('cmp').setup {
+require("tailwindcss-colorizer-cmp").setup({
+    color_square_width = 2,
+});
+local cmp = require('cmp');
+cmp.setup {
     snippet = {
         expand = function(args)
             -- vim.fn["UltiSnips#Anon"](args.body);
@@ -18,18 +22,26 @@ require('cmp').setup {
     },
     mapping = require 'keymap.cmp',
     formatting = {
+        fields = {
+            cmp.ItemField.Menu,
+            cmp.ItemField.Abbr,
+            cmp.ItemField.Kind,
+        },
         format = require "lspkind".cmp_format {
+            mode = "symbol_text",
             with_text = true,
             menu = {
-                luasnip  = "[snip]",
+                luasnip  = "[SNIP]",
                 nvim_lsp = "[LSP]",
-                buffer   = "[buf]",
-                path     = "[path]",
-                spell    = "[spell]",
-                calc     = "[calc]",
-                emoji    = "[emoji]",
-                nvim_lua = "[api]",
+                buffer   = "[BUF]",
+                path     = "[PATH]",
+                spell    = "[SPELL]",
+                calc     = "[CALC]",
+                emoji    = "[EMOJI]",
+                nvim_lua = "[API]",
             },
+            before = require("tailwindcss-colorizer-cmp").formatter,
         },
     },
 };
+

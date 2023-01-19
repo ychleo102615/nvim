@@ -15,7 +15,7 @@ require('nvim-treesitter.configs').setup{
                 ["ib"] = "@block.inner",
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
-                -- c 已被change佔用，改用 s
+                -- "c" 已被change佔用，改用 "s", means statement
                 ["as"] = "@conditional.outer",
                 ["is"] = "@conditional.inner",
                 -- suffix "q" means quote
@@ -51,6 +51,7 @@ require('nvim-treesitter.configs').setup{
                 ["]S"] = "@conditional.outer",
                 ["]q"] = "@comment.outer",
                 ["]a"] = "@parameter.inner",
+                ["]e"] = "@call.outer",
             },
             goto_next_end = {
                 ["]F"] = "@function.outer",
@@ -61,6 +62,7 @@ require('nvim-treesitter.configs').setup{
                 ["[S"] = "@conditional.outer",
                 ["[q"] = "@comment.outer",
                 ["[a"] = "@parameter.inner",
+                ["[e"] = "@call.outer",
             },
             goto_previous_end = {
                 ["[F"] = "@function.outer",

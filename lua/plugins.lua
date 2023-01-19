@@ -58,13 +58,13 @@ return require('packer').startup {
             'onsails/lspkind-nvim'
         };
         -- linters and formatters
-        use({
+        use {
             "jose-elias-alvarez/null-ls.nvim",
             -- config = function()
-            --     require("null-ls").setup()
-            -- end,
-            requires = { "nvim-lua/plenary.nvim" },
-        });
+                --     require("null-ls").setup()
+                -- end,
+                requires = { "nvim-lua/plenary.nvim" },
+            };
 
         -- outline
         use 'simrat39/symbols-outline.nvim';
@@ -83,6 +83,11 @@ return require('packer').startup {
                 'saadparwaiz1/cmp_luasnip',
                 'f3fora/cmp-spell',
             }
+        };
+        use 'roobert/tailwindcss-colorizer-cmp.nvim';
+        use {
+            'NvChad/nvim-colorizer.lua',
+            config = function() require('colorizer').setup{}; end
         };
 
         -- motion
