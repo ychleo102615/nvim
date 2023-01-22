@@ -1,3 +1,5 @@
+local tool = require("tools.tool");
+
 --[[
     Mapping Function Abbreviation
     https://neovim.io/doc/user/api.html#nvim_set_keymap()
@@ -120,6 +122,7 @@ nmap(GetOptionKey 'a', function()
     local next = node:next_sibling();
     local nodename = vim.treesitter.get_node_at_cursor();
     print("hello", node:start(), nodename, node:type());
+    tool.extract();
 end);
 
 
