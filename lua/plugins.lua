@@ -10,7 +10,6 @@ return require('packer').startup {
         use 'ellisonleao/gruvbox.nvim';
         use 'olimorris/onedarkpro.nvim';
         use 'jdsimcoe/abstract.vim';
-        use 'AlessandroYorba/Alduin';
         use 'tlhr/anderson.vim';
         use 'ayu-theme/ayu-vim';
         use 'romainl/Apprentice';
@@ -89,6 +88,9 @@ return require('packer').startup {
             'NvChad/nvim-colorizer.lua',
             config = function() require('colorizer').setup{}; end
         };
+
+        -- indent line
+        use "lukas-reineke/indent-blankline.nvim"
 
         -- motion
         use 'ggandor/lightspeed.nvim';

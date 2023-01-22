@@ -5,6 +5,10 @@ require('nvim-tree').setup {
         group_empty = true,
     },
     filters = {
-        exclude = { "node_modules" },
+        exclude  = { "node_modules" },
+        -- dotfiles = true,
+    },
+    git = {
+        ignore = false,
     },
 };
