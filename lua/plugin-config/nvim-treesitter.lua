@@ -1,9 +1,18 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#built-in-textobjects
-require('nvim-treesitter.configs').setup{
+require('nvim-treesitter.configs').setup {
     ensure_installed = { "html", "css", "javascript", "typescript", "lua", "c", "cpp", "go", "vue", "help", "cmake", "vim" },
     highlight = {
         -- enable = true,
         enable = not IS_USING_VSCODE,
+    },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection    = "gnn", -- set to `false` to disable one of the mappings
+            node_incremental  = "grn",
+            scope_incremental = "grc",
+            node_decremental  = "grm",
+        },
     },
     -- text objects
     textobjects = {
@@ -67,7 +76,6 @@ require('nvim-treesitter.configs').setup{
             goto_previous_end = {
                 ["[F"] = "@function.outer",
             },
-
         },
     },
     playground = {
