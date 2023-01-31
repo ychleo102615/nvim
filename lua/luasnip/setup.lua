@@ -1,6 +1,6 @@
--- require("luasnip.loaders.from_vscode").load({paths = "./luasnip/snippets"});
-require("luasnip.loaders.from_vscode").lazy_load({paths = "~/.config/nvim/lua/luasnip/snippets"})
---require("luasnip.loaders.from_vscode").lazy_load();
+require("luasnip.loaders.from_vscode").lazy_load { paths = "./lua/luasnip/snippets" };
+-- snipmate from: https://github.com/honza/vim-snippets
+require("luasnip.loaders.from_snipmate").lazy_load { paths = "./lua/luasnip/snipmate/snippets" };
 
 local ls      = require("luasnip");
 local s       = ls.snippet;
@@ -27,3 +27,4 @@ end
 -- ls.add_snippets("all", { });
 -- ls.add_snippets("lua", { });
 
+ls.filetype_extend("all", { "_" });
