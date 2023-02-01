@@ -47,5 +47,15 @@ function tool.extract()
     printNode(funcScope, "funcScope");
 end
 
+local cmd = vim.cmd;
+--[[
+nmap('<Space>i', '<Cmd>ToggleAlternate<CR>');
+vim.cmd(cmdStr)
+vim.api.nvim_command(cmdStr)
+--]]
+function tool.wrapCmd(cmdStr)
+    return function() return cmd(cmdStr) end;
+end
+
 
 return tool;

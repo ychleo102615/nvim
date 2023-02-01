@@ -1,4 +1,6 @@
 local tool = require("tools.tool");
+local wrapCmd = tool.wrapCmd;
+local cmd     = vim.cmd;
 
 --[[
     Mapping Function Abbreviation
@@ -72,13 +74,9 @@ nmap('<Space>vt', ':vs<CR><C-W>l:ter<CR>i');
 -- nmap('<Space>vd', ':vs<CR><C-W>lgd', { remap = true });
 nmap('<Space>vd', function()
     local lastWin = vim.api.nvim_get_current_win();
-    vim.cmd('vs');
+    cmd 'vs';
     vim.api.nvim_set_current_win(lastWin);
     vim.lsp.buf.definition();
-end);
-nmap('<Space>ww', function()
-    vim.api.nvim_command 'NvimTreeClose';
-    vim.api.nvim_command 'bdelete';
 end);
 nmap('<Space>m',  'ciw<C-R>=<C-R>"');
 nmap('<Space>s', function()
@@ -215,7 +213,12 @@ nmap('<Space>d', function()
     local find_file, no_focus = true, false;
     api.tree.toggle(find_file, no_focus);
 end);
-nmap('<Space>r',  ':NvimTreeFindFile<CR>');
+nmap('<Space>e', wrapCmd 'NvimTreeFindFile');
+-- nmap('<Space>r',  ':NvimTreeFindFile<CR>');
+nmap('<Space>ww', function()
+    cmd 'NvimTreeClose';
+    cmd 'bdelete';
+end);
 --[[ TreeSitter Playground ]]
 nmap('<Space>p', ':TSPlaygroundToggle<CR>');
 --[[ Symbols Outline ]]
@@ -235,7 +238,7 @@ local alignComment = function()
 end;
 vmap('<Space>ac', alignComment, {expr = true, silent = true});
 --[[ Toggler ]]
-nmap('<Space>i', '<Cmd>ToggleAlternate<CR>');
+nmap('<Space>i', wrapCmd 'ToggleAlternate');
 --[[ Neogen ]]
 nmap('<leader>nf', ':lua require("neogen").generate()<CR>', {noremap = true, silent = true});
 nmap('<leader>nc', ':lua require("neogen").generate{type = "class"}<CR>', {noremap = true, silent = true});
@@ -295,7 +298,7 @@ if TELESCOPE_DEBUG then
         },
         sorting_strategy = 'ascending',
     };
-    vim.api.nvim_command 'messages clear';
+    cmd 'messages clear';
     --print(vim.inspect(config));
     nmap('<Space>gc', function()
         builtin.git_commits(config);
