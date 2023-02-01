@@ -12,6 +12,7 @@ require "plugin-config.gitsigns";
 require "plugin-config.lualine";
 require "plugin-config.neogen";
 require "plugin-config.Comment";
+require "plugin-config.refactoring";
 
 if IS_USING_VSCODE then
     -- print("detect vscode, stop plugin setup");

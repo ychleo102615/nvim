@@ -41,6 +41,14 @@ return require('packer').startup {
             },
             -- tag = 'nightly', -- optional, updated every week. (see issue #1193)
         };
+        -- Refactor
+        use {
+            "ThePrimeagen/refactoring.nvim",
+            requires = {
+                { "nvim-lua/plenary.nvim" },
+                { "nvim-treesitter/nvim-treesitter" }
+            }
+        }
 
         -- buffer line
         use {
