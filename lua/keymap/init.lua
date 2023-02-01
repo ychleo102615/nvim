@@ -1,6 +1,6 @@
 local tool = require("tools.tool");
 local wrapCmd = tool.wrapCmd;
-local cmd     = vim.cmd;
+local cmd = vim.cmd;
 
 --[[
     Mapping Function Abbreviation
@@ -16,6 +16,7 @@ local modeMap = (function()
         return vim.keymap.set(mode, unpack(params));
     end;
 end)();
+-- checkout :h map-table to see difference
 local function map(...)   return modeMap('',         ...); end
 local function nmap(...)  return modeMap('n',        ...); end
 local function imap(...)  return modeMap('i',        ...); end
@@ -24,6 +25,12 @@ local function vmap(...)  return modeMap('v',        ...); end
 local function omap(...)  return modeMap('o',        ...); end
 local function vomap(...) return modeMap({'v', 'o'}, ...); end
 local function xmap(...)  return modeMap('x',        ...); end
+
+local function allmap(...)
+    map(...);
+    imap(...);
+    cmap(...);
+end
 
 --[[
     Global Function
@@ -62,6 +69,7 @@ end;
 
 -- All
 map('<Space>', '<Nop>');
+allmap(';a', '<Esc>');
 
 -- Normal Mode
 nmap('zp', '"0p'); -- paste from yanked
@@ -142,7 +150,6 @@ end)();
 nmap('<Space>nn', ToggleRelativeLineNum);
 
 -- Insert Mode
-imap(';a', '<Esc>');
 imap(GetOptionKey 'h', '<Left>');    -- option h
 imap(GetOptionKey 'j', '<Down>');    -- option j
 imap(GetOptionKey 'k', '<Up>');      -- option k
@@ -163,7 +170,6 @@ vmap('/', "<Esc>/" .. scriptGetSelectionLineRage);
 vmap('?', "<Esc>?" .. scriptGetSelectionLineRage);
 -- c_ctrl-r 會貼上指定的暫存器裡的東西
 vmap('f', 'y/<C-R>"<CR>');
-vmap(';a', '<Esc>');
 vmap('<Space>e', '<Esc>');
 -- vmap(';;', 'iwy/' .. MatchWholeWord [[<C-R>"]] .. '<CR>');
 vmap(';;', '<Esc>/' .. MatchWholeWord [[<C-R><C-W>]] .. '<CR>');
@@ -195,7 +201,6 @@ omap('F', ':<C-U>normal! 0f(hviw<CR>'); -- range word precede first () in same l
 
 -- Visual Mode With out Select Mode
 xmap('ga', '<Plug>(EasyAlign)');
-xmap(';a', '<Esc>');
 
 --[[
     Plugin
