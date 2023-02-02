@@ -268,13 +268,6 @@ nmap('<Space>fb', function()
         initial_mode = 'normal',
     });
 end);
-nmap('<Space>fm', function()
-    vim.lsp.buf.format({
-        filter = function(client)
-            return client.name == "null-ls";
-        end
-    });
-end);
 nmap('<leader>fh', '<Cmd>Telescope help_tags<Cr>');
 nmap('<leader>fn', '<Cmd>Telescope current_buffer_fuzzy_find<Cr>');
 nmap('<Space>gs', '<Cmd>Telescope git_status initial_mode=normal<CR>');

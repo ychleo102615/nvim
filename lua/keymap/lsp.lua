@@ -1,4 +1,11 @@
--- https://github.com/neovim/nvim-lspconfig
+-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/format.lua
+local function isNullLsSupported()
+    local buf = vim.api.nvim_get_current_buf();
+    local ft = vim.bo[buf].filetype;
+    local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0;
+    return have_nls;
+end
+
 return {
     setupKeymap = function()
         -- Mappings.
@@ -32,5 +39,15 @@ return {
         vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename,          bufopts)
         vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action,     bufopts)
         vim.keymap.set('n', 'gr',        vim.lsp.buf.references,      bufopts)
+
+        -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
+        vim.keymap.set('n', '<space>fm', function()
+            vim.lsp.buf.format {
+                async = true,
+                filter = function(client)
+                    return isNullLsSupported() and client.name == 'null-ls';
+                end,
+            }
+        end, bufopts)
     end,
 };
