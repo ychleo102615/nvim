@@ -11,8 +11,8 @@ cmp.setup {
         end,
     },
     sources = {
-        { name = 'luasnip' },
         { name = 'nvim_lsp' },
+        { name = 'luasnip' },
         { name = 'buffer', keyword_length = 5 },
         { name = 'path' },
         { name = 'spell' },
@@ -31,8 +31,8 @@ cmp.setup {
             mode = "symbol_text",
             with_text = true,
             menu = {
-                luasnip  = "[SNIP]",
                 nvim_lsp = "[LSP]",
+                luasnip  = "[SNIP]",
                 buffer   = "[BUF]",
                 path     = "[PATH]",
                 spell    = "[SPELL]",

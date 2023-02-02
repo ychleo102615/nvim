@@ -205,6 +205,12 @@ xmap('ga', '<Plug>(EasyAlign)');
 --[[
     Plugin
 ]]
+--[[]]
+-- nmap('<leader>ps', ':PackerSync<CR>');
+nmap('<leader>ps', function()
+    print("Run PackerSync..");
+    cmd 'PackerSync'
+end);
 --[[ lsp ]]
 require('keymap.lsp').setupKeymap();
 --[[ BufferLine ]]
