@@ -24,16 +24,6 @@ local schemeChoices = {
     "one_monokai",
 };
 
--- https://github.com/ellisonleao/gruvbox.nvim/blob/aee207e1ae55c44bd6a23c1a85e5e17939e3835b/lua/gruvbox/groups.lua
-require "gruvbox".setup {
-    bold = false,
-    contrast = "hard",
-    overrides = {
-        GitSignsCurrentLineBlame = { link = "GruvboxBg4" },
-        GitSignsChange           = { link = "GruvboxBlueSign" },
-    },
-};
-vim.g.ayucolor = "dark"
 vim.g.seoul256_background = 234;
 local sonokaiStyles = {
     "default", "atlantis", "andromeda", "shusia", "maia", "espresso",
@@ -43,5 +33,5 @@ vim.g.sonokai_enable_italic = true;
 vim.g.everforest_background = "hard";
 vim.g.everforest_ui_contrast = "high";
 
--- vim.cmd("colorscheme " .. schemeChoices[3]);
-vim.cmd("colorscheme " .. schemeChoices[20]);
+vim.cmd("colorscheme " .. schemeChoices[3]);
+-- vim.cmd("colorscheme " .. schemeChoices[20]);
