@@ -45,7 +45,8 @@ return {
             vim.lsp.buf.format {
                 async = true,
                 filter = function(client)
-                    return isNullLsSupported() and client.name == 'null-ls';
+                    -- isNullLsSupport XOR isUsingNullLs
+                    return isNullLsSupported() == (client.name == 'null-ls');
                 end,
             }
         end, bufopts)
