@@ -1,3 +1,6 @@
+--[[
+    TODO: write a function can subsittue every , into new line symbol
+--]]
 local tool = require("tools.tool");
 local wrapCmd = tool.wrapCmd;
 local cmd = vim.cmd;
