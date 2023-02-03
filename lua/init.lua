@@ -3,7 +3,7 @@ vim.g.mapleader = " ";
 
 require "option";
 require "keymap";
-require "plugins";
+require "lazy-config";
 require "colorscheme";
 
 require "plugin-config/nvim-treesitter";
