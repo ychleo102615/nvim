@@ -24,14 +24,5 @@ local schemeChoices = {
     "one_monokai",
 };
 
-vim.g.seoul256_background = 234;
-local sonokaiStyles = {
-    "default", "atlantis", "andromeda", "shusia", "maia", "espresso",
-};
-vim.g.sonokai_style = sonokaiStyles[6];
-vim.g.sonokai_enable_italic = true;
-vim.g.everforest_background = "hard";
-vim.g.everforest_ui_contrast = "high";
-
-vim.cmd("colorscheme " .. schemeChoices[3]);
--- vim.cmd("colorscheme " .. schemeChoices[20]);
+-- vim.cmd("colorscheme " .. schemeChoices[3]);
+vim.cmd("colorscheme " .. schemeChoices[20]);
