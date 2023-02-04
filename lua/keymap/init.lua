@@ -1,3 +1,4 @@
+require("keymap.lazy");
 --[[
     TODO: write a function can subsittue every , into new line symbol
 --]]
@@ -99,9 +100,8 @@ nmap('<Space>s', function()
     local cmdStr     = '/' .. rangeStr .. patternStr .. "<CR>" .. operateStr .. cleanupStr;
     return cmdStr;
 end, { expr = true, silent = true });   -- shrink spaces
-nmap('<C-S>', ':w<CR>');
 nmap('<C-Q>', ':qa<CR>');
-nmap('<C-H>', ':w | source %<CR>');
+nmap('<C-N>', ':w | source %<CR>');
 -- nmap('<C-M>', ':w | source %<CR>');   -- It seems that  ctrl-m is equivalent to Return key
 nmap(';j', '15j');
 nmap(';k', '15k');
@@ -216,10 +216,6 @@ nmap('<leader>ps', function()
 end);
 --[[ lsp ]]
 require('keymap.lsp').setupKeymap();
---[[ BufferLine ]]
-nmap('<Space>j', ':BufferLineCycleNext<CR>');
-nmap('<Space>k', ':BufferLineCyclePrev<CR>');
-nmap('<Space>cg', ':BufferLineGroupClose ungrouped<CR>');
 --[[ Tree ]]
 -- nmap('<Space>d',  ':NvimTreeToggle<CR>');
 nmap('<Space>d', function()
@@ -237,7 +233,7 @@ end);
 nmap('<Space>p', ':TSPlaygroundToggle<CR>');
 --[[ Symbols Outline ]]
 nmap('<Space>o', ':SymbolsOutline<CR>');
-nmap('<Space>a', 'ggVG');
+nmap('<Space>a', 'ggVG', { desc = "Select All" });
 --[[ EasyAlign ]]
 local alignComment = function()
     local ft = require('Comment.ft');

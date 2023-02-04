@@ -57,5 +57,12 @@ function tool.wrapCmd(cmdStr)
     return function() return cmd(cmdStr) end;
 end
 
+function tool.getOptionKey(originalKey)
+    local mappedKey = require('keymap.optionKeyMapping')[originalKey];
+    if not mappedKey then
+        tool.echo(("Option Key Mapping Error:'%s'"):format(originalKey))
+    end
+    return mappedKey;
+end
 
 return tool;
