@@ -49,9 +49,10 @@ end
 
 local cmd = vim.cmd;
 --[[
-nmap('<Space>i', '<Cmd>ToggleAlternate<CR>');
-vim.cmd(cmdStr)
-vim.api.nvim_command(cmdStr)
+    各種輸入ex command的方式
+    nmap('<Space>i', '<Cmd>ToggleAlternate<CR>');
+    vim.cmd(cmdStr)
+    vim.api.nvim_command(cmdStr)
 --]]
 function tool.wrapCmd(cmdStr)
     return function() return cmd(cmdStr) end;

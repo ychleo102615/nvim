@@ -2,8 +2,10 @@ require("keymap.lazy");
 --[[
     TODO: write a function can subsittue every , into new line symbol
 --]]
-local tool = require("tools.tool");
-local wrapCmd = tool.wrapCmd;
+local tool         = require("tools.tool");
+local wrapCmd      = tool.wrapCmd;
+local getOptionKey = tool.getOptionKey;
+
 local cmd = vim.cmd;
 
 --[[
@@ -62,15 +64,6 @@ function GetConditionStatementSelectorScript()
     end
 end
 
---[[
-    Local Function
-]]
-local function GetOptionKey(originalKey)
-    local mappedKey = require('keymap.optionKeyMapping')[originalKey];
-    assert(mappedKey ~= nil, ("Option Key Mapping Error:'%s'"):format(originalKey));
-    return mappedKey;
-end;
-
 -- All
 map('<Space>', '<Nop>');
 allmap(';a', '<Esc>');
@@ -106,25 +99,25 @@ nmap('<C-N>', ':w | source %<CR>');
 nmap(';j', '15j');
 nmap(';k', '15k');
 nmap(';p', 'viw\"0p');
-nmap(GetOptionKey 'j', ':m+<CR>==');
-nmap(GetOptionKey 'k', ':m-2<CR>==');
-nmap(GetOptionKey 'J', ':t.<CR>');
-nmap(GetOptionKey 'K', ':t.-1<CR>');
-nmap(GetOptionKey 's', ':w | source %<CR>');
-nmap(GetOptionKey 'd', ':silent ! dict://<C-R><C-W><CR>');
+nmap(getOptionKey 'j', ':m+<CR>==');
+nmap(getOptionKey 'k', ':m-2<CR>==');
+nmap(getOptionKey 'J', ':t.<CR>');
+nmap(getOptionKey 'K', ':t.-1<CR>');
+nmap(getOptionKey 's', ':w | source %<CR>');
+nmap(getOptionKey 'd', ':silent ! dict://<C-R><C-W><CR>');
 --[[
     m' will push current cursor position to jump list
-    nmap(GetOptionKey 'o', "m':normal o<CR>0D<C-O>");
+    nmap(getOptionKey 'o', "m':normal o<CR>0D<C-O>");
 ]]
-nmap(GetOptionKey 'o', ":call append(line('.'), '')<CR>");
-nmap(GetOptionKey 'O', ":call append(line('.')-1, '')<CR>");
-nmap(GetOptionKey ',', "<C-W><");
-nmap(GetOptionKey '.', "<C-W>>");
-nmap(GetOptionKey '<', "5<C-W><");
-nmap(GetOptionKey '>', "5<C-W>>");
+nmap(getOptionKey 'o', ":call append(line('.'), '')<CR>");
+nmap(getOptionKey 'O', ":call append(line('.')-1, '')<CR>");
+nmap(getOptionKey ',', "<C-W><");
+nmap(getOptionKey '.', "<C-W>>");
+nmap(getOptionKey '<', "5<C-W><");
+nmap(getOptionKey '>', "5<C-W>>");
 
 
-nmap(GetOptionKey 'a', function()
+nmap(getOptionKey 'a', function()
     -- https://neovim.io/doc/user/treesitter.html
     local r,c = unpack(vim.api.nvim_win_get_cursor(0))
     local node = vim.treesitter.get_node_at_pos(0, r-1, c);
@@ -153,12 +146,12 @@ end)();
 nmap('<Space>nn', ToggleRelativeLineNum);
 
 -- Insert Mode
-imap(GetOptionKey 'h', '<Left>');    -- option h
-imap(GetOptionKey 'j', '<Down>');    -- option j
-imap(GetOptionKey 'k', '<Up>');      -- option k
-imap(GetOptionKey 'l', '<Right>');   -- option l
-imap(GetOptionKey 'o', "<C-O>:call append(line('.'), '')<CR>");
-imap(GetOptionKey 'O', "<C-O>:call append(line('.')-1, '')<CR>");
+imap(getOptionKey 'h', '<Left>');    -- option h
+imap(getOptionKey 'j', '<Down>');    -- option j
+imap(getOptionKey 'k', '<Up>');      -- option k
+imap(getOptionKey 'l', '<Right>');   -- option l
+imap(getOptionKey 'o', "<C-O>:call append(line('.'), '')<CR>");
+imap(getOptionKey 'O', "<C-O>:call append(line('.')-1, '')<CR>");
 
 
 -- Visual Mode
@@ -178,11 +171,11 @@ vmap('<Space>e', '<Esc>');
 vmap(';;', '<Esc>/' .. MatchWholeWord [[<C-R><C-W>]] .. '<CR>');
 vmap(';w', '<Esc>/' .. MatchWholeWord [[<C-R><C-W>]] .. '<CR>');
 vmap(';v', 'y/' .. MatchWholeWord [[<C-R>"]] .. '<CR>');
-vmap(GetOptionKey 'j', ":m '>+1<CR>gv=gv");    -- option j
-vmap(GetOptionKey 'k', ":m '<-2<CR>gv=gv");    -- option k
-vmap(GetOptionKey 'J', ":t'><CR>gv");          -- option J or option shift j
-vmap(GetOptionKey 'K', ":t'<-1<CR>gv");        -- option K or option shift k
--- nmap(GetOptionKey 'm', 'c<C-R>=<C-R>"');
+vmap(getOptionKey 'j', ":m '>+1<CR>gv=gv");    -- option j
+vmap(getOptionKey 'k', ":m '<-2<CR>gv=gv");    -- option k
+vmap(getOptionKey 'J', ":t'><CR>gv");          -- option J or option shift j
+vmap(getOptionKey 'K', ":t'<-1<CR>gv");        -- option K or option shift k
+-- nmap(getOptionKey 'm', 'c<C-R>=<C-R>"');
 
 -- Command Mode
 cmap(';m', MatchWholeWord '' .. '<Left><Left>');

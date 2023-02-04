@@ -1,5 +1,5 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
-local tool = require("tools.tool");
+local getOptionKey = require("tools.tool").getOptionKey;
 
 local function map(mode, lhs, rhs, opts)
     local keys = require("lazy.core.handler").handlers.keys
@@ -28,12 +28,12 @@ map("n", "<C-Left>",  "<cmd>vertical resize -2<cr>", { desc = "Decrease window w
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Move Lines
-map("n", tool.getOptionKey "j", ":m .+1<cr>==",     { desc = "Move down" })
-map("n", tool.getOptionKey "k", ":m .-2<cr>==",     { desc = "Move up" })
-map("v", tool.getOptionKey "j", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-map("v", tool.getOptionKey "k", ":m '<-2<cr>gv=gv", { desc = "Move up" })
--- map("i", tool.getOptionKey "j", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
--- map("i", tool.getOptionKey "k", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
+map("n", getOptionKey "j", ":m .+1<cr>==",     { desc = "Move down" })
+map("n", getOptionKey "k", ":m .-2<cr>==",     { desc = "Move up" })
+map("v", getOptionKey "j", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+map("v", getOptionKey "k", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+-- map("i", getOptionKey "j", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
+-- map("i", getOptionKey "k", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
 
 -- buffers
 if require("bufferline") then
