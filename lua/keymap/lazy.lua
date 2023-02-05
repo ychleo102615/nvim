@@ -20,12 +20,11 @@ map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
--- TO FIX
 -- Resize window using <ctrl> arrow keys
-map("n", "<C-Up>",    "<cmd>resize +2<cr>",          { desc = "Increase window height" })
-map("n", "<C-Down>",  "<cmd>resize -2<cr>",          { desc = "Decrease window height" })
-map("n", "<C-Left>",  "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+map("n", "<tab><Up>",    "<cmd>resize +2<cr>",          { desc = "Increase window height" })
+map("n", "<tab><Down>",  "<cmd>resize -2<cr>",          { desc = "Decrease window height" })
+map("n", "<tab><Left>",  "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+map("n", "<tab><Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Move Lines
 map("n", getOptionKey "j", ":m .+1<cr>==",     { desc = "Move down" })
@@ -34,6 +33,12 @@ map("v", getOptionKey "j", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", getOptionKey "k", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 -- map("i", getOptionKey "j", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
 -- map("i", getOptionKey "k", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
+
+-- Copy Lines
+map("n", getOptionKey "J", ":t.<cr>",      { desc = "Copy down" })
+map("n", getOptionKey "K", ":t.-1<cr>",    { desc = "Copy up" })
+map("v", getOptionKey 'J', ":t'><CR>gv",   { desc = "Copy down" })
+map("v", getOptionKey 'K', ":t'<-1<CR>gv", { desc = "Copy up" })
 
 -- buffers
 if require("bufferline") then

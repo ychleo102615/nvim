@@ -99,8 +99,6 @@ nmap('<C-N>', ':w | source %<CR>');
 nmap(';j', '15j');
 nmap(';k', '15k');
 nmap(';p', 'viw\"0p');
-nmap(getOptionKey 'j', ':m+<CR>==');
-nmap(getOptionKey 'k', ':m-2<CR>==');
 nmap(getOptionKey 'J', ':t.<CR>');
 nmap(getOptionKey 'K', ':t.-1<CR>');
 nmap(getOptionKey 's', ':w | source %<CR>');
@@ -171,10 +169,6 @@ vmap('<Space>e', '<Esc>');
 vmap(';;', '<Esc>/' .. MatchWholeWord [[<C-R><C-W>]] .. '<CR>');
 vmap(';w', '<Esc>/' .. MatchWholeWord [[<C-R><C-W>]] .. '<CR>');
 vmap(';v', 'y/' .. MatchWholeWord [[<C-R>"]] .. '<CR>');
-vmap(getOptionKey 'j', ":m '>+1<CR>gv=gv");    -- option j
-vmap(getOptionKey 'k', ":m '<-2<CR>gv=gv");    -- option k
-vmap(getOptionKey 'J', ":t'><CR>gv");          -- option J or option shift j
-vmap(getOptionKey 'K', ":t'<-1<CR>gv");        -- option K or option shift k
 -- nmap(getOptionKey 'm', 'c<C-R>=<C-R>"');
 
 -- Command Mode
