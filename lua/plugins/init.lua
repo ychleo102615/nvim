@@ -34,20 +34,6 @@ return {
         dependencies = 'kyazdani42/nvim-web-devicons',
     },
 
-    -- lsp config
-    {
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
-        'neovim/nvim-lspconfig',
-        'williamboman/nvim-lsp-installer',
-        'onsails/lspkind-nvim'
-    },
-    -- linters and formatters
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-    },
-
     -- outline
     'simrat39/symbols-outline.nvim',
 

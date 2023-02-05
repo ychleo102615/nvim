@@ -28,7 +28,6 @@ require "plugin-config.telescope";
 require "plugin-config.symbols-outline";
 require "plugin-config.vim-go";
 
-require "lsp.setup";
 require "luasnip.setup";
 require "autocmd";
 
