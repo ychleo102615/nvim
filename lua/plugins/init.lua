@@ -1,4 +1,6 @@
 return {
+    { "LazyVim/LazyVim", --[[ import = "lazyvim.plugins" ]] },
+
     { "folke/which-key.nvim", config = true },
     -- { "folke/neoconf.nvim", cmd = "Neoconf" },
     -- "folke/neodev.nvim",
@@ -13,7 +15,13 @@ return {
     },
 
     -- outline
-    'simrat39/symbols-outline.nvim',
+    {
+        'simrat39/symbols-outline.nvim',
+        opts = {
+            autofold_depth = 0,
+        },
+        cond = not IS_USING_VSCODE,
+    },
 
     -- indent line
     'lukas-reineke/indent-blankline.nvim',
@@ -44,7 +52,6 @@ return {
             require('leap').add_default_mappings();
         end
     },
-    -- 'ggandor/lightspeed.nvim',
 
     -- surround
     'kylechui/nvim-surround',
@@ -56,7 +63,11 @@ return {
             'nvim-lua/plenary.nvim',
         }
     },
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', cond = vim.fn.executable 'make' == 1 },
+    {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+        cond = vim.fn.executable 'make' == 1
+    },
     'nvim-telescope/telescope-ui-select.nvim',
 
     -- git
@@ -72,7 +83,5 @@ return {
         dependencies = { 'nvim-tree/nvim-web-devicons' },
     },
     -- go
-    {
-        'fatih/vim-go',
-    },
+    'fatih/vim-go',
 };
