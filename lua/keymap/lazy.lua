@@ -92,8 +92,8 @@ map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List" })
 
 -- quit
-map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
-map("n", "<C-q>",      "<cmd>qa<cr>", { desc = "Quit all" })
+map("n", "<leader>q", "<cmd>q<cr>",  { desc = "Quit" })
+map("n", "<C-q>",     "<cmd>qa<cr>", { desc = "Quit all" })
 
 
 -- floating terminal

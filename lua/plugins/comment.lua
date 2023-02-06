@@ -16,9 +16,12 @@ return {
     {
         'numToStr/Comment.nvim',
         keys = {
+            -- :h using-<Plug>
             -- https://github.com/numToStr/Comment.nvim/blob/master/plugin/Comment.lua
-            { '<leader>;', '<Plug>(comment_toggle_linewise_current)',  desc = "Comment Line"},
-            { '<leader>;', '<Plug>(comment_toggle_linewise_visual)gv', desc = "Comment Lines", mode = 'v'},
+            { '<leader>;', '<Plug>(comment_toggle_linewise_current)',   desc = "Comment Line"},
+            { '<leader>;', '<Plug>(comment_toggle_linewise_visual)gv',  desc = "Comment Lines",  mode = 'v'},
+            { "<leader>'", '<Plug>(comment_toggle_blockwise_current)',  desc = "Comment Block"},
+            { "<leader>'", '<Plug>(comment_toggle_blockwise_visual)gv', desc = "Comment Block",  mode = 'v'},
         },
     },
 };

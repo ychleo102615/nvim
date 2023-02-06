@@ -19,7 +19,7 @@ return {
         vim.keymap.set('n', '<leader>cd', vim.diagnostic.open_float, exd { desc = "Line Diagnostics" })
         vim.keymap.set('n', '[d',         vim.diagnostic.goto_prev,  exd { desc = "Next Diagnostic" })
         vim.keymap.set('n', ']d',         vim.diagnostic.goto_next,  exd { desc = "Prev Diagnostic" })
-        vim.keymap.set('n', '<leader>q',  vim.diagnostic.setloclist, exd {})
+        vim.keymap.set('n', '<leader>cs', vim.diagnostic.setloclist, exd {})
         vim.keymap.set('n', '<leader>cl', "<cmd>LspInfo<cr>",        exd { desc = "Lsp Info" })
     end,
     on_attach = function(_, bufnr)
