@@ -1,5 +1,5 @@
 return {
-    "folke/which-key.nvim",
+    { "folke/which-key.nvim", config = true },
     -- { "folke/neoconf.nvim", cmd = "Neoconf" },
     -- "folke/neodev.nvim",
 
@@ -89,15 +89,6 @@ return {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'kyazdani42/nvim-web-devicons' },
     },
-
-    -- comment
-    {
-        "danymat/neogen",
-        dependencies = "nvim-treesitter/nvim-treesitter",
-        -- Uncomment next line if you want to follow only stable versions
-    },
-    'numToStr/Comment.nvim',
-
     -- go
     {
         'fatih/vim-go',

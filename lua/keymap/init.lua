@@ -236,14 +236,6 @@ end;
 vmap('<Space>ac', alignComment, {expr = true, silent = true});
 --[[ Toggler ]]
 nmap('<Space>i', wrapCmd 'ToggleAlternate');
---[[ Neogen ]]
-nmap('<leader>nf', ':lua require("neogen").generate()<CR>', {noremap = true, silent = true});
-nmap('<leader>nc', ':lua require("neogen").generate{type = "class"}<CR>', {noremap = true, silent = true});
---[[ Comment ]]
-local comment = require('Comment.api')
-nmap('<Space>/', function()
-    comment.toggle.linewise.current();
-end);
 --[[ Telescope ]]
 local builtin = require('telescope.builtin');
 local themes  = require('telescope.themes');
