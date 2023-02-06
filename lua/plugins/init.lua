@@ -76,12 +76,6 @@ return {
     -- editing
     'junegunn/vim-easy-align',
     'rmagatti/alternate-toggler',
-
-    -- status line
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
-    },
     -- go
     'fatih/vim-go',
 };
