@@ -9,7 +9,6 @@ require "setup-colorscheme";
 require "plugin-config.nvim-surround";
 require "plugin-config.gitsigns";
 require "plugin-config.lualine";
-require "plugin-config.Comment";
 require "plugin-config.refactoring";
 
 if IS_USING_VSCODE then
