@@ -66,6 +66,7 @@ return {
                 },
             })
         end,
+        cond = not IS_USING_VSCODE,
     },
 };
 
