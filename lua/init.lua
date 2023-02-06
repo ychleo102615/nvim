@@ -6,7 +6,6 @@ require "option";
 require "keymap";
 require "setup-colorscheme";
 
-require "plugin-config/nvim-treesitter";
 require "plugin-config.nvim-surround";
 require "plugin-config.gitsigns";
 require "plugin-config.lualine";

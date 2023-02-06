@@ -3,14 +3,6 @@ return {
     -- { "folke/neoconf.nvim", cmd = "Neoconf" },
     -- "folke/neodev.nvim",
 
-    -- Tree Sitter
-    {
-        'nvim-treesitter/nvim-treesitter',
-        build= ':TSUpdate'
-    },
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    'nvim-treesitter/playground',
-
     -- Tree
     {
         'kyazdani42/nvim-tree.lua',
