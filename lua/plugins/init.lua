@@ -12,12 +12,6 @@ return {
         },
     },
 
-    -- buffer line
-    {
-        'akinsho/bufferline.nvim',
-        dependencies = 'nvim-tree/nvim-web-devicons',
-    },
-
     -- outline
     'simrat39/symbols-outline.nvim',
 

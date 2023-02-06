@@ -17,7 +17,6 @@ if IS_USING_VSCODE then
 end
 
 require "plugin-config.gruvbox-material";
-require "plugin-config.bufferline";
 require "plugin-config.telescope";
 require "plugin-config.symbols-outline";
 require "plugin-config.vim-go";
