@@ -5,9 +5,9 @@ return {
 
     -- Tree
     {
-        'kyazdani42/nvim-tree.lua',
+        'nvim-tree/nvim-tree.lua',
         dependencies = {
-            'kyazdani42/nvim-web-devicons', -- optional, for file icons
+            'nvim-tree/nvim-web-devicons', -- optional, for file icons
         },
         -- tag = 'nightly', -- optional, updated every week. (see issue #1193)
     },
@@ -23,7 +23,7 @@ return {
     -- buffer line
     {
         'akinsho/bufferline.nvim',
-        dependencies = 'kyazdani42/nvim-web-devicons',
+        dependencies = 'nvim-tree/nvim-web-devicons',
     },
 
     -- outline
@@ -47,14 +47,15 @@ return {
     'roobert/tailwindcss-colorizer-cmp.nvim',
     {
         'NvChad/nvim-colorizer.lua',
-        config = function() require('colorizer').setup{} end
+        config = function() require('colorizer').setup {} end
     },
 
     -- indent line
     'lukas-reineke/indent-blankline.nvim',
 
     -- motion
-    'ggandor/lightspeed.nvim',
+    'ggandor/leap.nvim',
+    -- 'ggandor/lightspeed.nvim',
 
     -- surround
     'kylechui/nvim-surround',
@@ -79,7 +80,7 @@ return {
     -- status line
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'kyazdani42/nvim-web-devicons' },
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
     },
     -- go
     {
