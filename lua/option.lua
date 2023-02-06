@@ -28,3 +28,6 @@ opt.timeoutlen = 300;
 
 -- spell
 opt.ignorecase = true;
+
+opt.splitbelow = true; -- Put new windows below current
+opt.splitright = true; -- Put new windows right of current
