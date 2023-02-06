@@ -17,7 +17,6 @@ if IS_USING_VSCODE then
     return;
 end
 
-require "plugin-config.nvim-tree";
 require "plugin-config.gruvbox-material";
 require "plugin-config.bufferline";
 require "plugin-config.nvim-cmp";

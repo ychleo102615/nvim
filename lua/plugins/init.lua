@@ -3,14 +3,6 @@ return {
     -- { "folke/neoconf.nvim", cmd = "Neoconf" },
     -- "folke/neodev.nvim",
 
-    -- Tree
-    {
-        'nvim-tree/nvim-tree.lua',
-        dependencies = {
-            'nvim-tree/nvim-web-devicons', -- optional, for file icons
-        },
-        -- tag = 'nightly', -- optional, updated every week. (see issue #1193)
-    },
     -- Refactor
     {
         "ThePrimeagen/refactoring.nvim",
