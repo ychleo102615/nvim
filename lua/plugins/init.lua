@@ -5,7 +5,7 @@ return {
 
     -- Refactor
     {
-        "ThePrimeagen/refactoring.nvim",
+       "ThePrimeagen/refactoring.nvim",
         dependencies = {
             { "nvim-lua/plenary.nvim" },
             { "nvim-treesitter/nvim-treesitter" },
@@ -46,7 +46,12 @@ return {
     'lukas-reineke/indent-blankline.nvim',
 
     -- motion
-    'ggandor/leap.nvim',
+    {
+        'ggandor/leap.nvim',
+        config = function()
+            require('leap').add_default_mappings();
+        end
+    },
     -- 'ggandor/lightspeed.nvim',
 
     -- surround
