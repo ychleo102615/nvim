@@ -1,5 +1,5 @@
 -- https://github.com/lewis6991/gitsigns.nvim
-return function(bufnr)
+local function on_attach(bufnr)
     local gs = package.loaded.gitsigns
 
     local function map(mode, l, r, opts)
@@ -37,3 +37,24 @@ return function(bufnr)
     -- Text object
     map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
 end
+
+return {
+    {
+        'lewis6991/gitsigns.nvim',
+        opts = {
+            signs = {
+                add          = { hl = "GitSignsAdd",    text = "▎",  numhl = "GitSignsAddNr",    linehl = "GitSignsAddLn"    },
+                change       = { hl = "GitSignsChange", text = "▎",  numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+                delete       = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+                topdelete    = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+                changedelete = { hl = "GitSignsChange", text = "▎",  numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+            },
+            current_line_blame = true,
+            current_line_blame_opts = {
+                delay = 100,
+            },
+            current_line_blame_formatter = '      <author>, <author_time:%Y-%m-%d %H:%M:%S, %R> - <summary>',
+            on_attach = on_attach,
+        },
+    },
+};

@@ -1,7 +1,6 @@
 return {
     { "LazyVim/LazyVim", --[[ import = "lazyvim.plugins" ]] },
-    { "LazyVim/LazyVim", --[[ import = "lazyvim.plugins.ui" ]] },
-
+    -- { "LazyVim/LazyVim", --[[ import = "lazyvim.plugins.ui" ]] },
     { "folke/which-key.nvim", config = true },
     -- { "folke/neoconf.nvim", cmd = "Neoconf" },
 
@@ -69,9 +68,6 @@ return {
         cond = vim.fn.executable 'make' == 1
     },
     'nvim-telescope/telescope-ui-select.nvim',
-
-    -- git
-    'lewis6991/gitsigns.nvim',
 
     -- editing
     'junegunn/vim-easy-align',
