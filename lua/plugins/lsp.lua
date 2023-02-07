@@ -1,6 +1,4 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua
-local testEvent = "BufReadPre";
--- local testEvent = nil;
 
 -- How to config: https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
 -- Config list: https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
@@ -98,7 +96,7 @@ return {
     {
         "jose-elias-alvarez/null-ls.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
-        event        = testEvent,
+        event        = "BufReadPre",
         opts         = getNullLsOpts,
     },
 };
