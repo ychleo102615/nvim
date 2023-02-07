@@ -1,9 +1,9 @@
 return {
     { "LazyVim/LazyVim", --[[ import = "lazyvim.plugins" ]] },
+    { "LazyVim/LazyVim", --[[ import = "lazyvim.plugins.ui" ]] },
 
     { "folke/which-key.nvim", config = true },
     -- { "folke/neoconf.nvim", cmd = "Neoconf" },
-    -- "folke/neodev.nvim",
 
     -- Refactor
     {

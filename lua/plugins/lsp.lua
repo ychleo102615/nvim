@@ -49,6 +49,10 @@ end
 return {
     -- cmdline tools and lsp servers
     {
+        "folke/neodev.nvim",
+        config = true,
+    },
+    {
         "williamboman/mason.nvim",
         -- cmd    = "Mason",
         keys   = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
