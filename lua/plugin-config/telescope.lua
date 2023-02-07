@@ -1,6 +1,13 @@
--- You dont need to set any of these options. These are the default ones. Only
--- the loading is important
 require('telescope').setup {
+    -- https://github.com/nvim-telescope/telescope.nvim/pull/828
+    defaults = {
+        mappings = {
+            n = {
+                ["d"] = "delete_buffer",
+                -- ["<C-h>"] = "which_key",
+            }
+        }
+    },
     extensions = {
         ['fzf'] = {
             fuzzy                   = true,         -- false will only do exact matching
