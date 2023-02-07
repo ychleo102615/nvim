@@ -1,8 +1,8 @@
 IS_USING_VSCODE = vim.fn.exists 'g:vscode' ~= 0;
 vim.g.mapleader = " ";
 
-require "lazy-config";
 require "option";
+require "lazy-config";
 require "keymap";
 require "setup-colorscheme";
 

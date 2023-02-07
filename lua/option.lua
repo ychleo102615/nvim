@@ -10,6 +10,7 @@ opt.mouse             = "a";
 opt.cursorline        = true;
 opt.hlsearch          = true;
 opt.ruler             = true;
+opt.termguicolors     = true;
 -- opt.relativenumber = true;
 -- opt.cmdheight      = 5;
 
