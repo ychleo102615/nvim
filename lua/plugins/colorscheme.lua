@@ -60,4 +60,14 @@ return {
     { 'AlessandroYorba/Sierra',    lazy = true },
     { 'rakr/vim-two-firewatch',    lazy = true },
     { 'cpea2506/one_monokai.nvim', lazy = true },
+    {
+        "folke/tokyonight.nvim",
+        lazy = true,
+        opts = { style = "moon" },
+    },
+    -- https://github.com/EdenEast/nightfox.nvim
+    { 'EdenEast/nightfox.nvim', lazy = true },
+    -- https://github.com/projekt0n/github-nvim-theme
+    { 'projekt0n/github-nvim-theme', lazy = true, tag = 'v0.0.7' },
+    { 'savq/melange-nvim', lazy = true },
 };

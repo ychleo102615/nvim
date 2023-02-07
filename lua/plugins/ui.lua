@@ -69,6 +69,7 @@ return {
     {
         'akinsho/bufferline.nvim',
         dependencies = 'nvim-tree/nvim-web-devicons',
+        event = "VeryLazy",
         opts = {
             options = {
                 mode = "tabs",
@@ -79,6 +80,7 @@ return {
                     highlight  = "Directory",
                     text_align = "left"
                 }},
+                always_show_bufferline = false,
                 diagnostics = "nvim_lsp",
                 diagnostics_indicator = function(_, _, diag)
                     local icons = require("lazyvim.config").icons.diagnostics
@@ -94,18 +96,20 @@ return {
     {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
-        opts = {
+        -- lazy = true,
+        event = "VeryLazy",
+        opts = function() return {
             options = {
-                -- theme = 'gruvbox-material',
-                -- theme = 'seoul256',
-                -- theme = 'everforest',
-                -- theme = 'gruvbox',
-                theme = "auto",
+                globalstatus = true,
+                disabled_filetypes = {
+                    statusline = { "dashboard", "lazy", "alpha" },
+                    winbar     = { "dashboard", "lazy", "alpha" },
+                },
             },
             sections = {
                 lualine_y = {
                     { "progress", separator = "", padding = { left = 1, right = 0 } },
-                    { "location", padding = { left = 0, right = 1 } },
+                    { "location", padding = { left = 1, right = 1 } },
                 },
                 lualine_z = {
                     function()
@@ -148,9 +152,8 @@ return {
                     },
                 },
             },
-        },
+        } end,
     },
-
     -- noicer ui
     {
         "folke/noice.nvim",
