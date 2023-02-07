@@ -76,6 +76,12 @@ return {
     -- editing
     'junegunn/vim-easy-align',
     'rmagatti/alternate-toggler',
+
     -- go
-    'fatih/vim-go',
+    {
+        'fatih/vim-go',
+        config = function()
+            vim.g.go_fmt_autosave = false;
+        end,
+    },
 };

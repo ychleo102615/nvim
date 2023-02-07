@@ -17,7 +17,6 @@ end
 
 require "plugin-config.gruvbox-material";
 require "plugin-config.telescope";
-require "plugin-config.vim-go";
 
 require "luasnip.setup";
 require "autocmd";
