@@ -41,7 +41,7 @@ map("v", getOptionKey 'J', ":t'><CR>gv",   { desc = "Copy down" })
 map("v", getOptionKey 'K', ":t'<-1<CR>gv", { desc = "Copy up" })
 
 -- buffers
-if require("bufferline") then
+if pcall(function() require("bufferline") end) then
     map("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
     map("n", "]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
 else
