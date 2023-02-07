@@ -70,7 +70,7 @@ allmap(';a', '<Esc>');
 
 -- Normal Mode
 nmap('zp', '"0p'); -- paste from yanked
-nmap('zh', ':let @/ = ""<CR>'); -- clear search history
+nmap('zh', ':let @/ = ""<CR>'); -- clear search historykeyini
 nmap('zd', ':%bd | e#<CR>');
 nmap('ga', '<Plug>(EasyAlign)');
 -- nmap('zh', ':noh<CR>');
@@ -93,16 +93,14 @@ nmap('<Space>s', function()
     local cmdStr     = '/' .. rangeStr .. patternStr .. "<CR>" .. operateStr .. cleanupStr;
     return cmdStr;
 end, { expr = true, silent = true });   -- shrink spaces
-nmap('<C-Q>', ':qa<CR>');
 nmap('<C-N>', ':w | source %<CR>');
 -- nmap('<C-M>', ':w | source %<CR>');   -- It seems that  ctrl-m is equivalent to Return key
 nmap(';j', '15j');
 nmap(';k', '15k');
 nmap(';p', 'viw\"0p');
-nmap(getOptionKey 'J', ':t.<CR>');
-nmap(getOptionKey 'K', ':t.-1<CR>');
 nmap(getOptionKey 's', ':w | source %<CR>');
-nmap(getOptionKey 'd', ':silent ! dict://<C-R><C-W><CR>');
+-- https://apple.stackexchange.com/questions/90040/look-up-a-word-in-dictionary-app-in-terminal
+nmap(getOptionKey 'd', ':silent ! open dict://<C-R><C-W><CR>');
 --[[
     m' will push current cursor position to jump list
     nmap(getOptionKey 'o', "m':normal o<CR>0D<C-O>");
@@ -113,18 +111,6 @@ nmap(getOptionKey ',', "<C-W><");
 nmap(getOptionKey '.', "<C-W>>");
 nmap(getOptionKey '<', "5<C-W><");
 nmap(getOptionKey '>', "5<C-W>>");
-
-
-nmap(getOptionKey 'a', function()
-    -- https://neovim.io/doc/user/treesitter.html
-    local r,c = unpack(vim.api.nvim_win_get_cursor(0))
-    local node = vim.treesitter.get_node_at_pos(0, r-1, c);
-    local next = node:next_sibling();
-    local nodename = vim.treesitter.get_node_at_cursor();
-    print("hello", node:start(), nodename, node:type());
-    tool.extract();
-end);
-
 
 local function ReplaceFileWords()
     local prefix = "yiw:%s/\\<<C-R>0\\>/";

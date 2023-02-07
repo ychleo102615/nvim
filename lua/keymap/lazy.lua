@@ -21,10 +21,10 @@ map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
 -- Resize window using <ctrl> arrow keys
-map("n", "<tab><Up>",    "<cmd>resize +2<cr>",          { desc = "Increase window height" })
-map("n", "<tab><Down>",  "<cmd>resize -2<cr>",          { desc = "Decrease window height" })
-map("n", "<tab><Left>",  "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-map("n", "<tab><Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+map("n", "<Up>",    "<cmd>resize +1<cr>",          { desc = "Increase window height" })
+map("n", "<Down>",  "<cmd>resize -1<cr>",          { desc = "Decrease window height" })
+map("n", "<Left>",  "<cmd>vertical resize -1<cr>", { desc = "Decrease window width" })
+map("n", "<Right>", "<cmd>vertical resize +1<cr>", { desc = "Increase window width" })
 
 -- Move Lines
 map("n", getOptionKey "j", ":m .+1<cr>==",     { desc = "Move down" })
@@ -92,9 +92,8 @@ map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List" })
 
 -- quit
-map("n", "<leader>q", "<cmd>q<cr>",  { desc = "Quit" })
-map("n", "<C-q>",     "<cmd>qa<cr>", { desc = "Quit all" })
-
+map("n", "<leader>qq", "<cmd>q<cr>",  { desc = "Quit" })
+map("n", "<C-q>",      "<cmd>qa<cr>", { desc = "Quit all" })
 
 -- floating terminal
 map("n", "<leader>ft", function() require("lazy.util").float_term() end, { desc = "Terminal" })
