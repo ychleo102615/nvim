@@ -32,7 +32,10 @@ return {
     },
 
     -- surround
-    'kylechui/nvim-surround',
+    {
+        'kylechui/nvim-surround',
+        config = true,
+    },
 
     -- telescope
     {

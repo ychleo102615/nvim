@@ -230,10 +230,9 @@ return {
             require("mini.indentscope").setup(opts)
         end,
     },
-    -- { "MunifTanjim/nui.nvim", lazy = true },
 
-    -- noice ui 合併了notify, nui等美化工具 (待元件穩定再使用)
-    --[[ {
+    -- noice ui 合併了notify, nui等美化工具 (元件不穩定)
+    {
         "folke/noice.nvim",
         dependencies = {
             "MunifTanjim/nui.nvim",
@@ -248,7 +247,7 @@ return {
                 },
             },
             presets = {
-                -- bottom_search         = true,
+                bottom_search         = true,
                 command_palette       = true,
                 long_message_to_split = true,
             },
@@ -263,5 +262,5 @@ return {
             { "<c-f>",       function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end,  desc = "Scroll forward",       silent = true, expr = true, mode = {"i", "n", "s"} },
             { "<c-b>",       function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, desc = "Scroll backward",      silent = true, expr = true, mode = {"i", "n", "s"}},
         },
-    }, ]]
+    },
 };
