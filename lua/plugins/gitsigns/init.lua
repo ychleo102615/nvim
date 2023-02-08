@@ -13,13 +13,13 @@ local function on_attach(bufnr)
       if vim.wo.diff then return ']c' end
       vim.schedule(function() gs.next_hunk() end)
       return '<Ignore>'
-    end, {expr=true})
+    end, { expr = true, desc = "Next [C]Hunk" })
 
     map('n', '[c', function()
       if vim.wo.diff then return '[c' end
       vim.schedule(function() gs.prev_hunk() end)
       return '<Ignore>'
-    end, {expr=true})
+    end, { expr = true, desc = "Prev [C]Hunk" })
 
     -- Actions
     map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
@@ -41,6 +41,7 @@ end
 return {
     {
         'lewis6991/gitsigns.nvim',
+        event = "BufReadPre",
         opts = {
             signs = {
                 add          = { hl = "GitSignsAdd",    text = "▎",  numhl = "GitSignsAddNr",    linehl = "GitSignsAddLn"    },
