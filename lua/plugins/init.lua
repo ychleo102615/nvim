@@ -10,9 +10,11 @@ return {
         opts = {
             autofold_depth = 0,
         },
+        keys = {
+            { "<leader>o", "<cmd>SymbolsOutline<cr>", desc = "Show Symbols [O]utline" },
+        },
         cond = not IS_USING_VSCODE,
     },
-
 
     -- motion
     {

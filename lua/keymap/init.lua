@@ -185,9 +185,6 @@ xmap('ga', '<Plug>(EasyAlign)');
 require('keymap.lsp').setupKeymap();
 --[[ TreeSitter Playground ]]
 nmap('<Space>p', ':TSPlaygroundToggle<CR>');
---[[ Symbols Outline ]]
-nmap('<Space>o', ':SymbolsOutline<CR>');
-nmap('<Space>a', 'ggVG', { desc = "Select All" });
 --[[ EasyAlign ]]
 local alignComment = function()
     local ft = require('Comment.ft');
