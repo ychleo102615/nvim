@@ -6,8 +6,6 @@ require "lazy-config";
 require "keymap";
 require "setup-colorscheme";
 
-require "plugin-config.refactoring";
-
 if IS_USING_VSCODE then
     -- print("detect vscode, stop plugin setup");
     return;

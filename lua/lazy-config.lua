@@ -15,5 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     { import = "plugins" },
     { import = "plugins.gitsigns" },
+    { import = "plugins.editor" },
 });
 -- require("lazy").setup("plugins");

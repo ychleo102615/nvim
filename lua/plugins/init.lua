@@ -4,15 +4,6 @@ return {
     { "folke/which-key.nvim", config = true },
     -- { "folke/neoconf.nvim", cmd = "Neoconf" },
 
-    -- Refactor
-    {
-       "ThePrimeagen/refactoring.nvim",
-        dependencies = {
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-treesitter/nvim-treesitter" },
-        },
-    },
-
     -- outline
     {
         'simrat39/symbols-outline.nvim',
