@@ -99,7 +99,6 @@ return {
         event = "VeryLazy",
         opts = function() return {
             options = {
-                globalstatus = true,
                 disabled_filetypes = {
                     statusline = { "dashboard", "lazy", "alpha" },
                     winbar     = { "dashboard", "lazy", "alpha" },

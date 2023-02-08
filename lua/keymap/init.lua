@@ -181,27 +181,8 @@ xmap('ga', '<Plug>(EasyAlign)');
 --[[
     Plugin
 ]]
---[[]]
--- nmap('<leader>ps', ':PackerSync<CR>');
-nmap('<leader>ps', function()
-    print("Run PackerSync..");
-    cmd 'PackerSync'
-end);
 --[[ lsp ]]
 require('keymap.lsp').setupKeymap();
---[[ Tree ]]
--- nmap('<Space>d',  ':NvimTreeToggle<CR>');
-nmap('<Space>d', function()
-    local api = require("nvim-tree.api");
-    local find_file, no_focus = true, false;
-    api.tree.toggle(find_file, no_focus);
-end);
-nmap('<Space>e', wrapCmd 'NvimTreeFindFile');
--- nmap('<Space>r',  ':NvimTreeFindFile<CR>');
-nmap('<Space>ww', function()
-    cmd 'NvimTreeClose';
-    cmd 'bdelete';
-end);
 --[[ TreeSitter Playground ]]
 nmap('<Space>p', ':TSPlaygroundToggle<CR>');
 --[[ Symbols Outline ]]

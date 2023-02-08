@@ -34,6 +34,7 @@ return {
     -- surround
     {
         'kylechui/nvim-surround',
+        event = "BufReadPre",
         config = true,
     },
 
@@ -64,6 +65,7 @@ return {
     -- go
     {
         'fatih/vim-go',
+        ft = "go",
         config = function()
             vim.g.go_fmt_autosave = false;
         end,

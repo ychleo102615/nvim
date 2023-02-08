@@ -19,5 +19,8 @@ return {
                 ignore = false,
             },
         },
+        keys = {
+            { "<leader>d", "<cmd>NvimTreeFindFileToggle<cr>", desc = "Toggle Tree [D]irectory" },
+        },
     },
 };
