@@ -14,7 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 -- https://github.com/folke/lazy.nvim#%EF%B8%8F-importing-specs-config--opts
 require("lazy").setup({
     { import = "plugins" },
-    { import = "plugins.gitsigns" },
     { import = "plugins.editor" },
 });
 -- require("lazy").setup("plugins");
