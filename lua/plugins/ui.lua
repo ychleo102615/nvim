@@ -16,6 +16,7 @@ return {
             ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
             ]]
 
+            ---@diagnostic disable-next-line: missing-parameter
             dashboard.section.header.val = vim.split(logo, "\n")
             dashboard.section.buttons.val = {
                 dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
@@ -64,12 +65,11 @@ return {
             })
         end,
     },
-
     -- buffer line 上方頁籤
     {
         'akinsho/bufferline.nvim',
         dependencies = 'nvim-tree/nvim-web-devicons',
-        event = "VeryLazy",
+        event = "BufReadPre",
         opts = {
             options = {
                 mode = "tabs",
@@ -96,7 +96,6 @@ return {
     {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
-        -- lazy = true,
         event = "VeryLazy",
         opts = function() return {
             options = {
@@ -154,8 +153,87 @@ return {
             },
         } end,
     },
-    -- noicer ui
+    -- 通知彈窗
     {
+        "rcarriga/nvim-notify",
+        keys = {
+            {
+                "<leader>un",
+                function()
+                    require("notify").dismiss({ silent = true, pending = true })
+                end,
+                desc = "Delete all Notifications",
+            },
+        },
+        opts = {
+            timeout = 3000,
+            max_height = function()
+                return math.floor(vim.o.lines * 0.75)
+            end,
+            max_width = function()
+                return math.floor(vim.o.columns * 0.75)
+            end,
+        },
+        config = function ()
+            vim.notify = require("notify");
+        end,
+    },
+    -- 改名彈窗
+    {
+        "stevearc/dressing.nvim",
+        lazy = true,
+        init = function()
+            ---@diagnostic disable-next-line: duplicate-set-field
+            vim.ui.select = function(...)
+                require("lazy").load({ plugins = { "dressing.nvim" } })
+                return vim.ui.select(...)
+            end
+            ---@diagnostic disable-next-line: duplicate-set-field
+            vim.ui.input = function(...)
+                require("lazy").load({ plugins = { "dressing.nvim" } })
+                return vim.ui.input(...)
+            end
+        end,
+    },
+    -- Lsp 右下角狀態顯示
+    {
+        'j-hui/fidget.nvim',
+        -- event = "VeryLazy",
+        event = "BufReadPost",
+        opts = {
+            text = {
+                spinner = "dots",
+            },
+        },
+    },
+    -- 縮排線 indent line
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        event = "BufReadPost",
+    },
+    -- 動態縮排效果線 active indent guide and indent text objects
+    {
+        "echasnovski/mini.indentscope",
+        version = false, -- wait till new 0.7.0 release to put it back on semver
+        event = "BufReadPre",
+        opts = {
+            symbol = "│",
+            options = { try_as_border = true },
+        },
+        config = function(_, opts)
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
+                callback = function()
+                    vim.b.miniindentscope_disable = true
+                end,
+            })
+            require("mini.indentscope").setup(opts)
+        end,
+    },
+    -- { "MunifTanjim/nui.nvim", lazy = true },
+
+    -- noice ui 合併了notify, nui等美化工具 (待元件穩定再使用)
+    --[[ {
         "folke/noice.nvim",
         dependencies = {
             "MunifTanjim/nui.nvim",
@@ -177,6 +255,7 @@ return {
         },
         -- stylua: ignore
         keys = {
+            { "<leader>un",  function() require("notify").dismiss { } end, desc = "Close Notifications" },
             { "<S-Enter>",   function() require("noice").redirect(vim.fn.getcmdline()) end,                 desc = "Redirect Cmdline",     mode = "c" },
             { "<leader>snl", function() require("noice").cmd("last") end,                                   desc = "Noice Last Message" },
             { "<leader>snh", function() require("noice").cmd("history") end,                                desc = "Noice History" },
@@ -184,5 +263,5 @@ return {
             { "<c-f>",       function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end,  desc = "Scroll forward",       silent = true, expr = true, mode = {"i", "n", "s"} },
             { "<c-b>",       function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, desc = "Scroll backward",      silent = true, expr = true, mode = {"i", "n", "s"}},
         },
-    },
+    }, ]]
 };

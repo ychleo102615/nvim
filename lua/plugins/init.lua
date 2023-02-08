@@ -22,31 +22,11 @@ return {
         cond = not IS_USING_VSCODE,
     },
 
-    -- indent line
-    'lukas-reineke/indent-blankline.nvim',
-    -- active indent guide and indent text objects
-    {
-        "echasnovski/mini.indentscope",
-        version = false, -- wait till new 0.7.0 release to put it back on semver
-        event = "BufReadPre",
-        opts = {
-            symbol = "│",
-            options = { try_as_border = true },
-        },
-        config = function(_, opts)
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
-                callback = function()
-                    vim.b.miniindentscope_disable = true
-                end,
-            })
-            require("mini.indentscope").setup(opts)
-        end,
-    },
 
     -- motion
     {
         'ggandor/leap.nvim',
+        event = "VeryLazy",
         config = function()
             require('leap').add_default_mappings();
         end
@@ -71,7 +51,13 @@ return {
 
     -- editing
     'junegunn/vim-easy-align',
-    'rmagatti/alternate-toggler',
+    {
+        'rmagatti/alternate-toggler',
+        cmd = "ToggleAlternate",
+        keys = {
+            { "<leader>i", "<cmd>ToggleAlternate<cr>", desc = "Toggle Boolean" },
+        },
+    },
 
     -- go
     {

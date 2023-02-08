@@ -220,8 +220,8 @@ local alignComment = function()
     return alignCmdFormat:format(alignRegex);
 end;
 vmap('<Space>ac', alignComment, {expr = true, silent = true});
---[[ Toggler ]]
-nmap('<Space>i', wrapCmd 'ToggleAlternate');
+-- --[[ Toggler ]]
+-- nmap('<Space>i', wrapCmd 'ToggleAlternate');
 --[[ Telescope ]]
 local builtin = require('telescope.builtin');
 local themes  = require('telescope.themes');
