@@ -1,6 +1,52 @@
+local function setupLuaSnip()
+    require("luasnip.loaders.from_vscode").lazy_load { paths = "./lua/luasnip/snippets" };
+    -- snipmate from: https://github.com/honza/vim-snippets
+    require("luasnip.loaders.from_snipmate").lazy_load { paths = "./lua/luasnip/snipmate/snippets" };
+
+    local ls      = require("luasnip");
+    local s       = ls.snippet;
+    local sn      = ls.snippet_node;
+    local isn     = ls.indent_snippet_node;
+    local t       = ls.text_node;
+    local i       = ls.insert_node;
+    local f       = ls.function_node;
+    local c       = ls.choice_node;
+    local d       = ls.dynamic_node;
+    local r       = ls.restore_node;
+    local events  = require("luasnip.util.events");
+    local ai      = require("luasnip.nodes.absolute_indexer");
+    local fmt     = require("luasnip.extras.fmt").fmt;
+    local m       = require("luasnip.extras").m;
+    local lambda  = require("luasnip.extras").l;
+    local postfix = require("luasnip.extras.postfix").postfix;
+
+    -- from luasnip/util/environ.lua
+    local function FILENAME_BASE()
+        return vim.fn.expand("%:t:s?\\.[^\\.]\\+$??")
+    end
+
+    -- ls.add_snippets("all", { });
+    -- ls.add_snippets("lua", { });
+
+    ls.filetype_extend("all", { "_" });
+end
 return {
     -- cmp, config from: https://gist.github.com/mengwangk/e5b64dbbeadc81b0129f274908a7b692
-    "L3MON4D3/LuaSnip",
+    {
+        "L3MON4D3/LuaSnip",
+        dependencies = {
+            "rafamadriz/friendly-snippets",
+            config = function()
+                require("luasnip.loaders.from_vscode").lazy_load()
+            end,
+        },
+        opts = {
+            history = true,
+            delete_check_events = "TextChanged",
+        },
+        lazy = true, -- load when nvim-cmp loaded
+        config = setupLuaSnip,
+    },
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
@@ -14,7 +60,9 @@ return {
             "f3fora/cmp-spell",
             "onsails/lspkind-nvim",
             "roobert/tailwindcss-colorizer-cmp.nvim",
+            "L3MON4D3/LuaSnip",
         },
+        event = "InsertEnter",
         config = function()
             local cmp = require("cmp")
             cmp.setup({
@@ -63,7 +111,7 @@ return {
                         before = require("tailwindcss-colorizer-cmp").formatter,
                     }),
                 },
-            })
+            });
         end,
         cond = not IS_USING_VSCODE,
     },

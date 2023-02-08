@@ -17,7 +17,6 @@ end
 require "plugin-config.gruvbox-material";
 require "plugin-config.telescope";
 
-require "luasnip.setup";
 require "autocmd";
 
 -- print("init.lua載入完成");
