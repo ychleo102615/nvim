@@ -128,6 +128,7 @@ local ToggleRelativeLineNum = (function()
     end
 end)();
 nmap('<Space>nn', ToggleRelativeLineNum);
+nmap('<Space>a', 'ggVG', { desc = "Select All" });
 
 -- Insert Mode
 imap(getOptionKey 'h', '<Left>');    -- option h
