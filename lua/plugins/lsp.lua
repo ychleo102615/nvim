@@ -47,17 +47,18 @@ end
 return {
     -- cmdline tools and lsp servers
     {
-        "folke/neodev.nvim",
-        config = true,
-    },
-    {
         "williamboman/mason.nvim",
-        -- cmd    = "Mason",
+        cmd    = "Mason",
         keys   = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
         config = true,
     },
     {
         "williamboman/mason-lspconfig",
+        event = "BufReadPre",
+        dependencies = {
+            { "folke/neodev.nvim", config = true },
+            { 'neovim/nvim-lspconfig' },
+        },
         opts = {
             --[[
             Server List and theris githubs
@@ -90,8 +91,6 @@ return {
 
         end,
     },
-    { 'neovim/nvim-lspconfig' },
-    { 'onsails/lspkind-nvim' },
     -- linters and formatters
     {
         "jose-elias-alvarez/null-ls.nvim",
