@@ -119,6 +119,8 @@ return {
     {
         'nvim-treesitter/playground',
         lazy  = true,
-        event = "BufReadPost"
+        keys = {
+            { "<leader>p", "<cmd>TSPlayGroundToggle<cr>", desc = "Toggle Treesitter Playground" },
+        },
     },
 };

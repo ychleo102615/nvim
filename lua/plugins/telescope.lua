@@ -43,5 +43,36 @@ return {
             require('telescope').load_extension('fzf');
             require('telescope').load_extension('ui-select');
         end,
+        keys = {
+            { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = "Find File" },
+            { '<leader>fs', '<cmd>Telescope live_grep<cr>',  desc = "Find String" },
+            { '<leader>fb', function()
+                local builtin = require('telescope.builtin');
+                local themes  = require('telescope.themes');
+                builtin.buffers(themes.get_ivy {
+                    layout_config = {
+                        --height          = 0.9,
+                        prompt_position = 'bottom',
+                    },
+                    initial_mode = 'normal',
+                });
+            end, desc = "Find String" },
+
+            { '<leader>fh', '<Cmd>Telescope help_tags<Cr>',                        desc = "Find Helps" },
+            { '<leader>gs', '<Cmd>Telescope git_status initial_mode=normal<CR>',   desc = "Git Status"},
+            { '<leader>gc', '<Cmd>Telescope git_commits initial_mode=normal<CR>',  desc = "Git Commits" },
+            { '<leader>gf', '<Cmd>Telescope git_bcommits initial_mode=normal<CR>', desc = "Git Buffer Commits" },
+            { '<leader>gb', function()
+                local builtin = require('telescope.builtin');
+                local themes  = require('telescope.themes');
+                builtin.git_branches(themes.get_ivy {
+                    layout_config = {
+                        mirror = false,
+                        prompt_position = 'bottom',
+                    },
+                    initial_mode = 'normal',
+                });
+            end, desc = "Git Branches" },
+        },
     },
 };

@@ -23,4 +23,11 @@ function tool.getOptionKey(originalKey)
     return mappedKey;
 end
 
+function tool.cramp(word, isEmbeddedCode)
+    -- 使用omap時，可能需要以字串形式描述指令，反斜線會被視為特殊符號
+    if isEmbeddedCode then
+        -- :help expr-quote
+        return [[\\<]] .. word .. [[\\>]];
+    end
+    return '\\<' .. word .. '\\>';end
 return tool;

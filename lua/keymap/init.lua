@@ -1,10 +1,14 @@
+--[[ basic ]]
 require("keymap.lazy");
--- nmap('<C-M>', ':w | source %<CR>');   -- It seems that  ctrl-m is equivalent to Return key
+--[[ lsp ]]
+require('keymap.lsp').setupKeymap();
+
 --[[
     TODO: write a function can subsittue every , into new line symbol
 --]]
 local tool         = require("tools.tool");
 local getOptionKey = tool.getOptionKey;
+local cramp        = tool.cramp;
 local cmd = vim.cmd;
 
 --[[
@@ -39,20 +43,10 @@ end
 --[[
     Global Function
 ]]
-function MatchWholeWord(word, isEmbeddedCode)
-    -- 使用omap時，可能需要以字串形式描述指令，反斜線會被視為特殊符號
-    if isEmbeddedCode then
-        -- :help expr-quote
-        return [[\\<]] .. word .. [[\\>]];
-    end
-    return '\\<' .. word .. '\\>';
-end
-
 -- operator pending purpose
 function GetConditionStatementSelectorScript()
-    -- local fileExt = vim.fn.expand('%:e');
     -- embedded match whole word
-    local emww = function(w) return MatchWholeWord(w, true); end
+    local emww = function(w) return cramp(w, true); end
 
     if vim.bo.filetype == "lua" then
         -- 在使用ctrl-r= 的表達式時，\<Esc>似乎是不會跳出該表達示，所以關閉高亮得以被呼叫
@@ -79,28 +73,35 @@ map('<Space>', '<Nop>');
 allmap(';a', '<Esc>', desc "Escape");
 
 -- Normal Mode
-nmap('zp',             '"0p',                    desc "Paste From Yanked");
-nmap('zh',             ':let @/ = ""<CR>',       desc "Clear Search History");
-nmap('zd',             ':%bd | e#<CR>',          desc "Delete All Buffers But This One");
-nmap('<C-N>',          ':w | source %<CR>',      desc "Save And Source");
-nmap(';j',             '15j',                    desc "Move Down 15 Lines");
-nmap(';k',             '15k',                    desc "Move Up 15 Lines");
-nmap(';p',             'viw\"0p',                desc "Pase On Current Word");
-nmap('<leader>em',     'ciw<C-R>=<C-R>"',        desc "Expression Math");
-nmap('<leader>vt',     ':vs<CR><C-W>l:ter<CR>i', desc "Split [V]ertical [T]erminal");
+nmap('zp',    '"0p',                                 desc "Paste From Yanked");
+nmap('zh',    ':let @/ = ""<CR>',                    desc "Clear Search History");
+nmap('zd',    ':%bd | e#<CR>',                       desc "Delete All Buffers But This One");
+nmap('<C-N>', ':w | source %<CR>',                   desc "Save And Source");
+nmap(';j',    '15j',                                 desc "Move Down 15 Lines");
+nmap(';k',    '15k',                                 desc "Move Up 15 Lines");
+nmap(';p',    'viw\"0p',                             desc "Pase On Current Word");
+nmap(';f',    '/<C-R>+<CR>',                         desc "Search Copyed Word");
+nmap(';r',    ('/%s<CR>'):format(cramp'<C-R>+'),     desc "Search Restricted Copyed Word");
+nmap(';w',    ':%s/\\<<C-R><C-W>\\>//g<Left><Left>', desc "Subsitute Current Word In This Buffer");
+
+nmap('<leader>a',  'ggVG',                   desc "Select All");
+nmap('<leader>em', 'ciw<C-R>=<C-R>"',        desc "Expression Math");
+nmap('<leader>vt', ':vs<CR><C-W>l:ter<CR>i', desc "Split [V]ertical [T]erminal");
+nmap('<leader>gh', 'yiw<Cmd>Telescope help_tags<CR>p', desc "Get Help");
+
 nmap(getOptionKey 's', ':w | source %<CR>',      desc "Save And Source");
--- https://apple.stackexchange.com/questions/90040/look-up-a-word-in-dictionary-app-in-terminal
 nmap(getOptionKey 'd', ':silent ! open dict://<C-R><C-W><CR>', desc "Search Word On Dictionary");
+-- https://apple.stackexchange.com/questions/90040/look-up-a-word-in-dictionary-app-in-terminal
 --[[
     m' will push current cursor position to jump list
     nmap(getOptionKey 'o', "m':normal o<CR>0D<C-O>");
 ]]
-nmap(getOptionKey 'o', ":call append(line('.'), '')<CR>");
-nmap(getOptionKey 'O', ":call append(line('.')-1, '')<CR>");
-nmap(getOptionKey ',', "<C-W><");
-nmap(getOptionKey '.', "<C-W>>");
-nmap(getOptionKey '<', "5<C-W><");
-nmap(getOptionKey '>', "5<C-W>>");
+nmap(getOptionKey 'o', ":call append(line('.'),   '')<CR>", desc "Just Open Line Below");
+nmap(getOptionKey 'O', ":call append(line('.')-1, '')<CR>", desc "Just Open Line Above");
+nmap(getOptionKey ',', "<C-W><",  desc "Decrease Window Width");
+nmap(getOptionKey '.', "<C-W>>",  desc "Increase Window Width");
+nmap(getOptionKey '<', "5<C-W><", desc "Decrease Window Width By 5");
+nmap(getOptionKey '>', "5<C-W>>", desc "Increase Window Width By 5");
 
 nmap('<leader>vd', function()
     cmd 'vs';
@@ -115,22 +116,15 @@ nmap('<leader>ss', function()
     local cmdStr     = '/' .. rangeStr .. patternStr .. "<CR>" .. operateStr .. cleanupStr;
     return cmdStr;
 end, desc_opts{ "Shrink Spaces", expr = true });
-nmap(';w', function()
-    local prefix = "yiw:%s/\\<<C-R>0\\>/";
-    return IS_USING_VSCODE and prefix or prefix .. "/g<Left><Left>";
-end, desc_opts{ "Subsitute Current Word In This Buffer", expr = true });
-
--- vim.opt.relativenumber is always a table
 -- IIFE
-local toggle_relative_line_number = (function()
+nmap('<leader>nl', (function()
+    -- vim.opt.relativenumber is always a table
     local is_relative = false;
     return function()
         is_relative = not is_relative;
         vim.opt.relativenumber = is_relative;
     end
-end)();
-nmap('<leader>nn', toggle_relative_line_number, desc "Toggle Relative Line Number");
-nmap('<leader>a', 'ggVG', desc "Select All");
+end)(), desc "Toggle Relative Line Number");
 
 -- Insert Mode
 imap(getOptionKey 'h', '<Left>',  desc "Move Cursor Left");
@@ -150,22 +144,35 @@ imap(getOptionKey 'O', "<C-O>:call append(line('.')-1, '')<CR>", desc "Open Line
     ctrl-r= 可以貼上用expression取得的字串, See 'c_ctrl-r'
     參考 https://vim.fandom.com/wiki/Search_only_over_a_visual_range
 ]]
-local scriptGetSelectionLineRage = [[\%><C-R>=line("'<")-1<CR>l\%<<C-R>=line("'>")+1<CR>l]];
-vmap('zp', '"0p'); -- paste from yanked
-vmap('/', "<Esc>/" .. scriptGetSelectionLineRage);
-vmap('?', "<Esc>?" .. scriptGetSelectionLineRage);
+local visual_range = [[\%><C-R>=line("'<")-1<CR>l\%<<C-R>=line("'>")+1<CR>l]];
+vmap('zp', '"0p', desc "Paste From Yanked"); -- paste from yanked
+vmap('/', "<Esc>/" .. visual_range, desc "Search [/] In Visual Range");
+vmap('?', "<Esc>?" .. visual_range, desc "Search [?] In Visual Range");
 -- c_ctrl-r 會貼上指定的暫存器裡的東西
-vmap('f', 'y/<C-R>"<CR>');
-vmap('<Space>e', '<Esc>');
--- vmap(';;', 'iwy/' .. MatchWholeWord [[<C-R>"]] .. '<CR>');
-vmap(';;', '<Esc>/' .. MatchWholeWord [[<C-R><C-W>]] .. '<CR>');
-vmap(';w', '<Esc>/' .. MatchWholeWord [[<C-R><C-W>]] .. '<CR>');
-vmap(';v', 'y/' .. MatchWholeWord [[<C-R>"]] .. '<CR>');
--- nmap(getOptionKey 'm', 'c<C-R>=<C-R>"');
+vmap('f',  'y/<C-R>"<CR>',                             desc "Search Selected String");
+vmap(';f', 'y/' .. cramp [[<C-R>"]] .. '<CR>',         desc "Search Selected String Restrictedly");
+vmap(';;', '<Esc>/' .. cramp [[<C-R><C-W>]] .. '<CR>', desc "Search Current Word");
+
+local alignComment = function()
+    local ft = require('Comment.ft');
+    local U  = require('Comment.utils');
+    local commentFormat = ft.get(vim.bo.filetype, U.ctype.linewise); -- `//%s`
+    if not commentFormat then
+        return;
+    end
+    local alignRegex = "\\s" .. commentFormat:gsub("%%s", "");
+    local alignCmdFormat = ":EasyAlign -1/%s/<CR>gv";
+    return alignCmdFormat:format(alignRegex);
+end;
+vmap('<leader>ac', alignComment, desc_opts{ "Align Comments", expr = true, silent = true });
 
 -- Command Mode
-cmap(';m', MatchWholeWord '' .. '<Left><Left>');
+cmap(';m', cramp '' .. '<Left><Left>');
 
+
+--[[
+    以下的keymap算是學習記錄，並不實用
+--]]
 -- Visual Operation common
 vomap('cs', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]);
 vomap('om', [[:<C-U>execute "normal! ?self\r:noh\rv3e"<CR>]]); -- object momber / method
@@ -180,59 +187,3 @@ vomap('om', [[:<C-U>execute "normal! ?self\r:noh\rv3e"<CR>]]); -- object momber 
 -- examples
 omap('in(', ':<C-U>normal! f(vi(<CR>'); -- range between () in same line
 omap('F', ':<C-U>normal! 0f(hviw<CR>'); -- range word precede first () in same line
-
---[[
-    Plugin
-]]
---[[ lsp ]]
-require('keymap.lsp').setupKeymap();
---[[ TreeSitter Playground ]]
-nmap('<Space>p', ':TSPlaygroundToggle<CR>');
---[[ EasyAlign ]]
-local alignComment = function()
-    local ft = require('Comment.ft');
-    local U  = require('Comment.utils');
-    local commentFormat = ft.get(vim.bo.filetype, U.ctype.linewise); -- `//%s`
-    if not commentFormat then
-        return;
-    end
-    local alignRegex = "\\s" .. commentFormat:gsub("%%s", "");
-    local alignCmdFormat = ":EasyAlign -1/%s/<CR>gv";
-    return alignCmdFormat:format(alignRegex);
-end;
-vmap('<Space>ac', alignComment, { expr = true, silent = true, desc = "Align Comments" });
---[[ Telescope ]]
-nmap('<Space>ff', '<Cmd>Telescope find_files<CR>');
-nmap('<Space>fs', '<Cmd>Telescope live_grep<CR>');
-nmap('<Space>fb', function()
-    local builtin = require('telescope.builtin');
-    local themes  = require('telescope.themes');
-    -- builtin.current_buffer_fuzzy_find(themes.get_ivy {
-    builtin.buffers(themes.get_ivy {
-        --sorting_strategy = "descending";
-        layout_config = {
-            --height          = 0.9,
-            prompt_position = 'bottom',
-        },
-        initial_mode = 'normal',
-    });
-end);
-nmap('<leader>fh', '<Cmd>Telescope help_tags<Cr>');
-nmap('<leader>fn', '<Cmd>Telescope current_buffer_fuzzy_find<Cr>');
-nmap('<Space>gs', '<Cmd>Telescope git_status initial_mode=normal<CR>');
-
-nmap('<Space>gc', '<Cmd>Telescope git_commits initial_mode=normal<CR>');
--- p means 'page', instead of using b which is occupid by 'buffer'
-nmap('<Space>gp', '<Cmd>Telescope git_bcommits initial_mode=normal<CR>');
-nmap('<Space>gb', function()
-    local builtin = require('telescope.builtin');
-    local themes  = require('telescope.themes');
-    builtin.git_branches(themes.get_ivy {
-        layout_config = {
-            mirror = false,
-            prompt_position = 'bottom',
-        },
-        initial_mode = 'normal',
-    });
-end);
-
