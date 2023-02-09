@@ -35,7 +35,13 @@ return {
 
 
     -- editing
-    'junegunn/vim-easy-align',
+    {
+        'junegunn/vim-easy-align',
+        cmd = "EasyAlign",
+        keys = {
+            { "ga", "<Plug>(EasyAlign)", mode = { "n", "x" }, desc = "Easy Align" },
+        },
+    },
     {
         'rmagatti/alternate-toggler',
         cmd = "ToggleAlternate",
