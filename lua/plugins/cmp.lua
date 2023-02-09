@@ -20,7 +20,7 @@ local function setupLuaSnip()
     local lambda  = require("luasnip.extras").l;
     local postfix = require("luasnip.extras.postfix").postfix;
 
-    -- from luasnip/util/environ.lua
+    -- Just learning purpose. from luasnip/util/environ.lua
     local function FILENAME_BASE()
         return vim.fn.expand("%:t:s?\\.[^\\.]\\+$??")
     end

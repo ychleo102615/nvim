@@ -17,3 +17,5 @@ require("lazy").setup({
     { import = "plugins.editor" },
 });
 -- require("lazy").setup("plugins");
+
+-- Events: :h autocmd-events

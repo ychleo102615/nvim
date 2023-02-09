@@ -1,7 +1,12 @@
+-- 目前似乎autocmd似乎不影響vscode
+-- if IS_USING_VSCODE then
+--     return;
+-- end
+
 --[[
     http://yyq123.github.io/learn-vim/learn-vi-49-01-autocmd.html
 ]]
-
+-- :h *nvim_create_autocmd()*
 local function createCmd(...)
     return vim.api.nvim_create_autocmd(...);
 end
