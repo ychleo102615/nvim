@@ -5,14 +5,6 @@ require "option";
 require "lazy-config";
 require "keymap";
 require "setup-colorscheme";
-
-if IS_USING_VSCODE then
-    -- print("detect vscode, stop plugin setup");
-    return;
-end
-
-require "plugin-config.telescope";
-
 require "autocmd";
 
 -- print("init.lua載入完成");
