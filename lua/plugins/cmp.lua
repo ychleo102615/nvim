@@ -1,3 +1,8 @@
+if IS_USING_VSCODE then
+    print("[NVIM] Skip cmp");
+    return {};
+end
+
 local function setupLuaSnip()
     require("luasnip.loaders.from_vscode").lazy_load { paths = "./lua/luasnip/snippets" };
     -- snipmate from: https://github.com/honza/vim-snippets

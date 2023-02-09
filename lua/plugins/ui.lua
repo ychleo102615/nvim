@@ -1,3 +1,7 @@
+if IS_USING_VSCODE then
+    print("[NVIM] Skip ui");
+    return {};
+end
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/ui.lua
 return {
     -- dashboard
@@ -94,7 +98,6 @@ return {
             { "]r", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
             { "[r", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
         },
-        cond = not IS_USING_VSCODE,
     },
     -- status line 底部狀態條
     {

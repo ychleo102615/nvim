@@ -1,3 +1,8 @@
+if IS_USING_VSCODE then
+    print("[NVIM] Skip session")
+    return {};
+end
+
 return {
     -- session management
     {

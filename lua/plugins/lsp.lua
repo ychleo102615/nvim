@@ -1,3 +1,7 @@
+if IS_USING_VSCODE then
+    print("[NVIM] Skip lsp")
+    return {};
+end
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua
 
 -- How to config: https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
