@@ -27,27 +27,22 @@ map("n", "<Left>",  "<cmd>vertical resize -1<cr>", { desc = "Decrease window wid
 map("n", "<Right>", "<cmd>vertical resize +1<cr>", { desc = "Increase window width" })
 
 -- Move Lines
-map("n", getOptionKey "j", ":m .+1<cr>==",     { desc = "Move down" })
-map("n", getOptionKey "k", ":m .-2<cr>==",     { desc = "Move up" })
-map("v", getOptionKey "j", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-map("v", getOptionKey "k", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+map("n", getOptionKey "j", ":m .+1<cr>==",     { desc = "Move down", silent = true })
+map("n", getOptionKey "k", ":m .-2<cr>==",     { desc = "Move up",   silent = true })
+map("v", getOptionKey "j", ":m '>+1<cr>gv=gv", { desc = "Move down", silent = true })
+map("v", getOptionKey "k", ":m '<-2<cr>gv=gv", { desc = "Move up",   silent = true })
 -- map("i", getOptionKey "j", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
 -- map("i", getOptionKey "k", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
 
 -- Copy Lines
-map("n", getOptionKey "J", ":t.<cr>",      { desc = "Copy down" })
-map("n", getOptionKey "K", ":t.-1<cr>",    { desc = "Copy up" })
-map("v", getOptionKey 'J', ":t'><CR>gv",   { desc = "Copy down" })
-map("v", getOptionKey 'K', ":t'<-1<CR>gv", { desc = "Copy up" })
+map("n", getOptionKey "J", ":t.<cr>",      { desc = "Copy down", silent = true })
+map("n", getOptionKey "K", ":t.-1<cr>",    { desc = "Copy up",   silent = true })
+map("v", getOptionKey 'J', ":t'><CR>gv",   { desc = "Copy down", silent = true })
+map("v", getOptionKey 'K', ":t'<-1<CR>gv", { desc = "Copy up",   silent = true })
 
 -- buffers
-if pcall(function() require("bufferline") end) then
-    map("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
-    map("n", "]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
-else
-    map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-    map("n", "]b", "<cmd>bnext<cr>",     { desc = "Next buffer" })
-end
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+map("n", "]b", "<cmd>bnext<cr>",     { desc = "Next buffer" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })

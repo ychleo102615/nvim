@@ -1,11 +1,10 @@
 require("keymap.lazy");
+-- nmap('<C-M>', ':w | source %<CR>');   -- It seems that  ctrl-m is equivalent to Return key
 --[[
     TODO: write a function can subsittue every , into new line symbol
 --]]
 local tool         = require("tools.tool");
-local wrapCmd      = tool.wrapCmd;
 local getOptionKey = tool.getOptionKey;
-
 local cmd = vim.cmd;
 
 --[[
@@ -30,7 +29,6 @@ local function cmap(...)  return modeMap('c',        ...); end
 local function vmap(...)  return modeMap('v',        ...); end
 local function omap(...)  return modeMap('o',        ...); end
 local function vomap(...) return modeMap({'v', 'o'}, ...); end
-local function xmap(...)  return modeMap('x',        ...); end
 
 local function allmap(...)
     map(...);
@@ -52,11 +50,11 @@ end
 
 -- operator pending purpose
 function GetConditionStatementSelectorScript()
-    local fileExt = vim.fn.expand('%:e');
+    -- local fileExt = vim.fn.expand('%:e');
     -- embedded match whole word
     local emww = function(w) return MatchWholeWord(w, true); end
 
-    if fileExt == "lua" then
+    if vim.bo.filetype == "lua" then
         -- 在使用ctrl-r= 的表達式時，\<Esc>似乎是不會跳出該表達示，所以關閉高亮得以被呼叫
         return 'execute "normal! ?' .. emww 'if' .. '\\rwv/' .. emww 'then' .. '\\rge\\<Esc>:noh\\rgv"';
     else
@@ -64,43 +62,35 @@ function GetConditionStatementSelectorScript()
     end
 end
 
+---@param str string
+local function desc(str)
+    return { desc = str };
+end
+
+---@param tab table
+local function desc_opts(tab)
+    local temp = tab[1];
+    tab[1] = nil;
+    return vim.tbl_deep_extend("force", { desc = temp }, tab);
+end
+
 -- All
 map('<Space>', '<Nop>');
-allmap(';a', '<Esc>');
+allmap(';a', '<Esc>', desc "Escape");
 
 -- Normal Mode
-nmap('zp', '"0p'); -- paste from yanked
-nmap('zh', ':let @/ = ""<CR>'); -- clear search historykeyini
-nmap('zd', ':%bd | e#<CR>');
-nmap('ga', '<Plug>(EasyAlign)');
--- nmap('zh', ':noh<CR>');
-nmap('<Space>vt', ':vs<CR><C-W>l:ter<CR>i');
--- 'gd' refer to my lsp keymap
--- nmap('<Space>vd', ':vs<CR><C-W>lgd', { remap = true });
-nmap('<Space>vd', function()
-    local lastWin = vim.api.nvim_get_current_win();
-    cmd 'vs';
-    vim.api.nvim_set_current_win(lastWin);
-    vim.lsp.buf.definition();
-end);
-nmap('<Space>m',  'ciw<C-R>=<C-R>"');
-nmap('<Space>s', function()
-    local lineNumber = vim.fn.line('.');
-    local rangeStr   = '\\%>' .. lineNumber - 1 .. 'l' .. '\\%<' .. lineNumber + 1 .. 'l';
-    local patternStr = '\\s\\+';
-    local operateStr = 'Ngnc <Esc>';
-    local cleanupStr = ':let @/ = ""<CR>';
-    local cmdStr     = '/' .. rangeStr .. patternStr .. "<CR>" .. operateStr .. cleanupStr;
-    return cmdStr;
-end, { expr = true, silent = true });   -- shrink spaces
-nmap('<C-N>', ':w | source %<CR>');
--- nmap('<C-M>', ':w | source %<CR>');   -- It seems that  ctrl-m is equivalent to Return key
-nmap(';j', '15j');
-nmap(';k', '15k');
-nmap(';p', 'viw\"0p');
-nmap(getOptionKey 's', ':w | source %<CR>');
+nmap('zp',             '"0p',                    desc "Paste From Yanked");
+nmap('zh',             ':let @/ = ""<CR>',       desc "Clear Search History");
+nmap('zd',             ':%bd | e#<CR>',          desc "Delete All Buffers But This One");
+nmap('<C-N>',          ':w | source %<CR>',      desc "Save And Source");
+nmap(';j',             '15j',                    desc "Move Down 15 Lines");
+nmap(';k',             '15k',                    desc "Move Up 15 Lines");
+nmap(';p',             'viw\"0p',                desc "Pase On Current Word");
+nmap('<leader>em',     'ciw<C-R>=<C-R>"',        desc "Expression Math");
+nmap('<leader>vt',     ':vs<CR><C-W>l:ter<CR>i', desc "Split [V]ertical [T]erminal");
+nmap(getOptionKey 's', ':w | source %<CR>',      desc "Save And Source");
 -- https://apple.stackexchange.com/questions/90040/look-up-a-word-in-dictionary-app-in-terminal
-nmap(getOptionKey 'd', ':silent ! open dict://<C-R><C-W><CR>');
+nmap(getOptionKey 'd', ':silent ! open dict://<C-R><C-W><CR>', desc "Search Word On Dictionary");
 --[[
     m' will push current cursor position to jump list
     nmap(getOptionKey 'o', "m':normal o<CR>0D<C-O>");
@@ -112,32 +102,47 @@ nmap(getOptionKey '.', "<C-W>>");
 nmap(getOptionKey '<', "5<C-W><");
 nmap(getOptionKey '>', "5<C-W>>");
 
-local function ReplaceFileWords()
+nmap('<leader>vd', function()
+    cmd 'vs';
+    vim.lsp.buf.definition();
+end, desc "Split [V]ertical Lsp [D]efinition");
+nmap('<leader>ss', function()
+    local lineNumber = vim.fn.line('.');
+    local rangeStr   = '\\%>' .. lineNumber - 1 .. 'l' .. '\\%<' .. lineNumber + 1 .. 'l';
+    local patternStr = '\\s\\+';
+    local operateStr = 'Ngnc <Esc>';
+    local cleanupStr = ':let @/ = ""<CR>';
+    local cmdStr     = '/' .. rangeStr .. patternStr .. "<CR>" .. operateStr .. cleanupStr;
+    return cmdStr;
+end, desc_opts{ "Shrink Spaces", expr = true });
+nmap(';w', function()
     local prefix = "yiw:%s/\\<<C-R>0\\>/";
     return IS_USING_VSCODE and prefix or prefix .. "/g<Left><Left>";
-end
-nmap(';w', ReplaceFileWords, { expr = true });
+end, desc_opts{ "Subsitute Current Word In This Buffer", expr = true });
 
 -- vim.opt.relativenumber is always a table
 -- IIFE
-local ToggleRelativeLineNum = (function()
-    local defaultShowRelativeNumber = false;
+local toggle_relative_line_number = (function()
+    local is_relative = false;
     return function()
-        defaultShowRelativeNumber = not defaultShowRelativeNumber;
-        vim.opt.relativenumber = defaultShowRelativeNumber;
+        is_relative = not is_relative;
+        vim.opt.relativenumber = is_relative;
     end
 end)();
-nmap('<Space>nn', ToggleRelativeLineNum);
-nmap('<Space>a', 'ggVG', { desc = "Select All" });
+nmap('<leader>nn', toggle_relative_line_number, desc "Toggle Relative Line Number");
+nmap('<leader>a', 'ggVG', desc "Select All");
 
 -- Insert Mode
-imap(getOptionKey 'h', '<Left>');    -- option h
-imap(getOptionKey 'j', '<Down>');    -- option j
-imap(getOptionKey 'k', '<Up>');      -- option k
-imap(getOptionKey 'l', '<Right>');   -- option l
-imap(getOptionKey 'o', "<C-O>:call append(line('.'), '')<CR>");
-imap(getOptionKey 'O', "<C-O>:call append(line('.')-1, '')<CR>");
-
+imap(getOptionKey 'h', '<Left>',  desc "Move Cursor Left");
+imap(getOptionKey 'j', '<Down>',  desc "Move Cursor Down");
+imap(getOptionKey 'k', '<Up>',    desc "Move Cursor Up");
+imap(getOptionKey 'l', '<Right>', desc "Move Cursor Right");
+imap('<C-h>',          '<Left>',  desc "Move Cursor Left");
+imap('<C-j>',          '<Down>',  desc "Move Cursor Down");
+imap('<C-k>',          '<Up>',    desc "Move Cursor Up");
+imap('<C-l>',          '<Right>', desc "Move Cursor Right");
+imap(getOptionKey 'o', "<C-O>:call append(line('.'),   '')<CR>", desc "Open Line Below");
+imap(getOptionKey 'O', "<C-O>:call append(line('.')-1, '')<CR>", desc "Open Line Above");
 
 -- Visual Mode
 --[[
@@ -176,9 +181,6 @@ vomap('om', [[:<C-U>execute "normal! ?self\r:noh\rv3e"<CR>]]); -- object momber 
 omap('in(', ':<C-U>normal! f(vi(<CR>'); -- range between () in same line
 omap('F', ':<C-U>normal! 0f(hviw<CR>'); -- range word precede first () in same line
 
--- Visual Mode With out Select Mode
-xmap('ga', '<Plug>(EasyAlign)');
-
 --[[
     Plugin
 ]]
@@ -198,15 +200,13 @@ local alignComment = function()
     local alignCmdFormat = ":EasyAlign -1/%s/<CR>gv";
     return alignCmdFormat:format(alignRegex);
 end;
-vmap('<Space>ac', alignComment, {expr = true, silent = true});
--- --[[ Toggler ]]
--- nmap('<Space>i', wrapCmd 'ToggleAlternate');
+vmap('<Space>ac', alignComment, { expr = true, silent = true, desc = "Align Comments" });
 --[[ Telescope ]]
-local builtin = require('telescope.builtin');
-local themes  = require('telescope.themes');
 nmap('<Space>ff', '<Cmd>Telescope find_files<CR>');
 nmap('<Space>fs', '<Cmd>Telescope live_grep<CR>');
 nmap('<Space>fb', function()
+    local builtin = require('telescope.builtin');
+    local themes  = require('telescope.themes');
     -- builtin.current_buffer_fuzzy_find(themes.get_ivy {
     builtin.buffers(themes.get_ivy {
         --sorting_strategy = "descending";
@@ -225,6 +225,8 @@ nmap('<Space>gc', '<Cmd>Telescope git_commits initial_mode=normal<CR>');
 -- p means 'page', instead of using b which is occupid by 'buffer'
 nmap('<Space>gp', '<Cmd>Telescope git_bcommits initial_mode=normal<CR>');
 nmap('<Space>gb', function()
+    local builtin = require('telescope.builtin');
+    local themes  = require('telescope.themes');
     builtin.git_branches(themes.get_ivy {
         layout_config = {
             mirror = false,
@@ -234,21 +236,3 @@ nmap('<Space>gb', function()
     });
 end);
 
-local TELESCOPE_DEBUG = false;
-if TELESCOPE_DEBUG then
-    local config = themes.get_dropdown {
-    -- local config = {
-        -- previewer = false,
-        layout_config = {
-        --    height          = 0.9,
-            prompt_position = 'top',
-        },
-        sorting_strategy = 'ascending',
-    };
-    cmd 'messages clear';
-    --print(vim.inspect(config));
-    nmap('<Space>gc', function()
-        builtin.git_commits(config);
-        print(vim.inspect(config));
-    end);
-end
