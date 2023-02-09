@@ -5,7 +5,6 @@ return {
         event = "VeryLazy",
         config = true
     },
-
     -- outline
     {
         'simrat39/symbols-outline.nvim',
@@ -17,7 +16,6 @@ return {
         },
         cond = not IS_USING_VSCODE,
     },
-
     -- motion
     {
         'ggandor/leap.nvim',
@@ -32,8 +30,6 @@ return {
         event = "BufReadPre",
         config = true,
     },
-
-
     -- editing
     {
         'junegunn/vim-easy-align',
@@ -49,7 +45,11 @@ return {
             { "<leader>i", "<cmd>ToggleAlternate<cr>", desc = "Toggle Boolean" },
         },
     },
-
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = true,
+    },
     -- go
     {
         'fatih/vim-go',
