@@ -4,7 +4,9 @@ require("keymap.lazy");
 require('keymap.lsp').setupKeymap();
 
 --[[
-    TODO: write a function can subsittue every , into new line symbol
+    TODO:
+        1. write a function can subsittue every , into new line symbol
+        2. write a function which can acquire node text e.ge inside the quote
 --]]
 local tool         = require("tools.tool");
 local getOptionKey = tool.getOptionKey;

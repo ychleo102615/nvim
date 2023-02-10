@@ -17,7 +17,8 @@ local function getNullLsOpts()
             -- diagnostics
             null_ls.builtins.diagnostics.eslint_d,
             -- foramt
-            null_ls.builtins.formatting.prettierd,
+            null_ls.builtins.formatting.prettier,
+            -- null_ls.builtins.formatting.prettierd,
             null_ls.builtins.formatting.eslint_d,
         },
     };
@@ -70,7 +71,7 @@ return {
             :help lspconfig-all or https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
             ]]
             ensure_installed = {
-                "sumneko_lua",
+                "lua_ls",
                 "gopls",
                 "clangd",
                 "tsserver",
@@ -85,8 +86,8 @@ return {
                 function(serverName)
                     lspconfig[serverName].setup { on_attach = on_attach }
                 end,
-                ["sumneko_lua"] = function()
-                    lspconfig.sumneko_lua.setup {
+                ["lua_ls"] = function()
+                    lspconfig.lua_ls.setup {
                         on_attach = on_attach,
                         settings  = getNvimSetting(),
                     };

@@ -3,6 +3,16 @@ if IS_USING_VSCODE then
     return {};
 end
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/ui.lua
+
+local logo = [[
+███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+]];
+
 return {
     -- dashboard
     {
@@ -11,15 +21,6 @@ return {
         -- config = function() require'alpha'.setup(require'alpha.themes.dashboard'.config) end,
         opts = function()
             local dashboard = require("alpha.themes.dashboard")
-            local logo = [[
-            ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-            ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z
-            ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z
-            ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z
-            ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
-            ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
-            ]]
-
             ---@diagnostic disable-next-line: missing-parameter
             dashboard.section.header.val = vim.split(logo, "\n")
             dashboard.section.buttons.val = {
