@@ -58,4 +58,12 @@ return {
             vim.g.go_fmt_autosave = false;
         end,
     },
+    {
+        "akinsho/toggleterm.nvim",
+        config = true,
+        cmd = "ToggleTerm",
+        keys = {
+            { "<leader>ti", "<cmd>ToggleTerm<cr>", desc = "Toggle Terminal" },
+        },
+    }
 };
