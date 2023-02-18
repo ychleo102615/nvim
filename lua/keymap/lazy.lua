@@ -92,7 +92,7 @@ map("n", "<C-q>",      "<cmd>qa<cr>", { desc = "Quit all" })
 
 -- floating terminal
 map("n", "<leader>ft", function() require("lazy.util").float_term() end, { desc = "Terminal" })
-map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+map("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
 -- tabs
 map("n", "<leader><tab>l",     "<cmd>tablast<cr>",     { desc = "Last Tab" })
