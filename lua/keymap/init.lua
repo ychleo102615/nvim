@@ -85,6 +85,7 @@ nmap(';p',    'viw\"0p',                             desc "Pase On Current Word"
 nmap(';f',    '/<C-R>+<CR>',                         desc "Search Copyed Word");
 nmap(';r',    ('/%s<CR>'):format(cramp'<C-R>+'),     desc "Search Restricted Copyed Word");
 nmap(';w',    ':%s/\\<<C-R><C-W>\\>//g<Left><Left>', desc "Subsitute Current Word In This Buffer");
+nmap('<leader>xp', function() tool.query() end)
 
 nmap('<leader>a',  'ggVG',                   desc "Select All");
 nmap('<leader>em', 'ciw<C-R>=<C-R>"',        desc "Expression Math");
