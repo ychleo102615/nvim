@@ -79,6 +79,9 @@ return {
             options = {
                 mode = "tabs",
                 numbers = "oridinal",
+                indicator = {
+                    style = 'underline',
+                },
                 offsets = {{
                     filetype   = "NvimTree",
                     text       = "File Explorer",
@@ -93,11 +96,12 @@ return {
                     .. (diag.warning and icons.Warn .. diag.warning or "")
                     return vim.trim(ret)
                 end,
+                separator_style = "padded_slant"
             }
         },
         keys = {
-            { "]r", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-            { "[r", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+            { "]r", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+            { "[r", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
         },
     },
     -- status line 底部狀態條
