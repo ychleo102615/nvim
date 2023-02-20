@@ -75,7 +75,6 @@ map("i", ";", ";<c-g>u")
 -- save file
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
-
 -- better indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
@@ -93,6 +92,11 @@ map("n", "<C-q>",      "<cmd>qa<cr>", { desc = "Quit all" })
 -- floating terminal
 map("n", "<leader>ft", function() require("lazy.util").float_term() end, { desc = "Terminal" })
 map("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+
+map("t", "<C-h>", "<c-\\><c-n><C-w>h", { desc = "Go to left window" })
+map("t", "<C-j>", "<c-\\><c-n><C-w>j", { desc = "Go to lower window" })
+map("t", "<C-k>", "<c-\\><c-n><C-w>k", { desc = "Go to upper window" })
+map("t", "<C-l>", "<c-\\><c-n><C-w>l", { desc = "Go to right window" })
 
 -- tabs
 map("n", "<leader><tab>l",     "<cmd>tablast<cr>",     { desc = "Last Tab" })
