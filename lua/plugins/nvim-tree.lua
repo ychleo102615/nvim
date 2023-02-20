@@ -8,6 +8,13 @@ return {
         cond = not IS_USING_VSCODE,
         opts = {
             sort_by = "case_sensitive",
+            view = {
+                mappings = {
+                    list = {
+                        { key = "<C-e>", action = "" },
+                    },
+                },
+            },
             renderer = {
                 highlight_git = true,
                 group_empty   = true,
