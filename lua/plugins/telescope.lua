@@ -64,6 +64,7 @@ return {
             end, desc = "Find String" },
 
             { '<leader>fh', '<Cmd>Telescope help_tags<Cr>',                        desc = "Find Helps" },
+            { '<leader>km', '<Cmd>Telescope keymaps<Cr>',                          desc = "Find Keymaps" },
             { '<leader>gs', '<Cmd>Telescope git_status initial_mode=normal<CR>',   desc = "Git Status"},
             { '<leader>gc', '<Cmd>Telescope git_commits initial_mode=normal<CR>',  desc = "Git Commits" },
             { '<leader>gf', '<Cmd>Telescope git_bcommits initial_mode=normal<CR>', desc = "Git Buffer Commits" },
