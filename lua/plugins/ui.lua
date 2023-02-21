@@ -233,7 +233,7 @@ return {
         },
         config = function(_, opts)
             vim.api.nvim_create_autocmd("FileType", {
-                pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
+                pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason", "term" },
                 callback = function()
                     vim.b.miniindentscope_disable = true
                 end,
@@ -241,7 +241,16 @@ return {
             require("mini.indentscope").setup(opts)
         end,
     },
-
+    {
+        "NvChad/nvim-colorizer.lua",
+        opts = {
+            user_default_options = {
+                tailwind = true,
+                -- mode = 'virtualtext',
+                -- virtualtext = "▇",
+            },
+        },
+    },
     -- noice ui 合併了notify, nui等美化工具 (元件不穩定)
     {
         "folke/noice.nvim",
