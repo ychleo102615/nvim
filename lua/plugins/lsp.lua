@@ -103,4 +103,17 @@ return {
         event        = "BufReadPre",
         opts         = getNullLsOpts,
     },
+    {
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        event = "BufReadPre",
+        config = function()
+            vim.diagnostic.config({
+                virtual_text = false,
+            });
+            require("lsp_lines").setup();
+        end,
+        keys = {
+            { '<leader>tl', function() require("lsp_lines").toggle() end, desc = "Toggle Lsp_lines" },
+        },
+    }
 };
