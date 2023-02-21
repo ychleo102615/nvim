@@ -32,28 +32,40 @@ function tool.cramp(word, isEmbeddedCode)
     return '\\<' .. word .. '\\>';
 end
 
-function tool.query()
+--[[
+    Some references:
+    https://vi.stackexchange.com/questions/744/can-i-pass-a-custom-string-to-the-gx-command
+    https://github.com/neovim/neovim/blob/master/runtime/plugin/netrwPlugin.vim
+--]]
+local GITHUB_URL_TEMPLATE = "https://github.com/%s";
+
+---@alias siteType string | "github"
+
+---@param siteType siteType | nil
+function tool.gotoRepo(siteType)
     local r, c = unpack(vim.api.nvim_win_get_cursor(0))
     ---@diagnostic disable-next-line: missing-parameter
     local node = vim.treesitter.get_node_at_pos(0, r-1, c);
 
-    -- tool.echo(node:named());
     local sr, sc = node:start();
     local er, ec = node:end_();
-
-    -- local lines = vim.api.nvim_buf_get_text(0, sr, sc ,er, ec, {});
-    -- if #lines == 0 then
-    --     return;
-    -- end
 
     local text = vim.api.nvim_buf_get_text(0, sr, sc ,er, ec, {})[1];
     if not text then
         return;
     end
-    print(text);
-    -- tool.echo{ text, text:match([[%w+/%w+]]) };
-    tool.echo{ text, text:match([[ ["']%w+/%w+["'] ]]) };
+    text = text:gsub("[\"']", ""); -- trim quote marks
+    local REPO_PATTERN = [[[%w%-%.]+/[%w%-%.]+]];
+    if not text:match(REPO_PATTERN) then
+        print("No Git Repo Pattern for: " .. text);
+        return;
+    end
 
-    local GIT_HUB = "https://github.com/%s";
+    local url;
+    if not siteType or siteType == 'github' then
+        url = GITHUB_URL_TEMPLATE:format(text);
+    end
+    vim.fn['netrw#BrowseX'](url, true);
 end
+
 return tool;

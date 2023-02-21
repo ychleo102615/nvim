@@ -83,12 +83,12 @@ nmap(';p',    'viw\"0p',                             desc "Pase On Current Word"
 nmap(';f',    '/<C-R>+<CR>',                         desc "Search Copyed Word");
 nmap(';r',    ('/%s<CR>'):format(cramp'<C-R>+'),     desc "Search Restricted Copyed Word");
 nmap(';w',    ':%s/\\<<C-R><C-W>\\>//g<Left><Left>', desc "Subsitute Current Word In This Buffer");
-nmap('<leader>xp', function() tool.query() end)
 
-nmap('<leader>a',  'ggVG',                   desc "Select All");
-nmap('<leader>em', 'ciw<C-R>=<C-R>"',        desc "Expression Math");
-nmap('<leader>vt', ':vs<CR><C-W>l:ter<CR>i', desc "Split [V]ertical [T]erminal");
+nmap('<leader>a',  'ggVG',                             desc "Select All");
+nmap('<leader>em', 'ciw<C-R>=<C-R>"',                  desc "Expression Math");
+nmap('<leader>vt', ':vs<CR><C-W>l:ter<CR>i',           desc "Split [V]ertical [T]erminal");
 nmap('<leader>gh', 'yiw<Cmd>Telescope help_tags<CR>p', desc "Get Help");
+nmap('<leader>gp', tool.gotoRepo,                      desc "[G]o to Github Re[p]ository");
 
 nmap(getOptionKey 's', ':w | source %<CR>',      desc "Save And Source");
 nmap(getOptionKey 'd', ':silent ! open dict://<C-R><C-W><CR>', desc "Search Word On Dictionary");
