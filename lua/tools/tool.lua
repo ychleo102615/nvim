@@ -41,7 +41,7 @@ local GITHUB_URL_TEMPLATE = "https://github.com/%s";
 
 ---@alias siteType string | "github"
 
----@param siteType siteType | nil
+---@param siteType? siteType
 function tool.gotoRepo(siteType)
     local r, c = unpack(vim.api.nvim_win_get_cursor(0))
     ---@diagnostic disable-next-line: missing-parameter
