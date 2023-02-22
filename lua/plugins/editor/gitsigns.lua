@@ -30,9 +30,13 @@ local function on_attach(bufnr)
     map('n', '<leader>hp', gs.preview_hunk                         , { desc = "Prview Hunk" })
     map('n', '<leader>hb', function() gs.blame_line{full=true} end , { desc = "Blame Line" })
     map('n', '<leader>tb', gs.toggle_current_line_blame            , { desc = "Toggle Line Blame" })
-    map('n', '<leader>hd', gs.diffthis                             , { desc = "Diff This" })
-    map('n', '<leader>hD', function() gs.diffthis('~') end         , { desc = "Diff This With Head" })
     map('n', '<leader>td', gs.toggle_deleted                       , { desc = "Toggle Deleted Hunk View" })
+    map('n', '<leader>hD', gs.diffthis                             , { desc = "Diff This" })
+    map('n', '<leader>hd',
+        function()
+            gs.diffthis('~' .. ((vim.v.count > 0) and vim.v.count or ''))
+        end,
+    { desc = "Diff This With Head" })
 
     -- Text object
     map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = "Select Hunk" })
