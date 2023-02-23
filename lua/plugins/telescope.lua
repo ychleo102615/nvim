@@ -38,7 +38,7 @@ return {
                     ['ui-select'] = {
                         require("telescope.themes").get_cursor {
                             initial_mode = 'normal',
-                            layout_config = { height = 0.25 },
+                            layout_config = { height = 0.3 },
                         }
                     },
                 },
