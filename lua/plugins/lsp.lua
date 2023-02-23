@@ -9,17 +9,20 @@ end
 local function getNullLsOpts()
     local null_ls = require("null-ls");
     return {
+        --[[
+        -- eslint_d 似乎不會看專案內的prettier config
+        -- https://www.reddit.com/r/neovim/comments/uhgwyh/nullls_eslint_formatter_doesnt_pick_up_project/
+        --]]
         sources = {
             -- code actions
-            null_ls.builtins.code_actions.eslint_d,
+            null_ls.builtins.code_actions.eslint,
             null_ls.builtins.code_actions.gitsigns,
             null_ls.builtins.code_actions.refactoring,
             -- diagnostics
-            null_ls.builtins.diagnostics.eslint_d,
+            null_ls.builtins.diagnostics.eslint,
             -- foramt
             null_ls.builtins.formatting.prettier,
-            -- null_ls.builtins.formatting.prettierd,
-            null_ls.builtins.formatting.eslint_d,
+            null_ls.builtins.formatting.eslint,
         },
     };
 end
