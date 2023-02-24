@@ -68,4 +68,34 @@ function tool.gotoRepo(siteType)
     vim.fn['netrw#BrowseX'](url, true);
 end
 
+-- https://neovim.io/doc/user/treesitter.html
+function tool.extract()
+    local r, c = unpack(vim.api.nvim_win_get_cursor(0))
+    r = r - 1;
+    local current = vim.treesitter.get_node_at_pos(0, r, c, {});
+    local trace = {};
+
+    local function findFuncDeclare(node)
+        if node == nil then
+            return;
+        end
+        table.insert(trace, { node:type(), node:range()});
+        local parent = node:parent();
+        if parent == nil then
+            return;
+        end
+        -- local parentType = parent:type();
+        -- if parentType == "function_declaration" or parent:type() == "function_definition" then
+        --     -- found!!
+        --     return parent;
+        -- end
+        return findFuncDeclare(parent);
+    end
+
+    findFuncDeclare(current);
+    -- local funcScope = findFuncDeclare(current);
+    -- tool.echo(funcScope:type());
+    tool.echo(trace);
+end
+
 return tool;
