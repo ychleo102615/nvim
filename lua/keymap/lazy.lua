@@ -20,6 +20,11 @@ map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
+-- Moving between windows (from Ben Frain's talk at NeovimConf 2022)
+for i = 1, 6 do
+    map("n", "<leader>" .. i, i .. "<C-w>w", { desc = "Move to window " .. i });
+end
+
 -- Resize window using <ctrl> arrow keys
 map("n", "<Up>",    "<cmd>resize +1<cr>",          { desc = "Increase window height" })
 map("n", "<Down>",  "<cmd>resize -1<cr>",          { desc = "Decrease window height" })
@@ -86,8 +91,9 @@ map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List" })
 
 -- quit
-map("n", "<leader>qq", "<cmd>q<cr>",  { desc = "Quit" })
-map("n", "<C-q>",      "<cmd>qa<cr>", { desc = "Quit all" })
+map("n", "<C-q>",          "<cmd>q<cr>",   { desc = "Quit" })
+map("n", "<C-S-q>",        "<cmd>qa<cr>",  { desc = "Quit all" })
+map("n", getOptionKey "T", "<cmd>vs#<cr>", { desc = "Restore Last Window in Vertical" })
 
 -- floating terminal
 map("n", "<leader>ft", function() require("lazy.util").float_term() end, { desc = "Terminal" })
@@ -107,3 +113,5 @@ map("n", "<leader><tab>]",     "<cmd>tabnext<cr>",     { desc = "Next Tab" })
 map("n", "<leader><tab>[",     "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", "]t",                 "<cmd>tabnext<cr>",     { desc = "Next Tab" })
 map("n", "[t",                 "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<C-S-l>",            "<cmd>tabnext<cr>",     { desc = "Next Tab" })
+map("n", "<C-S-h>",            "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
