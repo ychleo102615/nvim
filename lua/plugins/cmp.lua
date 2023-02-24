@@ -30,8 +30,18 @@ local function setupLuaSnip()
         return vim.fn.expand("%:t:s?\\.[^\\.]\\+$??")
     end
 
-    -- ls.add_snippets("all", { });
-    -- ls.add_snippets("lua", { });
+    -- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md
+    ls.add_snippets("all", {
+        s("ternary", {
+            i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else")
+        }),
+    });
+    ls.add_snippets("lua", {
+        s("ternary", {
+            i(1, "cond"), t(" and "), i(2, "then"), t(" or "), i(3, "else")
+        }),
+    });
+    ls.add_snippets("typescript", {});
 
     ls.filetype_extend("all", { "_" });
 end
@@ -51,6 +61,10 @@ return {
         },
         lazy = true, -- load when nvim-cmp loaded
         config = setupLuaSnip,
+        keys = {
+            { "<tab>",   function() require('luasnip').jump(1) end,  mode = { "i", "s" }, desc = "Jump Next" },
+            { "<S-tab>", function() require('luasnip').jump(-1) end, mode = { "i", "s" }, desc = "Jump Prev" },
+        },
     },
     {
         "hrsh7th/nvim-cmp",
