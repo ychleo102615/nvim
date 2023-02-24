@@ -12,6 +12,12 @@ local logo = [[
 ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 ]];
+local function clock()
+    return " " .. os.date("%R")
+end
+local window = function()
+    return vim.api.nvim_win_get_number(0);
+end
 
 return {
     -- dashboard
@@ -121,11 +127,7 @@ return {
                     { "progress", separator = "", padding = { left = 1, right = 0 } },
                     { "location", padding = { left = 1, right = 1 } },
                 },
-                lualine_z = {
-                    function()
-                        return " " .. os.date("%R")
-                    end,
-                },
+                lualine_z = { clock },
             },
             winbar = {
                 lualine_a = {
@@ -145,6 +147,7 @@ return {
                         },
                     },
                 },
+                lualine_z = { window },
             },
             inactive_winbar = {
                 lualine_b = {
@@ -161,6 +164,7 @@ return {
                         },
                     },
                 },
+                lualine_z = { window },
             },
         } end,
     },

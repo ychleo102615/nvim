@@ -64,7 +64,7 @@ return {
         "williamboman/mason-lspconfig",
         event = "BufReadPre",
         dependencies = {
-            { "folke/neodev.nvim", config = true },
+            { "folke/neodev.nvim",    config = true },
             { 'neovim/nvim-lspconfig' },
         },
         opts = {
@@ -96,7 +96,6 @@ return {
                     };
                 end,
             };
-
         end,
     },
     -- linters and formatters
@@ -112,6 +111,7 @@ return {
         config = function()
             vim.diagnostic.config({
                 virtual_text = false,
+                virtual_lines = false,
             });
             require("lsp_lines").setup();
         end,
