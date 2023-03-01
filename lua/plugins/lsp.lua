@@ -80,11 +80,13 @@ return {
                 "tsserver",
                 "volar",
                 "tailwindcss",
+                "jdtls",
             }
         },
-        config = function()
+        config = function(_, opts)
             -- :h mason-lspconfig-automatic-server-setup
             local lspconfig = require("lspconfig");
+            require("mason-lspconfig").setup(opts);
             require("mason-lspconfig").setup_handlers {
                 function(serverName)
                     lspconfig[serverName].setup { on_attach = on_attach }
