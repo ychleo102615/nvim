@@ -263,6 +263,7 @@ return {
             "rcarriga/nvim-notify"
         },
         event = "VeryLazy",
+        cond = false,
         opts = {
             lsp = {
                 override = {

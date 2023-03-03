@@ -58,6 +58,11 @@ return {
             vim.g.go_fmt_autosave = false;
         end,
     },
+    -- java
+    {
+        'mfussenegger/nvim-jdtls',
+        -- ft = "java",
+    },
     {
         "akinsho/toggleterm.nvim",
         config = true,

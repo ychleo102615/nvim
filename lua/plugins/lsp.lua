@@ -80,7 +80,6 @@ return {
                 "tsserver",
                 "volar",
                 "tailwindcss",
-                "jdtls",
             }
         },
         config = function(_, opts)
