@@ -37,7 +37,7 @@ local function omap(...)  return modeMap('o',        ...); end
 local function vomap(...) return modeMap({'v', 'o'}, ...); end
 
 local function allmap(...)
-    modeMap({'n', 'i', 'c', 'v', 'o', 't'}, ...);
+    return modeMap({'n', 'i', 'c', 'v', 'o', 't'}, ...);
 end
 
 --[[
