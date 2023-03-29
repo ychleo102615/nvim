@@ -59,6 +59,13 @@ return {
         event = "InsertEnter",
         config = true,
     },
+    {
+        'echasnovski/mini.splitjoin',
+        config = function ()
+            require('mini.splitjoin').setup();
+        end,
+        version = false
+    },
     -- go
     {
         'fatih/vim-go',
