@@ -38,16 +38,18 @@ return {
                         ["as"] = "@conditional.outer",
                         ["is"] = "@conditional.inner",
                         -- suffix "q" means quote
-                        ["q"] = "@comment.outer",
+                        ["iq"] = "@comment.inner",
+                        ["aq"] = "@comment.outer",
                         -- suffix "e" means execute
                         ["ae"] = "@call.outer",
                         ["ie"] = "@call.inner",
                         ["al"] = "@loop.outer",
                         ["il"] = "@loop.inner",
-
-                        -- 實用度感覺較低           suffix "a" means argument
+                        -- suffix "a" means argument
                         ["aa"] = "@parameter.outer",
                         ["ia"] = "@parameter.inner",
+                        ["ar"] = "@return.outer",
+                        ["ir"] = "@return.inner",
                     },
                 },
                 swap = {
@@ -71,6 +73,8 @@ return {
                         ["]q"] = "@comment.outer",
                         ["]a"] = "@parameter.inner",
                         ["]e"] = "@call.outer",
+                        ["]r"] = "@return.outer",
+                        ["]R"] = "@return.inner",
                     },
                     goto_next_end = {
                         ["]F"] = "@function.outer",
@@ -82,6 +86,8 @@ return {
                         ["[q"] = "@comment.outer",
                         ["[a"] = "@parameter.inner",
                         ["[e"] = "@call.outer",
+                        ["[r"] = "@return.outer",
+                        ["[R"] = "@return.inner",
                     },
                     goto_previous_end = {
                         ["[F"] = "@function.outer",
