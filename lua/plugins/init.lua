@@ -32,7 +32,6 @@ return {
             vim.keymap.set({"n", "o", "x"}, "ge", function() require("spider").motion("ge") end, { desc = "Spider-ge" })
         end,
     },
-
     -- surround
     {
         'kylechui/nvim-surround',
@@ -88,5 +87,10 @@ return {
             { "<C-t>",      "<cmd>exe v:count1 . 'ToggleTerm'<cr>", mode = {"n", "t"}, desc = "Toggle Terminal" },
             { "<leader>ta", "<cmd>ToggleTermToggleAll<cr>",         mode = {"n", "t"}, desc = "Toggle All Terminal" },
         },
-    }
+    },
+    {
+        "chrisgrieser/nvim-early-retirement",
+        config = true,
+        event = "VeryLazy",
+    },
 };
