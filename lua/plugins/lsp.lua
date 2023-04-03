@@ -27,7 +27,10 @@ local function getNullLsOpts()
     };
 end
 
-local on_attach = require("keymap.lsp").on_attach;
+local on_attach = function(...)
+    require("keymap.lsp").on_attach(...);
+    require("nvim-navbuddy").attach(...);
+end
 --[[
 sumneko server config: https://github.com/sumneko/lua-language-server/wiki/Configuration-File
 ]]
@@ -88,7 +91,9 @@ return {
             require("mason-lspconfig").setup(opts);
             require("mason-lspconfig").setup_handlers {
                 function(serverName)
-                    lspconfig[serverName].setup { on_attach = on_attach }
+                    lspconfig[serverName].setup {
+                        on_attach = on_attach
+                    }
                 end,
                 ["lua_ls"] = function()
                     lspconfig.lua_ls.setup {
@@ -118,6 +123,18 @@ return {
         end,
         keys = {
             { '<leader>tl', function() require("lsp_lines").toggle() end, desc = "Toggle Lsp_lines" },
+        },
+    },
+    {
+        "SmiteshP/nvim-navbuddy",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            "SmiteshP/nvim-navic",
+            "MunifTanjim/nui.nvim"
+        },
+        config = true,
+        keys = {
+            { '<leader>nb', '<cmd>Navbuddy<cr>', desc = "Nav Buddy" },
         },
     }
 };
