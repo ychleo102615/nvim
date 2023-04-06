@@ -117,3 +117,8 @@ map("n", "]t",                 "<cmd>tabnext<cr>",     { desc = "Next Tab" })
 map("n", "[t",                 "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", "<C-S-l>",            "<cmd>tabnext<cr>",     { desc = "Next Tab" })
 map("n", "<C-S-h>",            "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+-- lazygit (you need to install it yourself)
+map("n", "<leader>gg", function()
+    require("lazy.util").float_term({"lazygit"});
+end, { desc = "Lazygit" });
