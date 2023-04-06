@@ -16,7 +16,10 @@ local function clock()
     return " " .. os.date("%R")
 end
 local window = function()
-    return vim.api.nvim_win_get_number(0);
+    return "win: " .. vim.api.nvim_win_get_number(0);
+end
+local bufferId = function()
+    return "buf: " .. vim.api.nvim_get_current_buf();
 end
 
 return {
@@ -147,7 +150,8 @@ return {
                         },
                     },
                 },
-                lualine_z = { window },
+                lualine_y = { window },
+                lualine_z = { bufferId },
             },
             inactive_winbar = {
                 lualine_b = {
@@ -164,7 +168,8 @@ return {
                         },
                     },
                 },
-                lualine_z = { window },
+                lualine_y = { window },
+                lualine_z = { bufferId },
             },
         } end,
     },
