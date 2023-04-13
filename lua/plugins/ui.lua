@@ -87,7 +87,7 @@ return {
         opts = {
             options = {
                 mode = "tabs",
-                numbers = "oridinal",
+                numbers = "buffer_id",
                 indicator = {
                     style = 'underline',
                 },
