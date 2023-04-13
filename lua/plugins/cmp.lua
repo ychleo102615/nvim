@@ -62,8 +62,8 @@ return {
         lazy = true, -- load when nvim-cmp loaded
         config = setupLuaSnip,
         keys = {
-            { "<C-tab>",   function() require('luasnip').jump(1) end,  mode = { "i", "s" }, desc = "Jump Next" },
-            { "<C-S-tab>", function() require('luasnip').jump(-1) end, mode = { "i", "s" }, desc = "Jump Prev" },
+            { "<C-f>", function() require('luasnip').jump(1) end,  mode = { "i", "s" }, desc = "Jump Next" },
+            { "<C-b>", function() require('luasnip').jump(-1) end, mode = { "i", "s" }, desc = "Jump Prev" },
         },
     },
     {
