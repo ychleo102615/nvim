@@ -117,6 +117,13 @@ map("n", "]t",                 "<cmd>tabnext<cr>",     { desc = "Next Tab" })
 map("n", "[t",                 "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", "<C-S-l>",            "<cmd>tabnext<cr>",     { desc = "Next Tab" })
 map("n", "<C-S-h>",            "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<leader>b", function()
+    local count = vim.v.count;
+    if count == 0 then
+        count = "";
+    end
+    vim.cmd("tabnext " .. count);
+end, { desc = "Next Ta[b] With Number" })
 
 -- lazygit (you need to install it yourself)
 map("n", "<leader>gg", function()
