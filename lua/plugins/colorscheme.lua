@@ -92,5 +92,6 @@ return {
     { 'projekt0n/github-nvim-theme', lazy = true, tag = 'v0.0.7' },
     { 'savq/melange-nvim', lazy = true },
     -- colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-    { "catppuccin/nvim", lazy = true }
+    { "catppuccin/nvim", lazy = true },
+    { "embark-theme/vim", lazy = true },
 };
