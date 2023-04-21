@@ -46,8 +46,9 @@ map("v", getOptionKey 'J', ":t'><CR>gv",   { desc = "Copy down", silent = true }
 map("v", getOptionKey 'K', ":t'<-1<CR>gv", { desc = "Copy up",   silent = true })
 
 -- buffers
-map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-map("n", "]b", "<cmd>bnext<cr>",     { desc = "Next buffer" })
+map("n", "[b",        "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+map("n", "]b",        "<cmd>bnext<cr>",     { desc = "Next buffer" })
+map("n", "<leader>b", "<cmd>b#<cr>",        { desc = "Last Buffer" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
@@ -117,13 +118,9 @@ map("n", "]t",                 "<cmd>tabnext<cr>",     { desc = "Next Tab" })
 map("n", "[t",                 "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", "<C-S-l>",            "<cmd>tabnext<cr>",     { desc = "Next Tab" })
 map("n", "<C-S-h>",            "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-map("n", "<leader>b", function()
-    local count = vim.v.count;
-    if count == 0 then
-        count = "";
-    end
-    vim.cmd("tabnext " .. count);
-end, { desc = "Next Ta[b] With Number" })
+map("n", "<leader>m", function()
+    vim.cmd("tabnext " .. (vim.v.count == 0 and "" or vim.v.count));
+end, { desc = "Next Tab With Number" })
 
 -- lazygit (you need to install it yourself)
 map("n", "<leader>gg", function()
