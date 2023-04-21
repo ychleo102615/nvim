@@ -43,9 +43,10 @@ local GITHUB_URL_TEMPLATE = "https://github.com/%s";
 
 ---@param siteType? siteType
 function tool.gotoRepo(siteType)
-    local r, c = unpack(vim.api.nvim_win_get_cursor(0))
-    ---@diagnostic disable-next-line: missing-parameter
-    local node = vim.treesitter.get_node_at_pos(0, r-1, c);
+    local node = vim.treesitter.get_node();
+    if not node then
+        return;
+    end
 
     local sr, sc = node:start();
     local er, ec = node:end_();
