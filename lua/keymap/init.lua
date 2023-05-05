@@ -179,7 +179,7 @@ end;
 vmap('<leader>ac', alignComment, desc_opts{ "Align Comments", expr = true, silent = true });
 
 -- Command Mode
-cmap(';m', cramp '' .. '<Left><Left>');
+cmap(';m', cramp '' .. '<Left><Left>', desc "Match Word Strictly");
 
 
 --[[
