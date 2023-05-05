@@ -251,6 +251,10 @@ return {
         end,
     },
     {
+        "kevinhwang91/nvim-bqf",
+        event = "VeryLazy"
+    },
+    {
         "NvChad/nvim-colorizer.lua",
         opts = {
             filetypes = {
