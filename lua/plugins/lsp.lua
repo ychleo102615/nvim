@@ -83,6 +83,7 @@ return {
                 "tsserver",
                 "volar",
                 "tailwindcss",
+                "pyright"
             }
         },
         config = function(_, opts)
