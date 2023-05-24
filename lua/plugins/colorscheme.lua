@@ -21,7 +21,7 @@ end
 return {
     {
         'ellisonleao/gruvbox.nvim',
-        lazy = true,
+        event = EVENT.FIND_THEME,
         opts = {
             -- https://github.com/ellisonleao/gruvbox.nvim/blob/aee207e1ae55c44bd6a23c1a85e5e17939e3835b/lua/gruvbox/groups.lua
             bold = false,
@@ -35,21 +35,21 @@ return {
     },
     {
         'ayu-theme/ayu-vim',
-        lazy = true,
+        event = EVENT.FIND_THEME,
         config = function()
             vim.g.ayucolor = "dark"
         end
     },
     {
         'junegunn/seoul256.vim',
-        lazy = true,
+        event = EVENT.FIND_THEME,
         config = function()
             vim.g.seoul256_background = 234;
         end
     },
     {
         'sainnhe/sonokai',
-        lazy = true,
+        event = EVENT.FIND_THEME,
         config = function()
             local sonokaiStyles = {
                 "default", "atlantis", "andromeda", "shusia", "maia", "espresso",
@@ -60,38 +60,36 @@ return {
     },
     {
         'sainnhe/everforest',
-        lazy = true,
+        event = EVENT.FIND_THEME,
         config = function()
             vim.g.everforest_background = "hard";
             vim.g.everforest_ui_contrast = "high";
         end
     },
-    { 'rebelot/kanagawa.nvim',     lazy = true },
-    { 'sainnhe/gruvbox-material',  lazy = true },
-    { 'olimorris/onedarkpro.nvim', lazy = true },
-    { 'jdsimcoe/abstract.vim',     lazy = true },
-    { 'tlhr/anderson.vim',         lazy = true },
-    { 'romainl/Apprentice',        lazy = true },
-    { 'ajmwagar/vim-deus',         lazy = true },
-    { 'wadackel/vim-dogrun',       lazy = true },
-    { 'romainl/flattened',         lazy = true },
-    { 'rakr/vim-one',              lazy = true },
-    { 'sonph/onehalf',             lazy = true },
-    { 'sts10/vim-pink-moon',       lazy = true },
-    { 'AlessandroYorba/Sierra',    lazy = true },
-    { 'rakr/vim-two-firewatch',    lazy = true },
-    { 'cpea2506/one_monokai.nvim', lazy = true },
+    { 'rebelot/kanagawa.nvim',     event = EVENT.FIND_THEME },
+    { 'sainnhe/gruvbox-material',  event = EVENT.FIND_THEME },
+    { 'olimorris/onedarkpro.nvim', event = EVENT.FIND_THEME },
+    { 'jdsimcoe/abstract.vim',     event = EVENT.FIND_THEME },
+    { 'tlhr/anderson.vim',         event = EVENT.FIND_THEME },
+    { 'romainl/Apprentice',        event = EVENT.FIND_THEME },
+    { 'ajmwagar/vim-deus',         event = EVENT.FIND_THEME },
+    { 'wadackel/vim-dogrun',       event = EVENT.FIND_THEME },
+    { 'romainl/flattened',         event = EVENT.FIND_THEME },
+    { 'rakr/vim-one',              event = EVENT.FIND_THEME },
+    { 'sonph/onehalf',             event = EVENT.FIND_THEME },
+    { 'sts10/vim-pink-moon',       event = EVENT.FIND_THEME },
+    { 'AlessandroYorba/Sierra',    event = EVENT.FIND_THEME },
+    { 'rakr/vim-two-firewatch',    event = EVENT.FIND_THEME },
+    { 'cpea2506/one_monokai.nvim', event = EVENT.FIND_THEME },
     {
         "folke/tokyonight.nvim",
-        lazy = true,
+        event = EVENT.FIND_THEME,
         opts = { style = "moon" },
     },
-    -- https://github.com/EdenEast/nightfox.nvim
-    { 'EdenEast/nightfox.nvim', lazy = true },
-    -- https://github.com/projekt0n/github-nvim-theme
-    { 'projekt0n/github-nvim-theme', lazy = true, tag = 'v0.0.7' },
-    { 'savq/melange-nvim', lazy = true },
+    { 'EdenEast/nightfox.nvim',      event = EVENT.FIND_THEME  },
+    { 'projekt0n/github-nvim-theme', event = EVENT.FIND_THEME, tag = 'v0.0.7' },
+    { 'savq/melange-nvim',           event = EVENT.FIND_THEME  },
+    { "catppuccin/nvim",             event = EVENT.FIND_THEME  },
+    { "embark-theme/vim",            event = EVENT.FIND_THEME  },
     -- colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-    { "catppuccin/nvim", lazy = true },
-    { "embark-theme/vim", lazy = true },
 };
