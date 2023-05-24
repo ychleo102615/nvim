@@ -124,5 +124,6 @@ end, { desc = "Next Tab With Number" })
 
 -- lazygit (you need to install it yourself)
 map("n", "<leader>gg", function()
-    require("lazy.util").float_term({"lazygit"});
+    local float = require("lazy.util").float_term({"lazygit"});
+    vim.keymap.set("t", "<esc>", "<esc>", { buffer = float.buf, nowait = true });
 end, { desc = "Lazygit" });
