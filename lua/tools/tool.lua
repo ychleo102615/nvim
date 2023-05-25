@@ -71,9 +71,7 @@ end
 
 -- https://neovim.io/doc/user/treesitter.html
 function tool.extract()
-    local r, c = unpack(vim.api.nvim_win_get_cursor(0))
-    r = r - 1;
-    local current = vim.treesitter.get_node_at_pos(0, r, c, {});
+    local current = vim.treesitter.get_node();
     local trace = {};
 
     local function findFuncDeclare(node)
