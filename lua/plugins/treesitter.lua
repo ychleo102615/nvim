@@ -125,6 +125,7 @@ return {
         'nvim-treesitter/playground',
         event = "BufReadPost",
         keys = {
+            -- or run :InspectTree
             { "<leader>pg", "<cmd>TSPlaygroundToggle<cr>", desc = "Toggle Treesitter Playground" },
             { "<leader>pn", "<cmd>TSNodeUnderCursor<cr>",  desc = "Treesitter Node Info" },
         },
