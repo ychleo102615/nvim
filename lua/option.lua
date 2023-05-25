@@ -11,6 +11,7 @@ opt.cursorline        = true;
 opt.hlsearch          = true;
 opt.ruler             = true;
 opt.termguicolors     = true;
+opt.showmode          = false;
 -- opt.relativenumber = true;
 -- opt.cmdheight      = 5;
 
