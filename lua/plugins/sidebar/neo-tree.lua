@@ -7,7 +7,7 @@ return {
             'nvim-tree/nvim-web-devicons',
             'MunifTanjim/nui.nvim',
         },
-        cond = false,
+        cond = true,
         -- cond = not IS_USING_VSCODE,
         opts = {
             filesystem = {
@@ -31,8 +31,8 @@ return {
             vim.fn.sign_define("DiagnosticSignHint",  { text = "",  texthl = "DiagnosticSignHint" });
             require("neo-tree").setup(opts);
         end,
-        -- keys = {
-        --     { "<leader>d",  "<cmd>NeoTreeRevealToggle<cr>",  desc = "Toggle Tree [D]irectory" },
-        -- }
+        keys = {
+            { "<leader>e",  "<cmd>NeoTreeRevealToggle<cr>",  desc = "Toggle N[E]o Tree" },
+        }
     },
 };
