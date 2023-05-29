@@ -20,11 +20,6 @@ map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
--- Moving between windows (from Ben Frain's talk at NeovimConf 2022)
-for i = 1, 6 do
-    map("n", "<leader>" .. i, i .. "<C-w>w", { desc = "Move to window " .. i });
-end
-
 -- Resize window using <ctrl> arrow keys
 map("n", "<Up>",    "<cmd>resize +1<cr>",          { desc = "Increase window height" })
 map("n", "<Down>",  "<cmd>resize -1<cr>",          { desc = "Decrease window height" })
@@ -121,6 +116,11 @@ map("n", "<C-S-h>",            "<cmd>tabprevious<cr>", { desc = "Previous Tab" }
 map("n", "<leader>m", function()
     vim.cmd("tabnext " .. (vim.v.count == 0 and "" or vim.v.count));
 end, { desc = "Next Tab With Number" })
+
+-- Moving between windows (from Ben Frain's talk at NeovimConf 2022)
+for i = 1, 9 do
+    map("n", "<leader>" .. i, ("<cmd>tabnext %d<cr>"):format(i), { desc = "Move To Tab " .. i });
+end
 
 -- lazygit (you need to install it yourself)
 map("n", "<leader>gg", function()

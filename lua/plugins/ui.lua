@@ -87,7 +87,7 @@ return {
         opts = {
             options = {
                 mode = "tabs",
-                numbers = "buffer_id",
+                numbers = "ordinal",
                 indicator = {
                     style = 'underline',
                 },
@@ -105,7 +105,7 @@ return {
                     .. (diag.warning and icons.Warn .. diag.warning or "")
                     return vim.trim(ret)
                 end,
-                separator_style = "padded_slant"
+                separator_style = "slant",
             }
         },
         keys = {
