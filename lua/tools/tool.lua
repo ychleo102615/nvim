@@ -14,9 +14,13 @@ local cmd = vim.cmd;
 function tool.wrapCmd(cmdStr)
     return function() return cmd(cmdStr) end;
 end
+local optionKeyMapping = require('keymap.optionKeyMapping');
 
 function tool.getOptionKey(originalKey)
-    local mappedKey = require('keymap.optionKeyMapping')[originalKey];
+    if not IS_MAC then
+        return ("<A-%s>"):format(originalKey);
+    end
+    local mappedKey = optionKeyMapping[originalKey];
     if not mappedKey then
         tool.echo(("Option Key Mapping Error:'%s'"):format(originalKey))
     end
