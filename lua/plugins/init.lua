@@ -26,10 +26,11 @@ return {
     {
         "chrisgrieser/nvim-spider",
         config = function()
-            vim.keymap.set({"n", "x"}, "w",  function() require("spider").motion("w")  end, { desc = "Spider-w"  })
-            vim.keymap.set({"n", "x"}, "e",  function() require("spider").motion("e")  end, { desc = "Spider-e"  })
-            vim.keymap.set({"n", "x"}, "b",  function() require("spider").motion("b")  end, { desc = "Spider-b"  })
-            vim.keymap.set({"n", "x"}, "ge", function() require("spider").motion("ge") end, { desc = "Spider-ge" })
+            local motion = require("spider").motion;
+            vim.keymap.set({"n", "x"}, "w",  function() return motion("w")  end, { desc = "Spider-w"  })
+            vim.keymap.set({"n", "x"}, "e",  function() return motion("e")  end, { desc = "Spider-e"  })
+            vim.keymap.set({"n", "x"}, "b",  function() return motion("b")  end, { desc = "Spider-b"  })
+            vim.keymap.set({"n", "x"}, "ge", function() return motion("ge") end, { desc = "Spider-ge" })
         end,
     },
     -- surround
