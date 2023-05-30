@@ -123,7 +123,7 @@ for i = 1, 9 do
 end
 
 -- lazygit (you need to install it yourself)
-map("n", "<leader>gg", function()
+map("n", "<leader>gl", function()
     local float = require("lazy.util").float_term({"lazygit"});
     vim.keymap.set("t", "<esc>", "<esc>", { buffer = float.buf, nowait = true });
 end, { desc = "Lazygit" });
