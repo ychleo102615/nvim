@@ -121,8 +121,8 @@ return {
         opts = function() return {
             options = {
                 disabled_filetypes = {
-                    statusline = { "dashboard", "lazy", "alpha", "neo-tree" },
-                    winbar     = { "dashboard", "lazy", "alpha", "neo-tree" },
+                    statusline = { "dashboard", "lazy", "alpha", "NvimTree", "neo-tree" },
+                    winbar     = { "dashboard", "lazy", "alpha", "NvimTree", "neo-tree" },
                 },
             },
             sections = {
