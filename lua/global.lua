@@ -4,8 +4,13 @@ EVENT = {
 };
 IS_MAC = vim.fn.has 'macunix' ~= 0;
 
-vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" });
-vim.fn.sign_define("DiagnosticSignWarn",  { text = " ", texthl = "DiagnosticSignWarn" });
-vim.fn.sign_define("DiagnosticSignInfo",  { text = " ", texthl = "DiagnosticSignInfo" });
-vim.fn.sign_define("DiagnosticSignHint",  { text = "",  texthl = "DiagnosticSignHint" });
+local signs = {
+    DiagnosticSignError = " ",
+    DiagnosticSignWarn  = " ",
+    DiagnosticSignInfo  = " ",
+    DiagnosticSignHint  = " ",
+};
+for name, text in pairs(signs) do
+    vim.fn.sign_define(name, { text = text, texthl = name, numhl = name });
+end
 vim.g.mapleader = " ";
