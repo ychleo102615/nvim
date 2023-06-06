@@ -22,7 +22,17 @@ return {
                         ".DS_Store",
                     },
                 },
+                follow_current_file = true,
             },
+            window = {
+                mappings = {
+                    ["<bs>"] = "close_node",
+                }
+            },
+            source_selector = {
+                winbar = true,
+                -- statusline = true
+            }
         },
         keys = {
             { "<leader>e",  "<cmd>NeoTreeRevealToggle<cr>",  desc = "Toggle N[E]o Tree" },
