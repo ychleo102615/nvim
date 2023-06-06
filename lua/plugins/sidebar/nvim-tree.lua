@@ -14,6 +14,11 @@ return {
             git = {
                 ignore = false,
             },
+            update_focused_file = {
+                enable = true,
+                -- update_root = false,
+                -- ignore_list = {},
+            },
             on_attach = function (bufnr)
                 -- from help "nvim-tree-mappings-default"
                 local api = require('nvim-tree.api');
