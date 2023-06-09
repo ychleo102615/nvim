@@ -7,8 +7,7 @@ return {
             'nvim-tree/nvim-web-devicons',
             'MunifTanjim/nui.nvim',
         },
-        cond = true,
-        -- cond = not IS_USING_VSCODE,
+        cond = not IS_USING_VSCODE,
         opts = {
             filesystem = {
                 filtered_items = {
