@@ -66,7 +66,22 @@ return {
             vim.g.everforest_ui_contrast = "high";
         end
     },
-    { 'rebelot/kanagawa.nvim',     event = EVENT.FIND_THEME },
+    {
+        'rebelot/kanagawa.nvim',
+        event = EVENT.FIND_THEME,
+        opts = {
+            -- https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/themes.lua
+            colors = {
+                theme = {
+                    wave = {
+                        ui = {
+                            bg_visual = "#5D7EA0"
+                        }
+                    }
+                }
+            },
+        },
+    },
     { 'sainnhe/gruvbox-material',  event = EVENT.FIND_THEME },
     { 'olimorris/onedarkpro.nvim', event = EVENT.FIND_THEME },
     { 'jdsimcoe/abstract.vim',     event = EVENT.FIND_THEME },
