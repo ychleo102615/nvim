@@ -91,5 +91,5 @@ return {
     { 'savq/melange-nvim',           event = EVENT.FIND_THEME  },
     { "catppuccin/nvim",             event = EVENT.FIND_THEME  },
     { "embark-theme/vim",            event = EVENT.FIND_THEME  },
-    -- colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+    { "LunarVim/lunar.nvim",         event = EVENT.FIND_THEME  },
 };
