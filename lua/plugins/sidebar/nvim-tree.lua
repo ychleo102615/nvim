@@ -8,6 +8,9 @@ return {
         cond = not IS_USING_VSCODE,
         opts = {
             sort_by = "case_sensitive",
+            view = {
+                adaptive_size = true
+            },
             filters = {
                 exclude  = { "node_modules" },
             },
