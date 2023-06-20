@@ -224,6 +224,7 @@ return {
             text = {
                 spinner = "dots",
             },
+            tag = "legacy"
         },
     },
     -- 縮排線 indent line
