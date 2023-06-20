@@ -89,17 +89,7 @@ nmap('<leader>xm', 'ciw<C-R>=<C-R>"',                  desc "Expression Math");
 nmap('<leader>vt', ':vs<CR><C-W>l:ter<CR>i',           desc "Split [V]ertical [T]erminal");
 nmap('<leader>gh', 'yiw<Cmd>Telescope help_tags<CR>p', desc "Get Help");
 nmap('<leader>gp', tool.gotoRepo,                      desc "[G]o to Github Re[p]ository");
-nmap('<leader>xp', function()
-    local ls = require("luasnip");
-    local s       = ls.snippet;
-    local t       = ls.text_node;
-    local i       = ls.insert_node;
-    -- tool.echo(ls);
-    -- ls.snip_expand(s("ternary", {
-    --     i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else")
-    -- }));
-    tool.extract();
-end, desc "Experiement");
+nmap('<leader>xt', tool.extract,                       desc "Extract");
 
 nmap(getOptionKey 's', ':w | source %<CR>',      desc "Save And Source");
 nmap(getOptionKey 'd', ':silent ! open dict://<C-R><C-W><CR>', desc "Search Word On Dictionary");
