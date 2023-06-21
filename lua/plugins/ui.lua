@@ -173,31 +173,6 @@ return {
             },
         } end,
     },
-    -- 通知彈窗
-    {
-        "rcarriga/nvim-notify",
-        keys = {
-            {
-                "<leader>un",
-                function()
-                    require("notify").dismiss({ silent = true, pending = true })
-                end,
-                desc = "Delete all Notifications",
-            },
-        },
-        opts = {
-            timeout = 3000,
-            max_height = function()
-                return math.floor(vim.o.lines * 0.75)
-            end,
-            max_width = function()
-                return math.floor(vim.o.columns * 0.75)
-            end,
-        },
-        config = function ()
-            vim.notify = require("notify");
-        end,
-    },
     -- 改名彈窗
     {
         "stevearc/dressing.nvim",
@@ -275,10 +250,16 @@ return {
         "folke/noice.nvim",
         dependencies = {
             "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify"
+            {
+                "rcarriga/nvim-notify",
+                opts = {
+                    -- minimal, simple, compact
+                    render = "minimal",
+                },
+            },
         },
         event = "VeryLazy",
-        cond = false,
+        cond = true,
         opts = {
             lsp = {
                 override = {
@@ -286,21 +267,20 @@ return {
                     ["vim.lsp.util.stylize_markdown"]                = true,
                 },
             },
-            presets = {
-                bottom_search         = true,
-                command_palette       = true,
-                long_message_to_split = true,
+            messages = {
+                view_search = "cmdline",
             },
         },
         -- stylua: ignore
         keys = {
             { "<leader>un",  function() require("notify").dismiss { } end, desc = "Close Notifications" },
-            { "<S-Enter>",   function() require("noice").redirect(vim.fn.getcmdline()) end,                 desc = "Redirect Cmdline",     mode = "c" },
+            { "<leader>cn",  function() require("notify").dismiss { } end, desc = "Close Notifications" },
+            { "<S-Enter>",   function() require("noice").redirect(vim.fn.getcmdline()) end,                 desc = "Redirect Cmdline", mode = "c" },
             { "<leader>snl", function() require("noice").cmd("last") end,                                   desc = "Noice Last Message" },
             { "<leader>snh", function() require("noice").cmd("history") end,                                desc = "Noice History" },
             { "<leader>sna", function() require("noice").cmd("all") end,                                    desc = "Noice All" },
-            { "<c-f>",       function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end,  desc = "Scroll forward",       silent = true, expr = true, mode = {"i", "n", "s"} },
-            { "<c-b>",       function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, desc = "Scroll backward",      silent = true, expr = true, mode = {"i", "n", "s"}},
+            { "<c-f>",       function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end,  desc = "Scroll forward", silent = true, expr = true, mode = {"i", "n", "s"} },
+            { "<c-b>",       function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, desc = "Scroll backward", silent = true, expr = true, mode = {"i", "n", "s"}},
         },
     },
 };
