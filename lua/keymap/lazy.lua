@@ -89,12 +89,13 @@ map("n", "<leader>hl", "<cmd>lclose<cr>", { desc = "Hide Location List" })
 map("n", "<leader>hq", "<cmd>cclose<cr>", { desc = "Hide Quickfix List" })
 
 -- quit
-map("n", "<C-q>",          "<cmd>q<cr>",   { desc = "Quit" })
-map("n", "<C-S-q>",        "<cmd>qa<cr>",  { desc = "Quit all" })
-map("n", getOptionKey "T", "<cmd>vs#<cr>", { desc = "Restore Last Window in Vertical" })
+map("n", "<C-q>",          "<cmd>q<cr>",    { desc = "Quit" })
+map("n", "<C-S-q>",        "<cmd>qa<cr>",   { desc = "Quit all" })
+map("n", getOptionKey "q", "<cmd>tabc<cr>", { desc = "Quit Tab" })
+map("n", getOptionKey "T", "<cmd>vs#<cr>",  { desc = "Restore Last Window in Vertical" })
 
 -- floating terminal
-map("n", "<leader>ft", function() require("lazy.util").float_term() end, { desc = "Terminal" })
+-- map("n", "<leader>ft", function() require("lazy.util").float_term() end, { desc = "Terminal" })
 map("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
 map("t", "<C-h>", "<c-\\><c-n><C-w>h", { desc = "Go to left window" })
@@ -103,26 +104,13 @@ map("t", "<C-k>", "<c-\\><c-n><C-w>k", { desc = "Go to upper window" })
 map("t", "<C-l>", "<c-\\><c-n><C-w>l", { desc = "Go to right window" })
 
 -- tabs
-map("n", "<leader><tab>l",     "<cmd>tablast<cr>",     { desc = "Last Tab" })
-map("n", "<leader><tab>f",     "<cmd>tabfirst<cr>",    { desc = "First Tab" })
-map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>",      { desc = "New Tab" })
-map("n", "<leader><tab>d",     "<cmd>tabclose<cr>",    { desc = "Close Tab" })
-map("n", "<leader><tab>]",     "<cmd>tabnext<cr>",     { desc = "Next Tab" })
-map("n", "<leader><tab>[",     "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-map("n", "]t",                 "<cmd>tabnext<cr>",     { desc = "Next Tab" })
-map("n", "[t",                 "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-map("n", "<C-S-l>",            "<cmd>tabnext<cr>",     { desc = "Next Tab" })
-map("n", "<C-S-h>",            "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-map("n", "<leader>m", function()
-    vim.cmd("tabnext " .. (vim.v.count == 0 and "" or vim.v.count));
-end, { desc = "Next Tab With Number" })
+map("n", "<leader>tn", "<cmd>tabnew<cr>",      { desc = "New Tab" })
+map("n", "<leader>tc", "<cmd>tabclose<cr>",    { desc = "Close Tab" })
+map("n", "]t",         "<cmd>tabnext<cr>",     { desc = "Next Tab" })
+map("n", "[t",         "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<C-S-l>",    "<cmd>tabnext<cr>",     { desc = "Next Tab" })
+map("n", "<C-S-h>",    "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
--- Moving between windows (from Ben Frain's talk at NeovimConf 2022)
-for i = 1, 9 do
-    map("n", "<leader>" .. i, ("<cmd>tabnext %d<cr>"):format(i), { desc = "Move To Tab " .. i });
-end
-
--- lazygit (you need to install it yourself)
 map("n", "<leader>gl", function()
     local float = require("lazy.util").float_term({"lazygit"});
     vim.keymap.set("t", "<esc>", "<esc>", { buffer = float.buf, nowait = true });
