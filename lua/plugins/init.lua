@@ -94,4 +94,21 @@ return {
         config = true,
         event = "VeryLazy",
     },
+    {
+        "rbong/vim-flog",
+        dependencies = {
+            "tpope/vim-fugitive"
+        },
+        keys = {
+            { "<leader>gg", "<cmd>Flog<cr>", mode = {"n"}, desc = "Git Flog" },
+        },
+    },
+    {
+        "sindrets/diffview.nvim",
+        event = "BufReadPre",
+        keys = {
+            { "<leader>gdo", "<cmd>DiffviewOpen<cr>",  mode = {"n"}, desc = "Git Diffview Open" },
+            { "<leader>gdc", "<cmd>DiffviewClose<cr>", mode = {"n"}, desc = "Git Diffview Close" },
+        },
+    },
 };
