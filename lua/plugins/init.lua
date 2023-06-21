@@ -81,12 +81,15 @@ return {
     },
     {
         "akinsho/toggleterm.nvim",
-        config = true,
+        config = function()
+            require("toggleterm").setup {
+                size = 80,
+                direction = "vertical",
+            };
+        end,
         cmd = "ToggleTerm",
         keys = {
-            { "<leader>ti", "<cmd>exe v:count1 . 'ToggleTerm'<cr>", mode = {"n", "t"}, desc = "Toggle Terminal" },
-            { "<C-t>",      "<cmd>exe v:count1 . 'ToggleTerm'<cr>", mode = {"n", "t"}, desc = "Toggle Terminal" },
-            { "<leader>ta", "<cmd>ToggleTermToggleAll<cr>",         mode = {"n", "t"}, desc = "Toggle All Terminal" },
+            { "<C-t>", "<cmd>exe v:count1 . 'ToggleTerm'<cr>", mode = {"n", "t"}, desc = "Toggle Terminal" },
         },
     },
     {
