@@ -102,6 +102,15 @@ return {
                         settings  = getNvimSetting(),
                     };
                 end,
+                ["clangd"] = function()
+                    -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428#issuecomment-997226723
+                    local capabilities = vim.lsp.protocol.make_client_capabilities();
+                    capabilities.offsetEncoding = { "utf-16" };
+                    lspconfig.clangd.setup {
+                        on_attach = on_attach,
+                        capabilities = capabilities
+                    };
+                end,
             };
         end,
     },
