@@ -51,25 +51,33 @@ return {
         keys = {
             { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = "Find File" },
             { '<leader>fs', '<cmd>Telescope live_grep<cr>',  desc = "Find String" },
-            { '<leader>fb', function()
-                local builtin = require('telescope.builtin');
-                local themes  = require('telescope.themes');
-                builtin.buffers(themes.get_ivy {
-                    layout_config = {
-                        --height          = 0.9,
-                        prompt_position = 'bottom',
-                    },
-                    initial_mode = 'normal',
-                });
-            end, desc = "Find String" },
-
-            { '<leader>fh', '<Cmd>Telescope help_tags<Cr>',                        desc = "Find Helps" },
-            { '<leader>fk', '<Cmd>Telescope keymaps<Cr>',                          desc = "Find Keymaps" },
-            { '<leader>fr', '<Cmd>Telescope registers <Cr>',                       desc = "Find Registers" },
-            { '<leader>ft', function()
-                vim.cmd("doautocmd " .. EVENT.FIND_THEME); -- send event
-                require("telescope.builtin").colorscheme { enable_preview = true };
-            end,  desc = "Find Themes" },
+            { '<leader>fh', '<cmd>Telescope help_tags<cr>',  desc = "Find Helps" },
+            { '<leader>fk', '<cmd>Telescope keymaps<cr>',    desc = "Find Keymaps" },
+            { '<leader>fr', '<cmd>Telescope registers <cr>', desc = "Find Registers" },
+            { '<leader>fm', '<cmd>Telescope marks <cr>',     desc = "Find Registers" },
+            {
+                '<leader>fb',
+                function()
+                    local builtin = require('telescope.builtin');
+                    local themes  = require('telescope.themes');
+                    builtin.buffers(themes.get_ivy {
+                        layout_config = {
+                            --height          = 0.9,
+                            prompt_position = 'bottom',
+                        },
+                        initial_mode = 'normal',
+                    });
+                end,
+                desc = "Find String"
+            },
+            {
+                '<leader>ft',
+                function()
+                    vim.cmd("doautocmd " .. EVENT.FIND_THEME); -- send event
+                    require("telescope.builtin").colorscheme { enable_preview = true };
+                end,
+                desc = "Find Themes"
+            },
             { '<leader>gs', '<Cmd>Telescope git_status initial_mode=normal<CR>',   desc = "Git Status"},
             { '<leader>gc', '<Cmd>Telescope git_commits initial_mode=normal<CR>',  desc = "Git Commits" },
             { '<leader>gf', '<Cmd>Telescope git_bcommits initial_mode=normal<CR>', desc = "Git Buffer Commits" },
