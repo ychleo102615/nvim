@@ -56,19 +56,25 @@ return {
             { '<leader>fr', '<cmd>Telescope registers <cr>', desc = "Find Registers" },
             { '<leader>fm', '<cmd>Telescope marks <cr>',     desc = "Find Registers" },
             {
-                '<leader>fb',
+                '<leader>fu',
                 function()
                     local builtin = require('telescope.builtin');
                     local themes  = require('telescope.themes');
-                    builtin.buffers(themes.get_ivy {
+                    -- builtin.buffers(themes.get_ivy {
+                    --     layout_config = {
+                    --         --height          = 0.9,
+                    --         prompt_position = 'bottom',
+                    --     },
+                    --     initial_mode = 'normal',
+                    -- });
+                    builtin.buffers({
                         layout_config = {
-                            --height          = 0.9,
-                            prompt_position = 'bottom',
+                            -- prompt_position = 'top',
                         },
                         initial_mode = 'normal',
                     });
                 end,
-                desc = "Find String"
+                desc = "Find B[U]ffers"
             },
             {
                 '<leader>ft',

@@ -51,7 +51,7 @@ return {
         vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action,             exd { desc = "Code Action" })
         vim.keymap.set('n', 'gr',         vim.lsp.buf.references,              exd { desc = "References" })
         -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
-        vim.keymap.set('n', '<leader>fm', function()
+        vim.keymap.set('n', '<leader>fb', function()
             vim.lsp.buf.format {
                 async = true,
                 filter = function(client)
@@ -59,6 +59,6 @@ return {
                     return isNullLsSupported() == (client.name == 'null-ls');
                 end,
             }
-        end, exd { desc = "Format Document"})
+        end, exd { desc = "Format Buffer"})
     end,
 };
