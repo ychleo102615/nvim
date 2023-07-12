@@ -71,11 +71,13 @@ return {
         event = EVENT.FIND_THEME,
         opts = {
             -- https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/themes.lua
+            -- https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
             colors = {
                 theme = {
                     wave = {
                         ui = {
-                            bg_visual = "#5D7EA0"
+                            bg_visual = "#5D7EA0",
+                            bg_search = "#737C73", -- dragonAsh
                         }
                     }
                 }
@@ -107,4 +109,5 @@ return {
     { "catppuccin/nvim",             event = EVENT.FIND_THEME  },
     { "embark-theme/vim",            event = EVENT.FIND_THEME  },
     { "LunarVim/lunar.nvim",         event = EVENT.FIND_THEME  },
+    { "rmehri01/onenord.nvim",       event = EVENT.FIND_THEME  },
 };
