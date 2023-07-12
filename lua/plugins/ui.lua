@@ -245,42 +245,4 @@ return {
             },
         },
     },
-    -- noice ui 合併了notify, nui等美化工具 (元件不穩定)
-    {
-        "folke/noice.nvim",
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            {
-                "rcarriga/nvim-notify",
-                opts = {
-                    -- minimal, simple, compact
-                    render = "minimal",
-                },
-            },
-        },
-        event = "VeryLazy",
-        cond = true,
-        opts = {
-            lsp = {
-                override = {
-                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                    ["vim.lsp.util.stylize_markdown"]                = true,
-                },
-            },
-            messages = {
-                view_search = "cmdline",
-            },
-        },
-        -- stylua: ignore
-        keys = {
-            { "<leader>un",  function() require("notify").dismiss { } end, desc = "Close Notifications" },
-            { "<leader>cn",  function() require("notify").dismiss { } end, desc = "Close Notifications" },
-            { "<S-Enter>",   function() require("noice").redirect(vim.fn.getcmdline()) end,                 desc = "Redirect Cmdline", mode = "c" },
-            { "<leader>snl", function() require("noice").cmd("last") end,                                   desc = "Noice Last Message" },
-            { "<leader>snh", function() require("noice").cmd("history") end,                                desc = "Noice History" },
-            { "<leader>sna", function() require("noice").cmd("all") end,                                    desc = "Noice All" },
-            { "<c-f>",       function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end,  desc = "Scroll forward", silent = true, expr = true, mode = {"i", "n", "s"} },
-            { "<c-b>",       function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, desc = "Scroll backward", silent = true, expr = true, mode = {"i", "n", "s"}},
-        },
-    },
 };
