@@ -58,11 +58,11 @@ return {
                     enable = true,
                     swap_next = {
                         ["<leader>pl"] = "@parameter.inner",
-                        [getOptionKey"l"] = "@parameter.inner",
+                        [getOptionKey"L"] = "@parameter.inner",
                     },
                     swap_previous = {
                         ["<leader>ph"] = "@parameter.inner",
-                        [getOptionKey"h"] = "@parameter.inner",
+                        [getOptionKey"H"] = "@parameter.inner",
                     },
                 },
                 move = {

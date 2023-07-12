@@ -1,5 +1,5 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
-local getOptionKey = require("tools.tool").getOptionKey;
+local optKey = require("tools.tool").getOptionKey;
 
 local function map(mode, lhs, rhs, opts)
     local keys = require("lazy.core.handler").handlers.keys
@@ -27,18 +27,18 @@ map("n", "<Left>",  "<cmd>vertical resize -1<cr>", { desc = "Decrease window wid
 map("n", "<Right>", "<cmd>vertical resize +1<cr>", { desc = "Increase window width" })
 
 -- Move Lines
-map("n", getOptionKey "j", ":m .+1<cr>==",     { desc = "Move down", silent = true })
-map("n", getOptionKey "k", ":m .-2<cr>==",     { desc = "Move up",   silent = true })
-map("v", getOptionKey "j", ":m '>+1<cr>gv=gv", { desc = "Move down", silent = true })
-map("v", getOptionKey "k", ":m '<-2<cr>gv=gv", { desc = "Move up",   silent = true })
+map("n", optKey "j", ":m .+1<cr>==",     { desc = "Move down", silent = true })
+map("n", optKey "k", ":m .-2<cr>==",     { desc = "Move up",   silent = true })
+map("v", optKey "j", ":m '>+1<cr>gv=gv", { desc = "Move down", silent = true })
+map("v", optKey "k", ":m '<-2<cr>gv=gv", { desc = "Move up",   silent = true })
 -- map("i", getOptionKey "j", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
 -- map("i", getOptionKey "k", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
 
 -- Copy Lines
-map("n", getOptionKey "J", ":t.<cr>",      { desc = "Copy down", silent = true })
-map("n", getOptionKey "K", ":t.-1<cr>",    { desc = "Copy up",   silent = true })
-map("v", getOptionKey 'J', ":t'><CR>gv",   { desc = "Copy down", silent = true })
-map("v", getOptionKey 'K', ":t'<-1<CR>gv", { desc = "Copy up",   silent = true })
+map("n", optKey "J", ":t.<cr>",      { desc = "Copy down", silent = true })
+map("n", optKey "K", ":t.-1<cr>",    { desc = "Copy up",   silent = true })
+map("v", optKey 'J', ":t'><CR>gv",   { desc = "Copy down", silent = true })
+map("v", optKey 'K', ":t'<-1<CR>gv", { desc = "Copy up",   silent = true })
 
 -- buffers
 map("n", "[b",        "<cmd>bprevious<cr>", { desc = "Prev buffer" })
@@ -91,8 +91,8 @@ map("n", "<leader>hq", "<cmd>cclose<cr>", { desc = "Hide Quickfix List" })
 -- quit
 map("n", "<C-q>",          "<cmd>q<cr>",    { desc = "Quit" })
 map("n", "<C-S-q>",        "<cmd>qa<cr>",   { desc = "Quit all" })
-map("n", getOptionKey "q", "<cmd>tabc<cr>", { desc = "Quit Tab" })
-map("n", getOptionKey "T", "<cmd>vs#<cr>",  { desc = "Restore Last Window in Vertical" })
+map("n", optKey "q", "<cmd>tabc<cr>", { desc = "Quit Tab" })
+map("n", optKey "T", "<cmd>vs#<cr>",  { desc = "Restore Last Window in Vertical" })
 
 -- floating terminal
 -- map("n", "<leader>ft", function() require("lazy.util").float_term() end, { desc = "Terminal" })
@@ -110,6 +110,13 @@ map("n", "]t",         "<cmd>tabnext<cr>",     { desc = "Next Tab" })
 map("n", "[t",         "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", "<C-S-l>",    "<cmd>tabnext<cr>",     { desc = "Next Tab" })
 map("n", "<C-S-h>",    "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", optKey "l",   "<cmd>tabnext<cr>",     { desc = "Next Tab" })
+map("n", optKey "h",   "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+-- Moving between windows (from Ben Frain's talk at NeovimConf 2022)
+for i = 1, 9 do
+    map("n", "<leader>" .. i, ("<cmd>tabnext %d<cr>"):format(i), { desc = "Move To Tab " .. i });
+end
 
 map("n", "<leader>gl", function()
     local float = require("lazy.util").float_term({"lazygit"});
