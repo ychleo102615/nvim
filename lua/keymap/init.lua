@@ -105,6 +105,11 @@ nmap(getOptionKey '.', "<C-W>>",  desc "Increase Window Width");
 nmap(getOptionKey '<', "5<C-W><", desc "Decrease Window Width By 5");
 nmap(getOptionKey '>', "5<C-W>>", desc "Increase Window Width By 5");
 
+nmap(';n', function()
+    vim.cmd(('let @*="%s"'):format(
+        tool.getBufferFileName()
+    ));
+end, desc 'Get File [N]ame');
 nmap('<leader>vd', function()
     cmd 'vs';
     vim.lsp.buf.definition();

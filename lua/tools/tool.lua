@@ -101,4 +101,9 @@ function tool.extract()
     tool.echo(trace);
 end
 
+-- :help filename-modifiers
+function tool.getBufferFileName()
+    return vim.fn.expand('%:t');
+end
+
 return tool;
