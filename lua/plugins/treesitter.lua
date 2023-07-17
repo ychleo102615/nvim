@@ -1,4 +1,3 @@
-local getOptionKey = require("tools.tool").getOptionKey;
 return {
     -- Tree Sitter
     {
@@ -58,11 +57,11 @@ return {
                     enable = true,
                     swap_next = {
                         ["<leader>pl"] = "@parameter.inner",
-                        [getOptionKey"L"] = "@parameter.inner",
+                        ["<leader>rl"] = "@parameter.inner",
                     },
                     swap_previous = {
                         ["<leader>ph"] = "@parameter.inner",
-                        [getOptionKey"H"] = "@parameter.inner",
+                        ["<leader>rh"] = "@parameter.inner",
                     },
                 },
                 move = {

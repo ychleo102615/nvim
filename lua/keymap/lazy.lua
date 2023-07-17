@@ -112,6 +112,11 @@ map("n", "<C-S-l>",    "<cmd>tabnext<cr>",     { desc = "Next Tab" })
 map("n", "<C-S-h>",    "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", optKey "l",   "<cmd>tabnext<cr>",     { desc = "Next Tab" })
 map("n", optKey "h",   "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", optKey "E",   "<cmd>tabnext<cr>",     { desc = "Next Tab" })
+map("n", optKey "W",   "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+map("n", optKey "L", "<cmd>+tabm<cr>", { desc = "Move Tab Next" })
+map("n", optKey "H", "<cmd>-tabm<cr>", { desc = "Move Tab Previous" })
 
 -- Moving between windows (from Ben Frain's talk at NeovimConf 2022)
 for i = 1, 9 do
