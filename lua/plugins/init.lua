@@ -113,10 +113,19 @@ return {
     },
     {
         "sindrets/diffview.nvim",
+        opts = {
+            file_history_panel = {
+                win_config = {
+                    position = "top",
+                    height = 20,
+                },
+            },
+        },
         event = "BufReadPre",
         keys = {
-            { "<leader>gdo", "<cmd>DiffviewOpen<cr>",  mode = {"n"}, desc = "Git Diffview Open" },
-            { "<leader>gdc", "<cmd>DiffviewClose<cr>", mode = {"n"}, desc = "Git Diffview Close" },
+            { "<leader>gdo", "<cmd>DiffviewOpen<cr>",        mode = {"n"}, desc = "Git Diffview Open" },
+            { "<leader>gdc", "<cmd>DiffviewClose<cr>",       mode = {"n"}, desc = "Git Diffview Close" },
+            { "<leader>gdh", "<cmd>DiffviewFileHistory<cr>", mode = {"n"}, desc = "Git Diffview File History" },
         },
     },
 };
