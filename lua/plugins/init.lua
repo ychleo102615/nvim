@@ -29,7 +29,20 @@ return {
         end
     },
     {
-        "chrisgrieser/nvim-spider",
+        'ggandor/leap-spooky.nvim',
+        opts = {
+            affixes = {
+                remote = {
+                    -- r is conflicting with return object
+                    window = 'd',
+                    cross_window = 'D',
+                },
+            },
+        },
+    },
+    {
+        "rhrisgrieser/nvim-spider",
+        event = "BufReadPre",
         config = function()
             local motion = require("spider").motion;
             vim.keymap.set({"n", "x"}, "w",  function() return motion("w")  end, { desc = "Spider-w"  })
@@ -103,15 +116,6 @@ return {
         event = "VeryLazy",
     },
     {
-        "rbong/vim-flog",
-        dependencies = {
-            "tpope/vim-fugitive"
-        },
-        keys = {
-            { "<leader>gg", "<cmd>Flog<cr>", mode = {"n"}, desc = "Git Flog" },
-        },
-    },
-    {
         "sindrets/diffview.nvim",
         opts = {
             file_history_panel = {
@@ -126,6 +130,24 @@ return {
             { "<leader>gdo", "<cmd>DiffviewOpen<cr>",        mode = {"n"}, desc = "Git Diffview Open" },
             { "<leader>gdc", "<cmd>DiffviewClose<cr>",       mode = {"n"}, desc = "Git Diffview Close" },
             { "<leader>gdh", "<cmd>DiffviewFileHistory<cr>", mode = {"n"}, desc = "Git Diffview File History" },
+        },
+    },
+    {
+        "stevearc/oil.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            keymaps = {
+                -- <C-v> 要用來編輯
+                ["<C-s>"] = "actions.select_vsplit",
+                ["<C-h>"] = false,
+                ["<C-l>"] = false,
+                ["<C-x>"] = "actions.select_split",
+                ["<esc>"] = "actions.close",
+                ["<C-g>"] = "actions.refresh",
+            },
+        },
+        keys = {
+            { "<leader>oi", "<cmd>tabnew<cr><cmd>Oil<cr>", mode = {"n"}, desc = "Open Oil" }
         },
     },
 };
