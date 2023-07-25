@@ -91,7 +91,6 @@ nmap('<leader>gh', 'yiw<Cmd>Telescope help_tags<CR>p', desc "Get Help");
 nmap('<leader>gp', tool.gotoRepo,                      desc "[G]o to Github Re[p]ository");
 nmap('<leader>xt', tool.extract,                       desc "Extract");
 
-nmap(getOptionKey 's', ':w | source %<CR>',      desc "Save And Source");
 nmap(getOptionKey 'd', ':silent ! open dict://<C-R><C-W><CR>', desc "Search Word On Dictionary");
 -- https://apple.stackexchange.com/questions/90040/look-up-a-word-in-dictionary-app-in-terminal
 --[[
