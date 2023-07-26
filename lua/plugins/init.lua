@@ -34,8 +34,8 @@ return {
             affixes = {
                 remote = {
                     -- r is conflicting with return object
-                    window = 'd',
-                    cross_window = 'D',
+                    window = 'g',
+                    cross_window = 'G',
                 },
             },
         },
