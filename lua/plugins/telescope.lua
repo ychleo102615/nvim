@@ -60,18 +60,10 @@ return {
                 function()
                     local builtin = require('telescope.builtin');
                     local themes  = require('telescope.themes');
-                    -- builtin.buffers(themes.get_ivy {
-                    --     layout_config = {
-                    --         --height          = 0.9,
-                    --         prompt_position = 'bottom',
-                    --     },
-                    --     initial_mode = 'normal',
-                    -- });
-                    builtin.buffers({
+                    builtin.buffers(themes.get_ivy {
                         layout_config = {
-                            -- prompt_position = 'top',
+                            prompt_position = 'bottom',
                         },
-                        initial_mode = 'normal',
                     });
                 end,
                 desc = "Find B[U]ffers"
