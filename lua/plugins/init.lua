@@ -41,7 +41,7 @@ return {
         },
     },
     {
-        "rhrisgrieser/nvim-spider",
+        "chrisgrieser/nvim-spider",
         event = "BufReadPre",
         config = function()
             local motion = require("spider").motion;
