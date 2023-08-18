@@ -116,6 +116,10 @@ nmap('<leader>vd', function()
     cmd 'vs';
     vim.lsp.buf.definition();
 end, desc "Split [V]ertical Lsp [D]efinition");
+nmap('<leader>nd', function()
+    cmd 'tab split'; -- :h :tab
+    vim.lsp.buf.definition();
+end, desc "[N]ew Tab Lsp [D]efinition");
 nmap('<leader>ss', function()
     local lineNumber = vim.fn.line('.');
     local rangeStr   = '\\%>' .. lineNumber - 1 .. 'l' .. '\\%<' .. lineNumber + 1 .. 'l';
