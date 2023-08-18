@@ -99,6 +99,9 @@ nmap(getOptionKey 'd', ':silent ! open dict://<C-R><C-W><CR>', desc "Search Word
 ]]
 nmap(getOptionKey 'o', ":call append(line('.'),   '')<CR>", desc "Just Open Line Below");
 nmap(getOptionKey 'O', ":call append(line('.')-1, '')<CR>", desc "Just Open Line Above");
+-- q: opens command-line window
+nmap(getOptionKey 'f', "q:i" .. "vimgrep //gj **/*<esc>7hi", desc "Search Into QuickFixList");
+nmap(getOptionKey 's', "q:i" .. "cfdo %s///ge<esc>3hi",      desc "Search Into QuickFixList");
 nmap(getOptionKey ',', "<C-W><",  desc "Decrease Window Width");
 nmap(getOptionKey '.', "<C-W>>",  desc "Increase Window Width");
 nmap(getOptionKey '<', "5<C-W><", desc "Decrease Window Width By 5");
