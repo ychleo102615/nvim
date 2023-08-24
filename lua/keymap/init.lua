@@ -188,8 +188,8 @@ cmap(';c', '\\C', desc "Case Sensitive");
     以下的keymap算是學習記錄，並不實用
 --]]
 -- Visual Operation common
-vomap('cs', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]);
-vomap('om', [[:<C-U>execute "normal! ?self\r:noh\rv3e"<CR>]]); -- object momber / method
+vomap('<leader>cs', [[:<C-U><C-R>=v:lua.GetConditionStatementSelectorScript()<CR><CR>]]);
+vomap('<leader>om', [[:<C-U>execute "normal! ?self\r:noh\rv3e"<CR>]]); -- object member / method
 
 --[[
     補充
