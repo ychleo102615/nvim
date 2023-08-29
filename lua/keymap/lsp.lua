@@ -16,7 +16,7 @@ return {
             return vim.tbl_deep_extend("force", { noremap = true, silent = true }, tab);
         end
 
-        vim.keymap.set('n', '<leader>cd', vim.diagnostic.open_float, exd { desc = "Line Diagnostics" })
+        vim.keymap.set('n', '<leader>sd', vim.diagnostic.open_float, exd { desc = "[S]how Line Diagnostics" })
         vim.keymap.set('n', ']d',         vim.diagnostic.goto_next,  exd { desc = "Next Diagnostic" })
         vim.keymap.set('n', '[d',         vim.diagnostic.goto_prev,  exd { desc = "Prev Diagnostic" })
         vim.keymap.set('n', '<leader>cs', vim.diagnostic.setloclist, exd {})
