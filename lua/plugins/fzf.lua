@@ -8,8 +8,9 @@ return {
             },
         },
         keys = {
-            { "<leader>fz", "<cmd>Files<cr>", mode = {"n"}, desc = "fzf Files" },
-            { "<leader>fg", "<cmd>Rg<cr>",    mode = {"n"}, desc = "fzf Rg" },
+            { "<leader>fz", "<cmd>Files<cr>",  mode = {"n"}, desc = "fzf Files" },
+            { "<leader>fg", "<cmd>Rg<cr>",     mode = {"n"}, desc = "fzf Rg" },
+            { "<C-/>",      "<cmd>BLines<cr>", mode = {"n"}, desc = "fzf Blines" },
         },
     },
 };
