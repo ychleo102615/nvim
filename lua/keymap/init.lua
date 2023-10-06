@@ -162,7 +162,7 @@ vmap('zp', '"0p', desc "Paste From Yanked"); -- paste from yanked
 vmap('/', "<Esc>/" .. visual_range, desc "Search [/] In Visual Range");
 vmap('?', "<Esc>?" .. visual_range, desc "Search [?] In Visual Range");
 -- c_ctrl-r 會貼上指定的暫存器裡的東西
-vmap('f',  'y/<C-R>"<CR>',                             desc "Search Selected String");
+vmap('gf',  'y/<C-R>"<CR>',                            desc "Search Selected String");
 vmap(';f', 'y/' .. cramp [[<C-R>"]] .. '<CR>',         desc "Search Selected String Restrictedly");
 vmap(';;', '<Esc>/' .. cramp [[<C-R><C-W>]] .. '<CR>', desc "Search Current Word");
 
