@@ -101,8 +101,14 @@ return {
         "akinsho/toggleterm.nvim",
         config = function()
             require("toggleterm").setup {
-                size = 80,
                 direction = "vertical",
+                size = function (term)
+                    if term.direction == "horizontal" then
+                        return vim.o.lines * 0.3;
+                    elseif term.direction == "vertical" then
+                        return vim.o.columns * 0.35;
+                    end
+                end
             };
         end,
         cmd = "ToggleTerm",
