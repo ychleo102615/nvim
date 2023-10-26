@@ -116,7 +116,7 @@ return {
     },
     -- linters and formatters
     {
-        "jose-elias-alvarez/null-ls.nvim",
+        "nvimtools/none-ls.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
         event        = "BufReadPre",
         opts         = getNullLsOpts,
