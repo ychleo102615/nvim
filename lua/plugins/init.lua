@@ -41,6 +41,15 @@ return {
         },
     },
     {
+        'smoka7/hop.nvim',
+        version = "*",
+        config = true,
+        keys = {
+            { "f", "<cmd>HopChar1<cr>", mode = "", desc = "Hop Char1" },
+            { "F", "<cmd>HopWord<cr>",  mode = "", desc = "Hop Word"  },
+        },
+    },
+    {
         "chrisgrieser/nvim-spider",
         event = "BufReadPre",
         config = function()
