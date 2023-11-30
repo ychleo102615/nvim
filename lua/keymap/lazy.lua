@@ -87,6 +87,8 @@ map("n", "<leader>sl", "<cmd>lopen<cr>",  { desc = "Show Location List" })
 map("n", "<leader>sq", "<cmd>copen<cr>",  { desc = "Show Quickfix List" })
 map("n", "<leader>hl", "<cmd>lclose<cr>", { desc = "Hide Location List" })
 map("n", "<leader>hq", "<cmd>cclose<cr>", { desc = "Hide Quickfix List" })
+map("n", "[q",         vim.cmd.cprev,     { desc = "Previous quickfix" })
+map("n", "]q",         vim.cmd.cnext,     { desc = "Next quickfix" })
 
 -- quit
 map("n", "<C-q>",          "<cmd>q<cr>",    { desc = "Quit" })

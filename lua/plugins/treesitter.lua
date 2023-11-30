@@ -39,8 +39,8 @@ return {
                         ["as"] = "@conditional.outer",
                         ["is"] = "@conditional.inner",
                         -- suffix "q" means quote
-                        ["iq"] = "@comment.inner",
-                        ["aq"] = "@comment.outer",
+                        ["im"] = "@comment.inner",
+                        ["am"] = "@comment.outer",
                         -- suffix "e" means execute
                         ["ae"] = "@call.outer",
                         ["ie"] = "@call.inner",
@@ -71,7 +71,7 @@ return {
                         ["]f"] = "@function.outer",
                         ["]s"] = "@conditional.inner",
                         ["]S"] = "@conditional.outer",
-                        ["]q"] = "@comment.outer",
+                        ["]m"] = "@comment.outer",
                         ["]a"] = "@parameter.inner",
                         ["]e"] = "@call.outer",
                         ["]r"] = "@return.outer",
@@ -84,7 +84,7 @@ return {
                         ["[f"] = "@function.outer",
                         ["[s"] = "@conditional.inner",
                         ["[S"] = "@conditional.outer",
-                        ["[q"] = "@comment.outer",
+                        ["[m"] = "@comment.outer",
                         ["[a"] = "@parameter.inner",
                         ["[e"] = "@call.outer",
                         ["[r"] = "@return.outer",
