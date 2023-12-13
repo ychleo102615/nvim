@@ -108,10 +108,6 @@ return {
                 separator_style = "slant",
             }
         },
-        keys = {
-            { "]r", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
-            { "[r", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-        },
     },
     -- status line 底部狀態條
     {
