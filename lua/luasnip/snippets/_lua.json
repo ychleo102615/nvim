@@ -25,8 +25,8 @@
 		"description": "test learning"
 	},
 	"Actions": {
-		"prefix":"CCSequence",
-		"body":[
+		"prefix": "CCSequence",
+		"body": [
 			"local actions = CCArray:create();",
 			"actions:addObject($0);",
 			"self:runAction(CCSequence:create(actions))"
@@ -34,24 +34,40 @@
 		"description": "建立Cocos2dx Sequence動畫"
 	},
 	"CCDelay": {
-		"prefix":"CCDelayTime",
-		"body":[
+		"prefix": "CCDelayTime",
+		"body": [
 			"CCDelayTime:create($0),"
 		],
 		"description": "建立DelayTime"
 	},
 	"CCCallFunc": {
-		"prefix":"CCCallFunc",
-		"body":[
+		"prefix": "CCCallFunc",
+		"body": [
 			"CCCallFunc:create(function()",
-				"$0",
+			"$0",
 			"end),"
 		],
 		"description": "建立 Callback func"
 	},
-	"SimpleClass":{
+	"Formatter Toggle": {
+		"prefix": "form_tog",
+		"body": [
+			"-- LuaFormatter off",
+			"-- LuaFormatter on"
+		]
+	},
+	"SimpleClass": {
 		"prefix": "simple_class_make",
 		"body": [
+			"--------------------------------------------------    require   --------------------------------------------------",
+			"-- LuaFormatter off",
+			"-- LuaFormatter on",
+			"",
+			"-------------------------------------------------- const member --------------------------------------------------",
+			"",
+			"-------------------------------------------------- class define --------------------------------------------------",
+			"---@class ${TM_FILENAME_BASE}",
+			"---@field new function",
 			"local ${TM_FILENAME_BASE} = class(\"${TM_FILENAME_BASE}\");",
 			"",
 			"function ${TM_FILENAME_BASE}.create(...)",
@@ -64,42 +80,30 @@
 			"return ${TM_FILENAME_BASE};"
 		]
 	},
-	"Class":{
-		"prefix":"class_make",
-		"body":[
+	"Class": {
+		"prefix": "class_make",
+		"body": [
 			"--------------------------------------------------    require   --------------------------------------------------",
+			"-- LuaFormatter off",
+			"-- LuaFormatter on",
 			"",
 			"-------------------------------------------------- const member --------------------------------------------------",
 			"",
 			"-------------------------------------------------- class define --------------------------------------------------",
-			"local ${TM_FILENAME/(.*)\\..+$/$1/} = class(\"${TM_FILENAME/(.*)\\..+$/$1/}\", function(...)",
-			"    return {};",
-			"end);",
+			"---@class ${TM_FILENAME_BASE}",
+			"---@field new function",
+			"local ${TM_FILENAME_BASE} = class(\"${TM_FILENAME_BASE}\");",
 			"",
 			"--------------------------------------------------  constructor --------------------------------------------------",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}.create(...)",
-				"    return ${TM_FILENAME/(.*)\\..+$/$1/}.new(...);",
-			"end;",
+			"---@return ${TM_FILENAME_BASE}",
+			"function ${TM_FILENAME_BASE}.create(...)",
+			"    return ${TM_FILENAME_BASE}.new(...);",
+			"end",
 			"",
-			"-- function ${TM_FILENAME/(.*)\\..+$/$1/}:getInstance()",
-			"--     if self._instance == nil then",
-			"--         self._instance = ${TM_FILENAME/(.*)\\..+$/$1/}.new();",
-			"--     end",
-			"--     return self._instance;",
-			"-- end",
-			"",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:ctor(...)",
+			"function ${TM_FILENAME_BASE}:ctor(...)",
 			"    -- member",
 			"",
 			"    -- init",
-			"    self:setNodeEventEnabled(true);",
-			"end",
-			"",
-			"--------------------------------------------------  life cycle  --------------------------------------------------",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:onEnter()",
-			"end",
-			"",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:onExit()",
 			"end",
 			"",
 			"--------------------------------------------------    public    --------------------------------------------------",
@@ -114,53 +118,87 @@
 			"",
 			"--------------------------------------------------    create    --------------------------------------------------",
 			"",
-			"return ${TM_FILENAME/(.*)\\..+$/$1/};"
+			"return ${TM_FILENAME_BASE};"
 		],
 		"description": "建立類別"
 	},
+	"NodeCtor": {
+		"prefix": "node_ctor",
+		"body": [
+			"function ${TM_FILENAME_BASE}:ctor(...)",
+			"    -- member",
+			"",
+			"    -- init",
+			"    self:setNodeEventEnabled(true);",
+			"end",
+			"",
+			"--------------------------------------------------  life cycle  --------------------------------------------------",
+			"function ${TM_FILENAME_BASE}:onEnter()",
+			"end",
+			"",
+			"function ${TM_FILENAME_BASE}:onExit()",
+			"end",
+			""
+		],
+		"description": "CCNode life cycle"
+	},
+	"GetInstance": {
+		"prefix": "getInstance",
+		"body": [
+			"",
+			"---@return ${TM_FILENAME_BASE}",
+			"function ${TM_FILENAME_BASE}:getInstance()",
+			"    if self._instance == nil then",
+			"        self._instance = ${TM_FILENAME_BASE}.new();",
+			"    end",
+			"    return self._instance;",
+			"end"
+		],
+		"description": "單例的建構子"
+	},
 	"FuncSelf": {
-		"prefix":"fsf:func_self",
-		"body":[
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:$0()",
+		"prefix": "fsf:func_self",
+		"body": [
+			"function ${TM_FILENAME_BASE}:$0()",
 			"end"
 		],
 		"description": "空的成員函數"
 	},
-	"FuncSelect":{
-		"prefix":"func_select",
+	"FuncSelect": {
+		"prefix": "func_select",
 		"body": [
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:${CLIPBOARD}()",
+			"function ${TM_FILENAME_BASE}:${CLIPBOARD}()",
 			"    $0",
 			"end"
 		],
 		"description": "快速建立成員函數（函數名稱必須要先複製）"
 	},
 	"FuncStatic": {
-		"prefix":"func_static",
-		"body":[
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}.$0()",
+		"prefix": "func_static",
+		"body": [
+			"function ${TM_FILENAME_BASE}.$0()",
 			"end"
 		],
 		"description": "空的靜態函數"
 	},
 	"FunctionLocal": {
-		"prefix":"fl:function local",
-		"body":[
+		"prefix": "fl:function local",
+		"body": [
 			"local function $0()",
 			"end"
 		],
 		"description": "普通函式"
 	},
 	"FunctionAnnonymous": {
-		"prefix":"fa:function annonymous",
-		"body":[
+		"prefix": "fa:function annonymous",
+		"body": [
 			"function() $0 end"
 		],
 		"description": "匿名函式"
 	},
 	"Button": {
-		"prefix":"button_make",
-		"body":[
+		"prefix": "button_make",
+		"body": [
 			"local $1 = CONFIG.Tools.UI.createSoundBtn({",
 			"    normal = CONFIG.BTN_PATH .. \"$2.png\",",
 			"    callback = function()",
@@ -174,30 +212,30 @@
 	},
 	"Center": {
 		"prefix": "center_abbreviation",
-		"body":[
+		"body": [
 			"display.cx, display.cy"
 		],
 		"description": "中心點簡寫"
 	},
 	"DisplaySize": {
 		"prefix": "display_size_abbreviation",
-		"body":[
+		"body": [
 			"display.width$0, display.height"
 		],
 		"description": "螢幕尺寸簡寫"
 	},
-	"ForeverActionSequence":{
+	"ForeverActionSequence": {
 		"prefix": "forever_sequence",
-		"body":[
+		"body": [
 			"CCRepeatForever:create(transition.sequence{",
 			"    $0",
 			"})"
 		],
 		"description": "永久循環動作列"
 	},
-	"DemoClass":{
+	"DemoClass": {
 		"prefix": "demo_class_make",
-		"body":[
+		"body": [
 			"--------------------------------------------------    require   --------------------------------------------------",
 			"local ButtonListView = require(\"utilityDemo.ButtonListView\");",
 			"local UICellListView = require(\"utilityDemo.UICellListView\");",
@@ -205,16 +243,16 @@
 			"-------------------------------------------------- const member --------------------------------------------------",
 			"",
 			"-------------------------------------------------- class define --------------------------------------------------",
-			"local ${TM_FILENAME/(.*)\\..+$/$1/} = class(\"${TM_FILENAME/(.*)\\..+$/$1/}\", function(...)",
-				"    return CCLayer:create();",
+			"local ${TM_FILENAME_BASE} = class(\"${TM_FILENAME_BASE}\", function(...)",
+			"    return CCLayer:create();",
 			"end);",
 			"",
 			"--------------------------------------------------  constructor --------------------------------------------------",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}.create(...)",
-				"    return ${TM_FILENAME/(.*)\\..+$/$1/}.new(...);",
+			"function ${TM_FILENAME_BASE}.create(...)",
+			"    return ${TM_FILENAME_BASE}.new(...);",
 			"end",
 			"",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:ctor(...)",
+			"function ${TM_FILENAME_BASE}:ctor(...)",
 			"    -- member",
 			"    self.removeCallBack = nil;",
 			"",
@@ -227,25 +265,25 @@
 			"end",
 			"",
 			"--------------------------------------------------  life cycle  --------------------------------------------------",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:onEnter()",
+			"function ${TM_FILENAME_BASE}:onEnter()",
 			"end",
 			"",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:onExit()",
+			"function ${TM_FILENAME_BASE}:onExit()",
 			"end",
 			"",
 			"--------------------------------------------------    public    --------------------------------------------------",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:setRemoveCallBack(func)",
+			"function ${TM_FILENAME_BASE}:setRemoveCallBack(func)",
 			"    self.removeCallBack = func;",
 			"end",
 			"",
 			"--------------------------------------------------   register   --------------------------------------------------",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:_registerButtonEvents(buttonListView)",
+			"function ${TM_FILENAME_BASE}:_registerButtonEvents(buttonListView)",
 			"    buttonListView:addButton(\"離開\", function()",
 			"        self:_onTouchBackBtn();",
 			"    end);",
 			"end",
 			"",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:_registerUICellEvents(uiListView)",
+			"function ${TM_FILENAME_BASE}:_registerUICellEvents(uiListView)",
 			"    uiListView:addButton(\"離開\", function()",
 			"        self:_onTouchBackBtn();",
 			"    end);",
@@ -260,7 +298,7 @@
 			"end",
 			"",
 			"--------------------------------------------------    event     --------------------------------------------------",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:_onTouchBackBtn()",
+			"function ${TM_FILENAME_BASE}:_onTouchBackBtn()",
 			"    if type(self.removeCallBack) ~= 'function' then",
 			"        return;",
 			"    end",
@@ -272,7 +310,7 @@
 			"--------------------------------------------------     tool     --------------------------------------------------",
 			"",
 			"--------------------------------------------------    create    --------------------------------------------------",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:_createButtonListView()",
+			"function ${TM_FILENAME_BASE}:_createButtonListView()",
 			"    local buttonListView = ButtonListView.create(ButtonListView.SCROLL_DIRECTION.VERTICAL);",
 			"    local VIEW_HEIGHT = 100;",
 			"    buttonListView:setViewSize(240, VIEW_HEIGHT);",
@@ -281,7 +319,7 @@
 			"    return buttonListView;",
 			"end",
 			"",
-			"function ${TM_FILENAME/(.*)\\..+$/$1/}:_createUIListView()",
+			"function ${TM_FILENAME_BASE}:_createUIListView()",
 			"    local listView = UICellListView.create();",
 			"    listView:setPosition(0, 0);",
 			"    listView:setViewSizeHeightCount(10);",
@@ -289,7 +327,7 @@
 			"    return listView;",
 			"end",
 			"",
-			"return ${TM_FILENAME/(.*)\\..+$/$1/};"
+			"return ${TM_FILENAME_BASE};"
 		],
 		"description": "創建預設utilityDemoLayer"
 	}
