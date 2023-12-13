@@ -45,8 +45,8 @@ return {
         version = "*",
         config = true,
         keys = {
-            { "f", "<cmd>HopChar1<cr>", mode = "", desc = "Hop Char1" },
-            { "F", "<cmd>HopWord<cr>",  mode = "", desc = "Hop Word"  },
+            { "gh", "<cmd>HopWord<cr>",  mode = "", desc = "Hop Word"  },
+            { "gH", "<cmd>HopChar1<cr>", mode = "", desc = "Hop Char1" },
         },
     },
     {
