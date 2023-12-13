@@ -1,5 +1,4 @@
 return {
-    -- Tree
     {
         'nvim-tree/nvim-tree.lua',
         dependencies = {
@@ -9,7 +8,8 @@ return {
         opts = {
             sort_by = "case_sensitive",
             view = {
-                adaptive_size = true
+                -- adaptive_size = true
+                width = 40,
             },
             filters = {
                 exclude  = { "node_modules" },
