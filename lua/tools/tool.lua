@@ -22,7 +22,7 @@ function tool.getOptionKey(originalKey)
     end
     local mappedKey = optionKeyMapping[originalKey];
     if not mappedKey then
-        tool.echo(("Option Key Mapping Error:'%s'"):format(originalKey))
+        tool.echo(("Option Key Mapping Error: '%s' doesn't exit."):format(originalKey))
     end
     return mappedKey;
 end

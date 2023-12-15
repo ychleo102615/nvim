@@ -150,6 +150,8 @@ imap('<C-k>',          '<Up>',    desc "Move Cursor Up");
 imap('<C-l>',          '<Right>', desc "Move Cursor Right");
 imap(getOptionKey 'o', "<C-O>:call append(line('.'),   '')<CR>", desc "Open Line Below");
 imap(getOptionKey 'O', "<C-O>:call append(line('.')-1, '')<CR>", desc "Open Line Above");
+imap(getOptionKey ';', "<C-O>A;", desc "Append Semicolon");
+
 
 -- Visual Mode
 --[[
