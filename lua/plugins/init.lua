@@ -110,7 +110,7 @@ return {
         "akinsho/toggleterm.nvim",
         config = function()
             require("toggleterm").setup {
-                direction = "vertical",
+                direction = "horizontal",
                 size = function (term)
                     if term.direction == "horizontal" then
                         return vim.o.lines * 0.3;
@@ -120,6 +120,7 @@ return {
                 end
             };
         end,
+        enabled = not IS_USING_VSCODE,
         cmd = "ToggleTerm",
         keys = {
             { "<C-t>", "<cmd>exe v:count1 . 'ToggleTerm'<cr>", mode = {"n", "t"}, desc = "Toggle Terminal" },
