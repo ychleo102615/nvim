@@ -27,9 +27,13 @@ local function getNullLsOpts()
     };
 end
 
-local on_attach = function(...)
-    require("keymap.lsp").on_attach(...);
-    require("nvim-navbuddy").attach(...);
+local on_attach = function(client, bufnr)
+    require("keymap.lsp").on_attach(client, bufnr);
+    if client.name ~= "tailwindcss" then
+        require("nvim-navbuddy").attach(client, bufnr);
+    end
+    -- print(vim.inspect(client));
+    -- print(client.name .. " attached");
 end
 --[[
 sumneko server config: https://github.com/sumneko/lua-language-server/wiki/Configuration-File
