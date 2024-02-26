@@ -81,7 +81,7 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- lazy
-map("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>ll", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 
 map("n", "<leader>sl", "<cmd>lopen<cr>",  { desc = "Show Location List" })
 map("n", "<leader>sq", "<cmd>copen<cr>",  { desc = "Show Quickfix List" })
@@ -125,7 +125,7 @@ for i = 1, 9 do
     map("n", "<leader>" .. i, ("<cmd>tabnext %d<cr>"):format(i), { desc = "Move To Tab " .. i });
 end
 
-map("n", "<leader>gl", function()
+map("n", "<leader>lg", function()
     local float = require("lazy.util").float_term({"lazygit"});
     vim.keymap.set("t", "<esc>", "<esc>", { buffer = float.buf, nowait = true });
 end, { desc = "Lazygit" });
