@@ -10,7 +10,7 @@ return {
             { "<bs>",    desc = "Schrink selection",     mode = "x" },
         },
         opts = {
-            ensure_installed = { "html", "css", "javascript", "typescript", "lua", "c", "cpp", "go", "vue", "help", "cmake", "vim", "java", "python" },
+            ensure_installed = { "html", "css", "javascript", "typescript", "lua", "c", "cpp", "go", "vue", "cmake", "vim", "java", "python" },
             highlight = {
                 -- enable = true,
                 enable = not IS_USING_VSCODE,
