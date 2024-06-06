@@ -70,15 +70,19 @@ end
 
 -- All
 map('<Space>', '<Nop>');
--- allmap(';a', '<Esc>', desc "Escape");
+allmap(';a', '<Esc>', desc "Escape");
 
 -- Normal Mode
 nmap('zp',    '"0p',                                 desc "Paste From Yanked");
 nmap('zh',    ':let @/ = ""<CR>',                    desc "Clear Search History");
 nmap('zd',    ':%bd | e#<CR>',                       desc "Delete All Buffers But This One");
 nmap('<C-N>', ':w | source %<CR>',                   desc "Save And Source");
-nmap('<leader>zp',    'viw\"0p',                             desc "Pase On Current Word");
--- nmap(';p',    'viw\"0p',                             desc "Pase On Current Word");
+nmap(';j',    '15j',                                 desc "Move Down 15 Lines");
+nmap(';k',    '15k',                                 desc "Move Up 15 Lines");
+nmap(';p',    'viw\"0p',                             desc "Pase On Current Word");
+nmap(';f',    '/<C-R>+<CR>',                         desc "Search Copyed Word");
+nmap(';r',    ('/%s<CR>'):format(cramp'<C-R>+'),     desc "Search Restricted Copyed Word");
+nmap(';w',    ':%s/\\<<C-R><C-W>\\>//g<Left><Left>', desc "Subsitute Current Word In This Buffer");
 
 nmap('<leader>a',  'ggVG',                             desc "Select All");
 nmap('<leader>xm', 'ciw<C-R>=<C-R>"',                  desc "Expression Math");
@@ -104,11 +108,11 @@ nmap(getOptionKey '<', "5<C-W><", desc "Decrease Window Width By 5");
 nmap(getOptionKey '>', "5<C-W>>", desc "Increase Window Width By 5");
 nmap(getOptionKey ';', "A;",      desc "Append Semicolon");
 
-nmap('<leader>fn', function()
+nmap(';n', function()
     vim.cmd(('let @*="%s"'):format(
         tool.getBufferFileName()
     ));
-end, desc 'Get [F]ile [N]ame');
+end, desc 'Get File [N]ame');
 nmap('<leader>vd', function()
     cmd 'vs';
     vim.lsp.buf.definition();
@@ -164,8 +168,8 @@ vmap('/', "<Esc>/" .. visual_range, desc "Search [/] In Visual Range");
 vmap('?', "<Esc>?" .. visual_range, desc "Search [?] In Visual Range");
 -- c_ctrl-r 會貼上指定的暫存器裡的東西
 vmap('gf',  'y/<C-R>"<CR>',                            desc "Search Selected String");
-vmap('<leader>f', 'y/' .. cramp [[<C-R>"]] .. '<CR>',         desc "Search Selected String Restrictedly");
-vmap('<leader>;', '<Esc>/' .. cramp [[<C-R><C-W>]] .. '<CR>', desc "Search Current Word");
+vmap(';f', 'y/' .. cramp [[<C-R>"]] .. '<CR>',         desc "Search Selected String Restrictedly");
+vmap(';;', '<Esc>/' .. cramp [[<C-R><C-W>]] .. '<CR>', desc "Search Current Word");
 
 local alignComment = function()
     local ft = require('Comment.ft');
