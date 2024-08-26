@@ -4,29 +4,6 @@ if IS_USING_VSCODE then
 end
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua
 
--- How to config: https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
--- Config list: https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
-local function getNullLsOpts()
-    local null_ls = require("null-ls");
-    return {
-        --[[
-        -- eslint_d 似乎不會看專案內的prettier config
-        -- https://www.reddit.com/r/neovim/comments/uhgwyh/nullls_eslint_formatter_doesnt_pick_up_project/
-        --]]
-        sources = {
-            -- code actions
-            null_ls.builtins.code_actions.eslint,
-            null_ls.builtins.code_actions.gitsigns,
-            null_ls.builtins.code_actions.refactoring,
-            -- diagnostics
-            null_ls.builtins.diagnostics.eslint,
-            -- foramt
-            null_ls.builtins.formatting.prettier,
-            null_ls.builtins.formatting.eslint,
-        },
-    };
-end
-
 local on_attach = function(client, bufnr)
     require("keymap.lsp").on_attach(client, bufnr);
     if client.name ~= "tailwindcss" then
@@ -118,12 +95,6 @@ return {
         end,
     },
     -- linters and formatters
-    {
-        "nvimtools/none-ls.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        event        = "BufReadPre",
-        opts         = getNullLsOpts,
-    },
     {
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         event = "BufReadPre",
