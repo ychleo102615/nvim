@@ -60,7 +60,6 @@ return {
                 "lua_ls",
                 "gopls",
                 "clangd",
-                "tsserver",
                 "volar",
                 "tailwindcss",
                 "pyright"
