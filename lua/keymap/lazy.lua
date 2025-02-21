@@ -124,8 +124,3 @@ map("n", optKey "H", "<cmd>-tabm<cr>", { desc = "Move Tab Previous" })
 for i = 1, 9 do
     map("n", "<leader>" .. i, ("<cmd>tabnext %d<cr>"):format(i), { desc = "Move To Tab " .. i });
 end
-
-map("n", "<leader>lg", function()
-    local float = require("lazy.util").float_term({"lazygit"});
-    vim.keymap.set("t", "<esc>", "<esc>", { buffer = float.buf, nowait = true });
-end, { desc = "Lazygit" });

@@ -100,6 +100,7 @@ return {
         config = function()
             vim.g.go_fmt_autosave = false;
         end,
+        enabled = not IS_USING_VSCODE,
     },
     -- java
     {
@@ -119,11 +120,26 @@ return {
                     end
                 end
             };
+            local Terminal  = require('toggleterm.terminal').Terminal;
+            local lazygit = Terminal:new {
+                cmd = "lazygit",
+                hidden = true,
+                direction = "float",
+                float_opts = {
+                    border = "single",
+                },
+            };
+
+            function _Lazygit_toggle()
+                lazygit:toggle()
+                vim.keymap.set("t", "<esc>", "<esc>", { buffer = lazygit.bufnr, nowait = true });
+            end
         end,
         enabled = not IS_USING_VSCODE,
         cmd = "ToggleTerm",
         keys = {
             { "<C-t>", "<cmd>exe v:count1 . 'ToggleTerm'<cr>", mode = {"n", "t"}, desc = "Toggle Terminal" },
+            { "<leader>lg", "<cmd>lua _Lazygit_toggle()<CR>", desc = "Lazygit" },
         },
     },
     {
