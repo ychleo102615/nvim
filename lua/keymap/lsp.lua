@@ -21,6 +21,15 @@ return {
         vim.keymap.set('n', '[d',         vim.diagnostic.goto_prev,  exd { desc = "Prev Diagnostic" })
         vim.keymap.set('n', '<leader>cs', vim.diagnostic.setloclist, exd {})
         vim.keymap.set('n', '<leader>cl', "<cmd>LspInfo<cr>",        exd { desc = "Lsp Info" })
+
+        vim.keymap.set('n', '<leader>th', function()
+            if not vim.lsp.inlay_hint then
+                print "Inlay Hints Not Supported";
+                return;
+            end
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled());
+            print("Inlay Hints: " .. (vim.lsp.inlay_hint.is_enabled() and "Enabled" or "Disabled"));
+        end, exd { desc = "Toggle Inlay Hints" })
     end,
     on_attach = function(_, bufnr)
         -- Use an on_attach function to only map the following keys
