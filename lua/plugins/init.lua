@@ -49,17 +49,6 @@ return {
             { "gH", "<cmd>HopChar1<cr>", mode = "", desc = "Hop Char1" },
         },
     },
-    {
-        "chrisgrieser/nvim-spider",
-        event = "BufReadPre",
-        config = function()
-            local motion = require("spider").motion;
-            vim.keymap.set({"n", "x"}, "w",  function() return motion("w")  end, { desc = "Spider-w"  })
-            vim.keymap.set({"n", "x"}, "e",  function() return motion("e")  end, { desc = "Spider-e"  })
-            vim.keymap.set({"n", "x"}, "b",  function() return motion("b")  end, { desc = "Spider-b"  })
-            vim.keymap.set({"n", "x"}, "ge", function() return motion("ge") end, { desc = "Spider-ge" })
-        end,
-    },
     -- surround
     {
         'kylechui/nvim-surround',
