@@ -135,6 +135,9 @@ nmap('<leader>nl', (function()
         vim.opt.relativenumber = is_relative;
     end
 end)(), desc "Toggle Relative Line Number");
+nmap('<leader>cc', function()
+    vim.api.nvim_clear_autocmds({ group = "tidyCode" });
+end, desc "Clear auto cmd")
 
 -- Insert Mode
 imap(getOptionKey 'h', '<Left>',  desc "Move Cursor Left");
