@@ -28,3 +28,12 @@ createCmd(
     }
 );
 
+createCmd(
+    "BufEnter",
+    {
+        pattern = "*",
+        callback = function()
+            vim.opt.formatoptions:remove("o") -- 確保新行不會繼承註解
+        end,
+    }
+);
