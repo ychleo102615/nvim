@@ -4,48 +4,17 @@ if IS_USING_VSCODE then
 end
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua
 
-local on_attach = function(client, bufnr)
-    require("keymap.lsp").on_attach(client, bufnr);
-    if client.name ~= "tailwindcss" then
-        require("nvim-navbuddy").attach(client, bufnr);
-    end
-    -- print(vim.inspect(client));
-    -- print(client.name .. " attached");
-end
---[[
-sumneko server config: https://github.com/sumneko/lua-language-server/wiki/Configuration-File
-]]
 local NVIM_ENV = "/.config/nvim";
-local function getNvimSetting()
-    if not vim.fn.getcwd():match(NVIM_ENV) then
-        return;
-    end
-    return {
-        Lua = {
-            runtime = { version = "LuaJIT" },
-            diagnostics = {
-                globals = { "vim" },
-            },
-            workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
-            },
-            telemetry = {
-                enable = false,
-            },
-        },
-    };
-end
 
 return {
-    -- cmdline tools and lsp servers
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         cmd    = "Mason",
         keys   = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
         config = true,
     },
     {
-        "williamboman/mason-lspconfig",
+        "mason-org/mason-lspconfig.nvim",
         event = "BufReadPre",
         dependencies = {
             { 'neovim/nvim-lspconfig' },
@@ -54,7 +23,7 @@ return {
             --[[
             Server List and theris githubs
             https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
-            :help lspconfig-all or https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+            :help lspconfig-all or https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
             ]]
             ensure_installed = {
                 "lua_ls",
@@ -63,38 +32,14 @@ return {
                 "volar",
                 "tailwindcss",
                 "pyright"
-            }
+            },
+            automatic_enable = true,
         },
-        config = function(_, opts)
-            -- :h mason-lspconfig-automatic-server-setup
-            local lspconfig = require("lspconfig");
-            require("mason-lspconfig").setup(opts);
-            require("mason-lspconfig").setup_handlers {
-                function(serverName)
-                    lspconfig[serverName].setup {
-                        on_attach = on_attach
-                    }
-                end,
-                ["lua_ls"] = function()
-                    lspconfig.lua_ls.setup {
-                        on_attach = on_attach,
-                        settings  = getNvimSetting(),
-                    };
-                end,
-                ["clangd"] = function()
-                    -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428#issuecomment-997226723
-                    local capabilities = vim.lsp.protocol.make_client_capabilities();
-                    capabilities.offsetEncoding = { "utf-16" };
-                    lspconfig.clangd.setup {
-                        on_attach = on_attach,
-                        capabilities = capabilities
-                    };
-                end,
-            };
-        end,
+        config = true,
     },
     -- linters and formatters
     {
+        -- https://github.com/maan2003/lsp_lines.nvim
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         event = "BufReadPre",
         config = function()
@@ -109,7 +54,7 @@ return {
         },
     },
     {
-        "SmiteshP/nvim-navbuddy",
+        "hasansujon786/nvim-navbuddy",
         dependencies = {
             "neovim/nvim-lspconfig",
             "SmiteshP/nvim-navic",
@@ -122,12 +67,17 @@ return {
     },
     {
         "folke/lazydev.nvim",
+        dependencies = {
+            "Bilal2453/luvit-meta",
+        },
         ft = "lua", -- only load on lua files
         opts = {
             library = {
-                -- See the configuration section for more details
-                -- Load luvit types when the `vim.uv` word is found
+                "lazy.nvim",
+                -- Only load luvit types when the `vim.uv` word is found
                 { path = "luvit-meta/library", words = { "vim%.uv" } },
+                -- Only load the lazyvim library when the `LazyVim` global is found
+                { path = "LazyVim", words = { "LazyVim" } },
             },
         },
         enabled = function()
@@ -135,5 +85,4 @@ return {
         end,
 
     },
-    { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 };
