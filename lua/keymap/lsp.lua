@@ -59,6 +59,8 @@ return {
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,                  exd { desc = "Rename" })
         vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action,             exd { desc = "Code Action" })
         vim.keymap.set('n', 'gr',         vim.lsp.buf.references,              exd { desc = "References" })
+        vim.keymap.set('n', '<leader>ss', vim.lsp.buf.document_symbol,         exd { desc = "Document Symbols" })
+        vim.keymap.set('n', '<leader>sS', vim.lsp.buf.workspace_symbol,        exd { desc = "Workspace Symbols" })
         -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
         vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format,                  exd { desc = "Format Buffer"})
     end,
