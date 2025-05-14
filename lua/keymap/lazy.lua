@@ -83,10 +83,10 @@ map("v", ">", ">gv")
 -- lazy
 map("n", "<leader>ll", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 
-map("n", "<leader>sl", "<cmd>lopen<cr>",  { desc = "Show Location List" })
-map("n", "<leader>sq", "<cmd>copen<cr>",  { desc = "Show Quickfix List" })
-map("n", "<leader>hl", "<cmd>lclose<cr>", { desc = "Hide Location List" })
-map("n", "<leader>hq", "<cmd>cclose<cr>", { desc = "Hide Quickfix List" })
+map("n", "<leader>ol", "<cmd>lopen<cr>",  { desc = "Open Location List" })
+map("n", "<leader>oq", "<cmd>copen<cr>",  { desc = "Open Quickfix List" })
+map("n", "<leader>cl", "<cmd>lclose<cr>", { desc = "Close Location List" })
+map("n", "<leader>cq", "<cmd>cclose<cr>", { desc = "Close Quickfix List" })
 map("n", "[q",         vim.cmd.cprev,     { desc = "Previous quickfix" })
 map("n", "]q",         vim.cmd.cnext,     { desc = "Next quickfix" })
 

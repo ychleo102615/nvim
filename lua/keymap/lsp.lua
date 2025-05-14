@@ -19,8 +19,8 @@ return {
         vim.keymap.set('n', '<leader>sd', vim.diagnostic.open_float, exd { desc = "[S]how Line Diagnostics" })
         vim.keymap.set('n', ']d',         vim.diagnostic.goto_next,  exd { desc = "Next Diagnostic" })
         vim.keymap.set('n', '[d',         vim.diagnostic.goto_prev,  exd { desc = "Prev Diagnostic" })
-        vim.keymap.set('n', '<leader>cs', vim.diagnostic.setloclist, exd {})
-        vim.keymap.set('n', '<leader>cl', "<cmd>LspInfo<cr>",        exd { desc = "Lsp Info" })
+        vim.keymap.set('n', '<leader>ld', vim.diagnostic.setloclist, exd { desc = "Local List Diagnostics" })
+        vim.keymap.set('n', '<leader>li', "<cmd>LspInfo<cr>",        exd { desc = "Lsp Info" })
 
         vim.keymap.set('n', '<leader>th', function()
             if not vim.lsp.inlay_hint then
@@ -60,6 +60,6 @@ return {
         vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action,             exd { desc = "Code Action" })
         vim.keymap.set('n', 'gr',         vim.lsp.buf.references,              exd { desc = "References" })
         -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
-        vim.keymap.set('n', '<leader>fb', vim.lsp.buf.format,                  exd { desc = "Format Buffer"})
+        vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format,                  exd { desc = "Format Buffer"})
     end,
 };

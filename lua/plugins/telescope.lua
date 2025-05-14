@@ -7,6 +7,7 @@ return {
     -- telescope
     {
         'nvim-telescope/telescope.nvim',
+        enabled = false,
         dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-ui-select.nvim',

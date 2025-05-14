@@ -33,10 +33,9 @@ return {
             ---@diagnostic disable-next-line: missing-parameter
             dashboard.section.header.val = vim.split(logo, "\n")
             dashboard.section.buttons.val = {
-                dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
+                dashboard.button("f", " " .. " Find file", [[:lua require("snacks").picker.files() <CR>]]),
                 dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
-                dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
-                dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
+                dashboard.button("g", " " .. " Grep", [[:lua require("snacks").picker.grep() <CR>]]),
                 dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
                 dashboard.button("s", "勒" .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
                 dashboard.button("l", "鈴" .. " Lazy", ":Lazy<CR>"),
@@ -198,31 +197,8 @@ return {
         },
         tag = "legacy"
     },
-    -- 縮排線 indent line
     {
-        'lukas-reineke/indent-blankline.nvim',
-        event = "BufReadPost",
-    },
-    -- 動態縮排效果線 active indent guide and indent text objects
-    {
-        "echasnovski/mini.indentscope",
-        version = false, -- wait till new 0.7.0 release to put it back on semver
-        event = "BufReadPre",
-        opts = {
-            symbol = "│",
-            options = { try_as_border = true },
-        },
-        config = function(_, opts)
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason", "toggleterm" },
-                callback = function()
-                    vim.b.miniindentscope_disable = true
-                end,
-            })
-            require("mini.indentscope").setup(opts)
-        end,
-    },
-    {
+        -- better quick fix window
         "kevinhwang91/nvim-bqf",
         event = "VeryLazy"
     },

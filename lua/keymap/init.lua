@@ -83,7 +83,6 @@ nmap('gw',    '/\\C\\<<C-R><C-W>\\><CR>',            desc "Search Copyed Word");
 nmap('<leader>a',  'ggVG',                             desc "Select All");
 nmap('<leader>xm', 'ciw<C-R>=<C-R>"',                  desc "Expression Math");
 nmap('<leader>vt', ':vs<CR><C-W>l:ter<CR>i',           desc "Split [V]ertical [T]erminal");
-nmap('<leader>gh', 'yiw<Cmd>Telescope help_tags<CR>p', desc "Get Help");
 nmap('<leader>gp', tool.gotoRepo,                      desc "[G]o to Github Re[p]ository");
 nmap('<leader>xt', tool.extract,                       desc "Extract");
 

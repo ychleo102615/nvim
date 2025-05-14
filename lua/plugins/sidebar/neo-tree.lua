@@ -34,7 +34,7 @@ return {
             }
         },
         keys = {
-            { "<leader>e",  "<cmd>NeoTreeRevealToggle<cr>",  desc = "Toggle N[E]o Tree" },
+            { "<leader>ne",  "<cmd>NeoTreeRevealToggle<cr>",  desc = "Toggle N[E]o Tree" },
         }
     },
 };
