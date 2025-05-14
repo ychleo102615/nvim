@@ -88,18 +88,6 @@ return {
         end
     },
     {
-        'ggandor/leap-spooky.nvim',
-        opts = {
-            affixes = {
-                remote = {
-                    -- r is conflicting with return object
-                    window = 'g',
-                    cross_window = 'G',
-                },
-            },
-        },
-    },
-    {
         'smoka7/hop.nvim',
         version = "*",
         config = true,
@@ -194,23 +182,6 @@ return {
         "chrisgrieser/nvim-early-retirement",
         config = true,
         event = "VeryLazy",
-    },
-    {
-        "sindrets/diffview.nvim",
-        opts = {
-            file_history_panel = {
-                win_config = {
-                    position = "top",
-                    height = 20,
-                },
-            },
-        },
-        event = "BufReadPre",
-        keys = {
-            { "<leader>gdo", "<cmd>DiffviewOpen<cr>",        mode = {"n"}, desc = "Git Diffview Open" },
-            { "<leader>gdc", "<cmd>DiffviewClose<cr>",       mode = {"n"}, desc = "Git Diffview Close" },
-            { "<leader>gdh", "<cmd>DiffviewFileHistory<cr>", mode = {"n"}, desc = "Git Diffview File History" },
-        },
     },
     {
         "stevearc/oil.nvim",
