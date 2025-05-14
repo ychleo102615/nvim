@@ -49,8 +49,6 @@ return {
                         -- suffix "a" means argument
                         ["aa"] = "@parameter.outer",
                         ["ia"] = "@parameter.inner",
-                        ["ar"] = "@return.outer",
-                        ["ir"] = "@return.inner",
                     },
                 },
                 swap = {
@@ -74,8 +72,6 @@ return {
                         ["]m"] = "@comment.outer",
                         ["]a"] = "@parameter.inner",
                         ["]e"] = "@call.outer",
-                        ["]r"] = "@return.outer",
-                        ["]R"] = "@return.inner",
                     },
                     goto_next_end = {
                         ["]F"] = "@function.outer",
@@ -87,8 +83,6 @@ return {
                         ["[m"] = "@comment.outer",
                         ["[a"] = "@parameter.inner",
                         ["[e"] = "@call.outer",
-                        ["[r"] = "@return.outer",
-                        ["[R"] = "@return.inner",
                     },
                     goto_previous_end = {
                         ["[F"] = "@function.outer",
