@@ -96,6 +96,24 @@ return {
             { "gH", "<cmd>HopChar1<cr>", mode = "", desc = "Hop Char1" },
         },
     },
+    {
+        'aaronik/treewalker.nvim',
+        opts = {
+            highlight = true,
+            highlight_duration = 250,
+            highlight_group = 'CursorLine',
+        },
+        keys = {
+            { '<A-C-k>', '<cmd>Treewalker Up<cr>',    mode = { 'n', 'v' }, desc = "Treewalker Up"    },
+            { '<A-C-j>', '<cmd>Treewalker Down<cr>',  mode = { 'n', 'v' }, desc = "Treewalker Down"  },
+            { '<A-C-h>', '<cmd>Treewalker Left<cr>',  mode = { 'n', 'v' }, desc = "Treewalker Left"  },
+            { '<A-C-l>', '<cmd>Treewalker Right<cr>', mode = { 'n', 'v' }, desc = "Treewalker Right" },
+            { '<A-C-S-K>', '<cmd>Treewalker SwapUp<cr>',    desc = "Treewalker Swap Up"   },
+            { '<A-C-S-J>', '<cmd>Treewalker SwapDown<cr>',  desc = "Treewalker Swap Down" },
+            { '<A-C-S-H>', '<cmd>Treewalker SwapLeft<cr>',  desc = "Treewalker Swap Left" },
+            { '<A-C-S-L>', '<cmd>Treewalker SwapRight<cr>', desc = "Treewalker Swap Right" },
+        },
+    },
     -- surround
     {
         'kylechui/nvim-surround',

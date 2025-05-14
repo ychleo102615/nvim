@@ -17,7 +17,7 @@ end
 local optionKeyMapping = require('keymap.optionKeyMapping');
 
 function tool.getOptionKey(originalKey)
-    if not IS_MAC then
+    if not IS_MAC or true then
         return ("<A-%s>"):format(originalKey);
     end
     local mappedKey = optionKeyMapping[originalKey];
