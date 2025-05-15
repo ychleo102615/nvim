@@ -74,6 +74,7 @@ return {
         opts = {
             library = {
                 "lazy.nvim",
+                "snacks.nvim",
                 -- Only load luvit types when the `vim.uv` word is found
                 { path = "luvit-meta/library", words = { "vim%.uv" } },
                 -- Only load the lazyvim library when the `LazyVim` global is found
