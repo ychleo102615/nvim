@@ -6,13 +6,14 @@ return {
         priority = 1000,
         event = "BufReadPre", -- 讓keys啟動的話，indent會失效
         opts = {
-            bigfile      = { enabled = true },
-            indent       = { enabled = true },
-            image        = { enabled = true },
-            input        = { enabled = true },
-            picker       = { enabled = true },
-            notifier     = { enabled = true },
-            statuscolumn = { enabled = true },
+            bigfile      = {},
+            indent       = {},
+            image        = {},
+            picker       = {},
+            notifier     = {},
+            statuscolumn = {},
+            scroll       = {},
+            words        = {},
         },
         keys = {
             { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
@@ -57,6 +58,15 @@ return {
             { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
             { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
             { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
+            -- Other
+            { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+            { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
+            { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
+            { "<leader>lg", function() Snacks.lazygit() end, desc = "Lazygit" },
+            { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+            { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
+            { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
+            { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
         },
     },
     {
@@ -160,41 +170,6 @@ return {
     {
         'mfussenegger/nvim-jdtls',
         -- ft = "java",
-    },
-    {
-        "akinsho/toggleterm.nvim",
-        config = function()
-            require("toggleterm").setup {
-                direction = "horizontal",
-                size = function (term)
-                    if term.direction == "horizontal" then
-                        return vim.o.lines * 0.3;
-                    elseif term.direction == "vertical" then
-                        return vim.o.columns * 0.35;
-                    end
-                end
-            };
-            local Terminal  = require('toggleterm.terminal').Terminal;
-            local lazygit = Terminal:new {
-                cmd = "lazygit",
-                hidden = true,
-                direction = "float",
-                float_opts = {
-                    border = "single",
-                },
-            };
-
-            function _Lazygit_toggle()
-                lazygit:toggle()
-                vim.keymap.set("t", "<esc>", "<esc>", { buffer = lazygit.bufnr, nowait = true });
-            end
-        end,
-        enabled = not IS_USING_VSCODE,
-        cmd = "ToggleTerm",
-        keys = {
-            { "<C-t>", "<cmd>exe v:count1 . 'ToggleTerm'<cr>", mode = {"n", "t"}, desc = "Toggle Terminal" },
-            { "<leader>lg", "<cmd>lua _Lazygit_toggle()<CR>", desc = "Lazygit" },
-        },
     },
     {
         "chrisgrieser/nvim-early-retirement",
