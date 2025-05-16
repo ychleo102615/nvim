@@ -87,17 +87,6 @@ return {
     },
     -- motion
     {
-        'ggandor/leap.nvim',
-        config = function()
-            require('leap').set_default_mappings();
-            vim.api.nvim_create_autocmd('ColorScheme', {
-                callback = function()
-                    vim.api.nvim_set_hl(0, 'LeapBackdrop', { fg = 'grey' })
-                end,
-            });
-        end
-    },
-    {
         'smoka7/hop.nvim',
         version = "*",
         config = true,
@@ -122,6 +111,19 @@ return {
             { '<A-C-S-J>', '<cmd>Treewalker SwapDown<cr>',  desc = "Treewalker Swap Down" },
             { '<A-C-S-H>', '<cmd>Treewalker SwapLeft<cr>',  desc = "Treewalker Swap Left" },
             { '<A-C-S-L>', '<cmd>Treewalker SwapRight<cr>', desc = "Treewalker Swap Right" },
+        },
+    },
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        ---@type Flash.Config
+        opts = {},
+        keys = {
+            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+            { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+            { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
         },
     },
     -- surround
