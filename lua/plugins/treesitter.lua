@@ -125,4 +125,8 @@ return {
             { "<leader>pn", "<cmd>TSNodeUnderCursor<cr>",  desc = "Treesitter Node Info" },
         },
     },
+    {
+        "mtdl9/vim-log-highlighting",
+        ft = { "log" },
+    }
 };
