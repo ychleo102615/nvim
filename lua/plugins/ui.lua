@@ -200,7 +200,12 @@ return {
     {
         -- better quick fix window
         "kevinhwang91/nvim-bqf",
-        event = "VeryLazy"
+        event = "VeryLazy",
+        opts = {
+            func_map = {
+                open = ""
+            }
+        }
     },
     {
         "NvChad/nvim-colorizer.lua",
