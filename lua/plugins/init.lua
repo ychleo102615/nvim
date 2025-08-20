@@ -9,10 +9,48 @@ return {
             bigfile      = {},
             indent       = {},
             image        = {},
-            picker       = {},
+            picker       = {
+                actions = {
+                    drop_open = function(picker, item)
+                        picker:close()
+                        item = item or (picker:selected { fallback = true } or {})[1]
+                        if not item then return end
+                        local file = item.file or item.path or item.text
+                        local pos = item.pos
+                        local win = vim.api.nvim_get_current_win()
+                        if not file then
+                            return;
+                        end
+                        vim.schedule(function()
+                            vim.cmd("drop " .. vim.fn.fnameescape(file))
+                            if picker.opts.jump.match then
+                                pos = picker.matcher:bufpos(vim.api.nvim_get_current_buf(), item) or pos
+                            end
+                            if not pos or not win then
+                                return;
+                            end
+                            if pos and pos[1] > 0 then
+                                vim.api.nvim_win_set_cursor(win, { pos[1], pos[2] })
+                                vim.cmd("norm! zzzv")
+                            elseif item.search then
+                                vim.cmd(item.search)
+                                vim.cmd("noh")
+                            end
+
+                        end)
+                    end,
+                },
+                win = {
+                    input = {
+                        keys = {
+                            ["<c-o>"] = { "drop_open", mode = { "n", "i" } },
+                            -- ["<c-f>"] = { "drop", mode = { "n", "i" } },  -- 原生功能，但是跳轉完會返回原本視窗
+                        },
+                    },
+                },
+            },
             notifier     = {},
             statuscolumn = {},
-            scroll       = {},
             words        = {},
         },
         keys = {
