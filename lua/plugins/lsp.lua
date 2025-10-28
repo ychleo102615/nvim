@@ -17,7 +17,7 @@ return {
         "mason-org/mason-lspconfig.nvim",
         event = "BufReadPre",
         dependencies = {
-            { 'neovim/nvim-lspconfig' },
+            { "neovim/nvim-lspconfig" },
         },
         opts = {
             --[[
@@ -29,13 +29,41 @@ return {
                 "lua_ls",
                 "gopls",
                 "clangd",
-                "volar",
                 "tailwindcss",
-                "pyright"
+                "pyright",
+                "vtsls",  -- 使用 vtsls 而不是 ts_ls，因為 Vue 需要它
+                "vue_ls",
             },
-            automatic_enable = true,
+            -- 排除需要自定義配置的 servers
+            automatic_enable = {
+                exclude = { 'vtsls', 'vue_ls' },
+            },
         },
-        config = true,
+        config = function(_, opts)
+            require("mason-lspconfig").setup(opts)
+
+            -- vtsls: 配置 Vue TypeScript 支持
+            vim.lsp.config('vtsls', {
+                settings = {
+                    vtsls = {
+                        tsserver = {
+                            globalPlugins = {
+                                {
+                                    name = '@vue/typescript-plugin',
+                                    location = vim.fn.stdpath('data') .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
+                                    languages = { 'vue' },
+                                },
+                            },
+                        },
+                    },
+                },
+                filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+            })
+            vim.lsp.enable('vtsls')
+
+            -- vue_ls: 啟用 Vue Language Server
+            vim.lsp.enable('vue_ls')
+        end,
     },
     -- linters and formatters
     {
