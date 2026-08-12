@@ -16,9 +16,11 @@ opt.showmode          = false;
 -- opt.cmdheight      = 5;
 
 -- 縮排
+-- 預設 2，需要 4 的語言（lua、java）由各自的 ftplugin 覆蓋
 opt.expandtab   = true;
-opt.ts          = 4;
-opt.shiftwidth  = 4;
+opt.ts          = 2;
+opt.shiftwidth  = 2;
+opt.softtabstop = -1; -- 跟隨 shiftwidth，Tab 鍵與自動縮排一致
 opt.smartindent = true;
 
 -- fold
