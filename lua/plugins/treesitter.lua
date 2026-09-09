@@ -10,11 +10,48 @@ return {
             -- playground plugin is gone; built-ins replace it
             { "<leader>pg", "<cmd>InspectTree<cr>", desc = "Toggle Treesitter Inspector" },
             { "<leader>pn", "<cmd>Inspect<cr>",      desc = "Inspect Highlight Group Under Cursor" },
+            -- incremental_selection is gone (upstream: no replacement); recreated via
+            -- core's an node text object (Neovim 0.12+). an is a plain keymap, not
+            -- hardcoded like iw/ap, so remap=true is required for it to resolve.
+            -- (no shrink/<BS> binding: vim.treesitter._select.select_child has a
+            -- reproducible off-by-one right after a grow, overshooting bigger before
+            -- it starts shrinking correctly on later presses -- it's private/unstable
+            -- API for a reason.)
+            --
+            -- <CR> here is a global keymap, which shadows quickfix's (and help's,
+            -- netrw's, ...) built-in <CR> behavior: those aren't real keymaps, just
+            -- the default Normal-mode action for special buffers, so any user
+            -- mapping on <CR> silently wins. Guard on buftype == "" (a real file
+            -- buffer) and otherwise replay <CR> unmapped ('n' flag) so the
+            -- buffer-specific default still runs.
+            {
+                "<CR>",
+                function()
+                    if vim.bo.buftype ~= "" then
+                        return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "n", false)
+                    end
+                    vim.api.nvim_feedkeys("van", "m", false)
+                end,
+                mode = "n",
+                desc = "Select treesitter node under cursor",
+            },
+            {
+                "<CR>",
+                function()
+                    if vim.bo.buftype ~= "" then
+                        return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "n", false)
+                    end
+                    vim.api.nvim_feedkeys("an", "m", false)
+                end,
+                mode = "x",
+                desc = "Expand selection to parent node",
+            },
         },
         config = function()
             local ensure_installed = {
                 "html", "css", "javascript", "typescript", "lua", "c", "cpp",
                 "vue", "cmake", "vim", "java", "python",
+                "markdown", "markdown_inline",
             }
 
             require("nvim-treesitter").install(ensure_installed)
