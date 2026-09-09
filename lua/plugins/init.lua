@@ -8,7 +8,21 @@ return {
         opts = {
             bigfile      = {},
             indent       = {},
-            image        = {},
+            image        = {
+                -- default formats list + svg (svg isn't included by default)
+                formats = {
+                    "png", "jpg", "jpeg", "gif", "bmp", "webp", "tiff",
+                    "heic", "avif", "mp4", "mov", "avi", "mkv", "webm",
+                    "pdf", "icns", "svg",
+                },
+                convert = {
+                    magick = {
+                        -- default vector args lack -background none, so ImageMagick
+                        -- flattens transparent svg/eps/ai onto its default white bg
+                        vector = { "-background", "none", "-density", 192, "{src}[{page}]" },
+                    },
+                },
+            },
             picker       = {
                 actions = {
                     drop_open = function(picker, item)
@@ -102,6 +116,26 @@ return {
             { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
             { "<leader>lg", function() Snacks.lazygit() end, desc = "Lazygit" },
             { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+            { "<leader>ui", function()
+                local buf = vim.api.nvim_get_current_buf()
+                local file = vim.api.nvim_buf_get_name(buf)
+                if vim.bo[buf].filetype == "image" then
+                    -- the image-attached buffer never had the file's text loaded
+                    -- (BufReadCmd skips the normal read), so read it ourselves
+                    Snacks.image.placement.clean(buf)
+                    vim.bo[buf].modifiable = true
+                    vim.bo[buf].filetype = vim.filetype.match({ filename = file }) or "text"
+                    vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.fn.readfile(file))
+                    vim.bo[buf].modified = false
+                else
+                    -- attach never clears buffer text itself (it expects an
+                    -- untouched buffer straight from BufReadCmd), so wipe the
+                    -- source text we loaded back out before re-attaching
+                    vim.bo[buf].modifiable = true
+                    vim.api.nvim_buf_set_lines(buf, 0, -1, false, { "" })
+                    Snacks.image.buf.attach(buf)
+                end
+            end, desc = "Toggle Image/Source View" },
             { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
             { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
             { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
