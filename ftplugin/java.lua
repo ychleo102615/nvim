@@ -1,3 +1,7 @@
+vim.bo.shiftwidth  = 4;
+vim.bo.tabstop     = 4;
+vim.bo.softtabstop = 4;
+
 -- https://github.com/mfussenegger/nvim-jdtls
 local JDTLS_PATH  = "/Users/leo.huang/ToolLib/jdt-language-server-latest";
 local JAVA        = "/usr/local/Cellar/openjdk/19.0.2/bin/java";
